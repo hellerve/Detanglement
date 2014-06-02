@@ -5,7 +5,7 @@ This repo contains a research project I work on at FKI/HTW Berlin.
 As with most of my repositories, this is a work-in-progress, more specifically,
 an alpha.
 
-It is a tool that visulizes big amounts of geolocalized data on-demand.
+It is a tool that visualizes big amounts of geolocalized data on-demand.
 At the moment, only a proof-of-concept plugin for WorldBanks' Indicator API
 is working with it, but it can theoretically be extended to work with many
 different APIs; that is the goal, anyway.
@@ -21,7 +21,7 @@ pygeoip
 geopy
 ```
 
-Addiotionally, if you want the WorldBank plugin to work(which is the
+Additionally, if you want the WorldBank plugin to work(which is the
 only working plugin right now, so you might), you need to install
 `wbpy`.
 Also, if you want to check out the nonworking plugin for Twitter(which
@@ -33,7 +33,7 @@ Usage
 
 There are many ways to invoke/use the application. I suggest you `git clone`
 the repository first, change into the directory and check out the command-line
-features`(by invoking `./Tangle.py -h`). To wrap up what I just told you, 
+features(by invoking `./Tangle.py -h`). To wrap up what I just told you, 
 it should look like this:
 
 ```bash
@@ -78,6 +78,9 @@ The feature I am currently working on is a GUI frontend for the database so you 
 conveniently add new APIs and API keys to the application. A database wrapper needs
 to be created sooner or later as well(as it stands, the only database code is inlined
 into a definition in the main script; not very beautiful).
+
+Also, the help file is a mess that needs to be cleaned up by someone who enjoys writing
+HTML files more than me. It is a non-informative mess.
 
 I suggest you code a plugin and see if it works. If it does not, we can look at what is
 the problem and fix it together.
