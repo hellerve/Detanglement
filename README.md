@@ -28,6 +28,9 @@ Also, if you want to check out the nonworking plugin for Twitter(which
 adds markers to the map, but the data is not visualized), you need
 to install `TwitterAPI`.
 
+I have included all Javascript APIs you might need, hoping that no
+licensing issues will emerge.
+
 Usage
 -----
 
