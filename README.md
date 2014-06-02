@@ -59,7 +59,25 @@ capabilities pretty well. Click around, make yourself at home.
 click on the dotted rectangle means: that is where you will be able to add
 APIs in the app itself, providing keys et cetera)
 
-More coming soon.
+Sooner or later you will want to visualize something, because, you know,
+that is what the tool is about. You can click any marker; a window will pop
+open and ask you to apply filters. First you can set the time: world bank will
+only visualize until 2012. Certain filters will not be available for certain
+areas, but you will see that by experimenting. Other filters(like `Population
+(Total)`) will almost always be available. You can fiddle around, search them
+by the search bar or by hand(but that might be pretty unconformtable, because
+WorldBank provides well over 9000(no pun intended) filters. Dragging them into
+the second(empty) list will select them and if you click apply, a different window
+should open and visualize the filters for you - except if you get a notification that
+the filter did not provide any data.
+
+If you click the settings icon(the little cogwheel in the toolbar), you will also
+have the possibility to select an alternative map(Kartograph is not working right now,
+because it is based on Python 2.7 and we are using Python 3+, but we are working
+on that). You can also toggle geolocation and APIs, although the API section should look
+a bit... empty.
+
+Well, that's it with the features. There is more to come, though, so be prepared!
 
 
 Writing Plugins

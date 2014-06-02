@@ -1,4 +1,4 @@
-[1] Exporting feature does not work in visualizing
+[1] Exporting feature does not work in visualization
 [2] Testing due on various platforms
 [3] Random countries not in dict(WorldBank API: Bahamas, Macedonia, Gambia?)
-[4] Google Maps is loaded when startup too fast
+[4] Google Maps is loaded when startup too fast (regardless of settings)
