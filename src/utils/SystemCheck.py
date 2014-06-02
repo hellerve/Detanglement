@@ -32,26 +32,36 @@ def check():
         core_err.append("Please install geopy to use Tangle.")
 
     try:
-        import TwitterAPI
-        print("TwitterAPI:", TwitterAPI.__version__)
-    except:
-        print("TwitterAPI:", "missing")
-        core_err.append("Please install TwitterAPI to use Tangle.")
-
-    try:
         from PyQt5 import QtCore
         print("pyqt:", QtCore.PYQT_VERSION_STR)
     except:
         print("pyqt:", "missing")
         core_err.append("Please install PyQt4 to use Tangle.")
 
+    #try:
+    #    import kartograph
+    #    print("kartograph:", "up and working")
+    #except:
+    #    print("kartograph:", "missing")
+    #    core_info.append("You might want to install Kartograph if " +
+    #                     "you want to use SVG-based maps.")
+
     try:
-        import kartograph
-        print("kartograph:", "up and working")
+        import TwitterAPI
+        print("TwitterAPI:", TwitterAPI.__version__)
     except:
-        print("kartograph:", "missing")
-        core_info.append("You might want to install Kartograph if " +
-                         "you want to use SVG-based maps.")
+        print("TwitterAPI:", "missing")
+        core_err.append("Please install TwitterAPI if you want " +
+                        "Twitter visualization(which is a stub " +
+                        "anyway right now).")
+
+    try:
+        import wbpy
+        print("wbpy:", wbpy.__version__)
+    except:
+        print("wbpy:", "missing")
+        core_err.append("Please install wbpy if you want "+
+                        "WorldBanks' Indicator API to function.")
 
     if sys.version_info < (3, 0):
         core_err.append("Your python version is too old, Please use " +
