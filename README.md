@@ -35,13 +35,13 @@ Usage
 -----
 
 There are many ways to invoke/use the application. I suggest you `git clone`
-the repository first, change into the directory and check out the command-line
-features(by invoking `./Tangle.py -h`). To wrap up what I just told you, 
-it should look like this:
+the repository first, change into the `src`directory and check out the 
+command-line features(by invoking `./Tangle.py -h`). To wrap up what I 
+just told you, it should look like this:
 
 ```bash
 git clone https://github.com/hellerve/Detanglement.git
-cd Detanglement
+cd Detanglement/src
 ./Tangle.py -h
 ```
 

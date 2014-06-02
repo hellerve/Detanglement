@@ -138,7 +138,7 @@ class PlotterTrotter(QtWidgets.QMainWindow):
                 if type(v) is dict:
                     local.append(self._getChildren(v))
                 else:
-                    local.append(v)
+                    local.append(v if v else 0)
         return local
 
     def _plot(self):
