@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--The index html. A form and two divs for maps. Not much more.-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="TweeProto Home Window" />
+
+        <link href="javascript/toastr/toastr.css" rel="stylesheet"/> 
+        <link href="style/style.css" rel="stylesheet"/> 
+
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_fBTp5an2gjpXabgV35JO6FHuXCAGVhQ&sensor=false""></script>
+        <script src="javascript/modernizr.js"></script>
+        <script src="javascript/jquery-1.10.2.min.js"></script>
+        <script src="javascript/toastr/toastr.js"></script>
+
+        <script type="text/javascript">
+            Modernizr.load({
+                test: Modernizr.svg && Modernizr.inlinesvg,
+                yep : [ "javascript/kartograph.js",
+                        "http://www.openlayers.org/api/OpenLayers.js",
+                        "javascript/mapAndStartup.js" ],
+                fails : ["nope.js"] 
+            });
+        </script>
+
+        <title title="TweeProto Home Window"></title>
+    </head>
+    
+	<body class="body_main">
+    	<div class="div_center" align="center">
+                <div class="fillForm">
+                    <form>
+                        <label for="country">Country:</label>
+                        <input type="text" name="country" id="country" onchange="fillForm();" onkeyup="this.onchange();"
+                        onpaste="this.onchange();" oninput="this.onchange()"></input>
+                        <label for="city">City:</label>
+                        <input type="text" name="city" id="city" onchange="fillForm();" onkeyup="this.onchange();"
+                        onpaste="this.onchange();" oninput="this.onchange()"></input>
+                        <input type="button" id="submitBtn" value="Submit Location" onclick="getRegion()""></input>
+                        </br>
+                        <input type="button" id="submitBtn" value="Get Localized Trends" onclick="getLocalizedTrends()()""></input>
+                    </form>
+                </div>
+                <div class="map_object" id="google-canvas"></div> 
+                <div class="map_object" id="kartograph-canvas"></div>
+                <div class="map_object" id="osm-canvas"></div>
+                </br>
+        </div>
+        <!--<div class="div_foot">
+            <hr />
+            &copy; No rights reserved. Proudly made with VI only. If you are seeing this, you have not installed the appropriate map
+            framework. You might want to choose a different setup via the Settings(CTRL+E).
+        </div>-->
+        </div>
+	</body>
+</html>
