@@ -111,7 +111,7 @@ class PlotterTrotter(QtWidgets.QMainWindow):
 
     def _createLeft(self):
         """This method creates a list of filters."""
-        if self.left_data == None: return
+        if not self.left_data: return
         #for i in self.left_data:
         #    self.webview.page().mainWindow().evaluateJavascript('addFilter('+i+');')
 

@@ -79,7 +79,7 @@ class Twitter(TwitterAPI.TwitterAPI):
         Known Exceptions:
             RequestError -- raised when the request was not valid
         """
-        if type(request) == dict and request['errors'] != None:
+        if type(request) == dict and request['errors']:
             raise RequestError(request['errors'])
 
     def _getWOEIDbyCityName(self, city_name):

@@ -49,6 +49,7 @@ After you have made yourself familiar with the main scripts' features, you
 can explore the tool by typing:
 
 ```bash
+./Tangle.py -f
 ./Tangle.py -a WorldBank
 ```
 

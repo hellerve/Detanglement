@@ -54,15 +54,15 @@ class TangleInterfaces(QtCore.QObject):
         for api in self.apis:
             if api.requiresFilter():
                 self._askForFilter(api)
-                if self.filters != None:
+                if self.filters:
                     src = api.api_name
                     req = {}
                     for i in self.filters:
-                        if self.date != None:
+                        if self.date:
                             x, t = api.getDataForLocation(location[0], i, self.date)
                         else:
                             x, t = api.getDataForLocation(location[0], i)
-                        if t == None:
+                        if not t:
                             self.web_view.warning("No datasets for filter " +
                                     i + "!")
                         else: req.update({k+'/'+i:v for k,v in t.items()})
@@ -70,7 +70,7 @@ class TangleInterfaces(QtCore.QObject):
                     src, req = None, None
             else:
                 src, req = api.getDataForLocation(location, [], self.date)
-            if req != None:
+            if req:
                 data += [req, src]
             else:
                 self.web_view.warning("Got no datasets from API " +

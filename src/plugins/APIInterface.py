@@ -33,8 +33,7 @@ class APIInterface():
         args -- API object arguments (default None)
         """
         self.api_name = api_name
-        self.api_object = (api_object(*args) if not args == None
-                           else api_object())
+        self.api_object = (api_object(*args) if args else api_object())
         self.locations = self.api_object.getLocations()
 
     def getIndicators(self):
