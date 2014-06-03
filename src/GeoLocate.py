@@ -24,7 +24,7 @@ class GeoLocate(pygeoip.GeoIP):
         """
         pygeoip.GeoIP.__init__(self, filename)
         self._setup_segments()
-        if geo_identity != None:
+        if geo_identity:
             self.gnames = GeoNames(None, geo_identity)
 
     def getOwnAddress(self):
@@ -124,7 +124,7 @@ class GeoLocate(pygeoip.GeoIP):
             Value Error:
                 Raised when gnames does not know the location or is not set
         """
-        if self.gnames == None:
+        if not self.gnames:
             raise ValueError
         try:
             loc_tuple = Point(location[2], location[3])

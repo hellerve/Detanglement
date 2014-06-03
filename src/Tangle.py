@@ -153,7 +153,7 @@ def _parseArguments():
         _makeConfFile()
         sys.exit(0)
 
-    if options.log != None:
+    if options.log:
         _logToFile(options.log)
     elif options.l:
         _logToFile()
@@ -162,7 +162,7 @@ def _parseArguments():
         _sysCheck()
         sys.exit(0)
 
-    if options.apis == None:
+    if not options.apis:
         from ConfigObject import ConfigObject
         config = ConfigObject(path + "/src/config.json")
         apis = config.configs["apis"]
@@ -223,7 +223,7 @@ def _logToFile(logfile=None):
     """
     Redirects stdout and stderr to file.
     """
-    if logfile == None:
+    if not logfile:
         import datetime
         logfile = "Log" + str(datetime.datetime.now()) + ".txt"
     with open(path + "/logging/" + logfile, "a") as f:
