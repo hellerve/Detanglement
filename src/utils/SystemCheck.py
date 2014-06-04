@@ -67,7 +67,7 @@ def check():
         for err in core_err:
             print(err)
         choice = input("\nShould the dependencies be installed " +
-                        "automatically?[y/n]\033[0m")
+                        "automatically?[y/n]\t\033[0m")
         if choice in ["y", "Y", "YES", "Yes", "yes"]:
             if __name__ == "__main__":
                 okay = subprocess.call(["sh", "dependencies.sh"])

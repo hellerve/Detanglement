@@ -43,15 +43,16 @@ else
     OSSTR="NULL"
 fi
 
-echo "Determined distribution is: ${OSSTR}"
+echo "Determined distribution is: ${OSSTR}\n"
 
 case $OSSTR in
     "NULL") echo Im not sure about that distro. Rather do it manually.
             exit 1;;
-    *)      sudo mkdir /usr/bin/Detanglement
+    *)      sudo mkdir /usr/bin/Detanglement &> /dev/null
             returnval=$?
             if [ "${returnval}" != "0" ] ; then
-                echo "Cowardly exiting on failure."
+                echo "Cowardly exiting on failure." 
+                echo "The program is likely already installed or there exists another directory called Detanglement in /usr/bin."
                 exit 1
             fi
             sudo cp -r ../* /usr/bin/Detanglement
