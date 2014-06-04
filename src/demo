@@ -1,6 +1,0 @@
-#!/usr/bin/env python3.3
-
-from plugins import WorldBank
-
-api = WorldBank.WorldBank()
-print(api.getDataForLocation("Turkey", "Population (Total)"))

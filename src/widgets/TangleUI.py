@@ -6,12 +6,12 @@ import sys
 
 from PyQt5 import QtCore, QtWidgets, QtGui
 
-from GeoLocate import GeoLocate
-from SettingsWindow import SettingsWindow
+from util.GeoLocate import GeoLocate
+from util.ConfigObject import ConfigObject
 from web.WebViewObject import WebViewObject
-from ConfigObject import ConfigObject
-from ProgressBar import ProgressBar
-from TangleBase import TangleBase
+from widgets.SettingsWindow import SettingsWindow
+from widgets.ProgressBar import ProgressBar
+from widgets.TangleBase import TangleBase
 
 #Python 3 Hack; QString is not compatible with Py3 :(
 try:

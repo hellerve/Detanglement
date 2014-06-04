@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import re
+import sre_constants
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 #Python 3 Hack; QString is not compatible with Py3 :(
@@ -108,10 +111,16 @@ class FilterWindow(QtWidgets.QDialog):
     def updateFilters(self, search):
         self.filterview.clear()
         for filt in self.filters:
-            if search in filt:
-                x = QtWidgets.QListWidgetItem()
-                x.setText(filt)
-                self.filterview.addItem(x)
+            try:
+                if re.search(search, filt):
+                    x = QtWidgets.QListWidgetItem()
+                    x.setText(filt)
+                    self.filterview.addItem(x)
+            except sre_constants.error:
+                if search in filt:
+                    x = QtWidgets.QListWidgetItem()
+                    x.setText(filt)
+                    self.filterview.addItem(x)
 
     def addItem(self, item):
         index = self.filters.index(item.text())

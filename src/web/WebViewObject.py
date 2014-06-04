@@ -3,7 +3,7 @@
 from PyQt5 import QtWebKit, QtCore, QtWebKitWidgets, QtWidgets
 
 from web.WebPlugins import TangleInterfaces
-from GeoLocate import GeoLocate
+from util.GeoLocate import GeoLocate
 
 class WebViewObject(QtWebKitWidgets.QWebView):
     """

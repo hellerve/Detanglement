@@ -163,7 +163,7 @@ def _parseArguments():
         sys.exit(0)
 
     if not options.apis:
-        from ConfigObject import ConfigObject
+        from util.ConfigObject import ConfigObject
         config = ConfigObject(path + "/src/config.json")
         apis = config.configs["apis"]
         return apis if type(apis) is list else [apis]
@@ -181,8 +181,8 @@ def _makeApiObjects(apis):
     import sqlite3
     from plugins.APIInterface import APIInterface
     objects = []
-    plugindir = os.listdir("plugins")
-    db = sqlite3.connect("../rc/creds.db")
+    plugindir = os.listdir(path + "/src/plugins")
+    db = sqlite3.connect(path + "/rc/creds.db")
     cursor = db.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS credentials(api_name " +
                    "TEXT PRIMARY KEY, authentication TEXT)")
@@ -225,7 +225,7 @@ def _logToFile(logfile=None):
     """
     if not logfile:
         import datetime
-        logfile = "Log" + str(datetime.datetime.now()) + ".txt"
+        logfile = "Log" + str(datetime.datetime.now()) + ".log"
     with open(path + "/logging/" + logfile, "a") as f:
         sys.stderr = f
         sys.stdout = f
@@ -256,7 +256,7 @@ def _sysCheck():
     """
     It is checked whether the dependencies for the application are met.
     """
-    from utils import SystemCheck
+    from util import SystemCheck
     SystemCheck.check()
 
 def main():
@@ -272,7 +272,7 @@ def main():
 
     from PyQt5.QtWidgets import QApplication
     app = QApplication(sys.argv)
-    from TangleUI import TangleUI
+    from widgets.TangleUI import TangleUI
     menu = TangleUI(api_objects, app, path, "/src/config.json")
     sys.exit(app.exec_())
 

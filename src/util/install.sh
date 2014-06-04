@@ -1,5 +1,4 @@
 #!/bin/sh
-# Detects which OS and if it is Linux then it will detect which Linux Distribution.
 
 OS=`uname -s`
 REV=`uname -r`
@@ -16,6 +15,8 @@ if [ "${OS}" = "SunOS" ] ; then
         OSSTR="${OS} ${REV}(${ARCH} `uname -v`)"
 elif [ "${OS}" = "AIX" ] ; then
         OSSTR="${OS} `oslevel` (`oslevel -r`)"
+elif [ "${OS}" = "Darwin" ] ; then
+        OSSTR="${OS} OS X `defaults read loginwindow SystemVersionStampAsString`"
 elif [ "${OS}" = "Linux" ] ; then
         KERNEL=`uname -r`
         if [ -f /etc/redhat-release ] ; then
@@ -32,22 +33,41 @@ elif [ "${OS}" = "Linux" ] ; then
         elif [ -f /etc/debian_version ] ; then
                 DIST="Debian `cat /etc/debian_version`"
                 REV=""
-
         fi
         if [ -f /etc/UnitedLinux-release ] ; then
                 DIST="${DIST}[`cat /etc/UnitedLinux-release | tr "\n" ' ' | sed s/VERSION.*//`]"
         fi
 
         OSSTR="${OS} ${DIST} ${REV}(${PSUEDONAME} ${KERNEL} ${MACH})"
-
+else
+    OSSTR="NULL"
 fi
 
-case $OSSTR in
-    *"ARCH"*) return1=sudo pacman -S python-pip python-pyqt4
-            return2=sudo pip install pygeoip geopy twitterapi
-            echo "The installation returned ${return1} and ${return2}."
-            exit 0;;
+echo "Determined distribution is: ${OSSTR}\n"
 
-    *) echo Im not sure about that distro. Rather do it manually.
-       exit 1;;
+case $OSSTR in
+    "NULL") echo Im not sure about that distro. Rather do it manually.
+            exit 1;;
+    *)      sudo mkdir /usr/bin/Detanglement &> /dev/null
+            returnval=$?
+            if [ "${returnval}" != "0" ] ; then
+                echo "Cowardly exiting on failure." 
+                echo "The program is likely already installed or there exists another directory called Detanglement in /usr/bin."
+                exit 1
+            fi
+            sudo cp -r ../* /usr/bin/Detanglement
+            returnval=$?
+            if [ "${returnval}" != "0" ] ; then
+                echo "Cowardly exiting on failure."
+                exit 1
+            fi
+            echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bashrc
+            echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bash_profile
+            returnval=$?
+            if [ "${returnval}" != "0" ] ; then
+                echo "Cowardly exiting on failure."
+                exit 1
+            fi
+            echo "Everything seems to have worked fine, try it by opening a new terminal and typing 'tangle'."
+            exit 0;;
 esac
