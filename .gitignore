@@ -54,3 +54,6 @@ docs/_build/
 
 # .DS_STORE
 .DS_Store
+
+#Database
+*.db
