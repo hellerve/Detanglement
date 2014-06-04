@@ -1,1 +1,1 @@
-{"map": "google", "gnames": "veitheller", "apis": ["Twitter", "WorldBank"], "geo_location": false}
+{"map": "google", "geo_location": false, "apis": ["Twitter", "WorldBank"], "gnames": "veitheller"}

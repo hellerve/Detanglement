@@ -3,7 +3,7 @@
 from PyQt5 import QtCore, QtWebKit
 
 from web.PlotterTrotter import *
-from web import FilterWindow
+from widgets.FilterWindow import FilterWindow
 
 class TangleInterfaces(QtCore.QObject):
     """
@@ -95,7 +95,7 @@ class TangleInterfaces(QtCore.QObject):
                                                 "alert(" + str(e) + ")")
 
     def _askForFilter(self, api):
-        filter_choice = FilterWindow.FilterWindow(self.path, *api.getIndicators())
+        filter_choice = FilterWindow(self.path, *api.getIndicators())
         filter_choice.appliedSignal.connect(self.setFilters)
         filter_choice.dateSignal.connect(self.setDate)
         filter_choice.exec()
