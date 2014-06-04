@@ -181,8 +181,8 @@ def _makeApiObjects(apis):
     import sqlite3
     from plugins.APIInterface import APIInterface
     objects = []
-    plugindir = os.listdir("plugins")
-    db = sqlite3.connect("../rc/creds.db")
+    plugindir = os.listdir(path + "/src/plugins")
+    db = sqlite3.connect(path + "/rc/creds.db")
     cursor = db.cursor()
     cursor.execute("CREATE TABLE IF NOT EXISTS credentials(api_name " +
                    "TEXT PRIMARY KEY, authentication TEXT)")

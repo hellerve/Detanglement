@@ -15,6 +15,8 @@ if [ "${OS}" = "SunOS" ] ; then
         OSSTR="${OS} ${REV}(${ARCH} `uname -v`)"
 elif [ "${OS}" = "AIX" ] ; then
         OSSTR="${OS} `oslevel` (`oslevel -r`)"
+elif [ "${OS}" = "Darwin" ] ; then
+        OSSTR="${OS} OS X `defaults read loginwindow SystemVersionStampAsString`"
 elif [ "${OS}" = "Linux" ] ; then
         KERNEL=`uname -r`
         if [ -f /etc/redhat-release ] ; then
@@ -31,37 +33,40 @@ elif [ "${OS}" = "Linux" ] ; then
         elif [ -f /etc/debian_version ] ; then
                 DIST="Debian `cat /etc/debian_version`"
                 REV=""
-
         fi
         if [ -f /etc/UnitedLinux-release ] ; then
                 DIST="${DIST}[`cat /etc/UnitedLinux-release | tr "\n" ' ' | sed s/VERSION.*//`]"
         fi
 
         OSSTR="${OS} ${DIST} ${REV}(${PSUEDONAME} ${KERNEL} ${MACH})"
-
+else
+    OSSTR="NULL"
 fi
 
+echo "Determined distribution is: ${OSSTR}"
+
 case $OSSTR in
-    *"ARCH"*) sudo mkdir /usr/bin/Entanglement
+    "NULL") echo Im not sure about that distro. Rather do it manually.
+            exit 1;;
+    *)      sudo mkdir /usr/bin/Detanglement
             returnval=$?
             if [ "${returnval}" != "0" ] ; then
                 echo "Cowardly exiting on failure."
                 exit 1
             fi
-            sudo cp -r ../* /usr/bin/Entanglement
+            sudo cp -r ../* /usr/bin/Detanglement
             returnval=$?
             if [ "${returnval}" != "0" ] ; then
                 echo "Cowardly exiting on failure."
                 exit 1
             fi
-            echo "alias tangle=\"/usr/bin/Entanglement/Tangle.py\"" >> ~/.bashrc
+            echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bashrc
+            echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bash_profile
             returnval=$?
             if [ "${returnval}" != "0" ] ; then
                 echo "Cowardly exiting on failure."
                 exit 1
             fi
-            echo "Everything seems to have worked fine, try it by typing 'tangle'."
+            echo "Everything seems to have worked fine, try it by opening a new terminal and typing 'tangle'."
             exit 0;;
-    *) echo Im not sure about that distro. Rather do it manually.
-       exit 1;;
 esac
