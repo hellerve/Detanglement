@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from Crypto.Cipher import AES
+from PyQt5 import QtCore, QtGui, QtWidgets, QtSql
 
 #Python 3 Hack; QString is not compatible with Py3 :(
 try:
@@ -42,41 +43,45 @@ class TangleBase(QtWidgets.QDialog):
     def _makeInterface(self):
         """Creates the content for the Window(buttons and so on)."""
         dblabel = QtWidgets.QLabel(self)
-        dblabel.setGeometry(5, 10, 250, 20)
+        dblabel.setGeometry(5, 15, 250, 20)
         dblabel.setText("Enter API name")
         dblabellayout = QtWidgets.QHBoxLayout()
         dblabellayout.addWidget(dblabel)
         self.dbnamebox = QtWidgets.QLineEdit(self)
-        self.dbnamebox.move(15, 30)
+        self.dbnamebox.move(20, 40)
         self.dbnamebox.setPlaceholderText("Your API Name")
         nameboxlayout = QtWidgets.QHBoxLayout()
         nameboxlayout.addWidget(self.dbnamebox)
         credentialslabel = QtWidgets.QLabel(self)
-        credentialslabel.setGeometry(5, 50, 250, 20)
+        credentialslabel.setGeometry(5, 70, 250, 20)
         credentialslabel.setText("Your API keys")
         credlabellayout = QtWidgets.QHBoxLayout()
         credlabellayout.addWidget(credentialslabel)
         credentials = QtWidgets.QCheckBox("This API has credentials (API keys)", self)
-        credentials.move(15, 70)
+        credentials.move(20, 95)
         credentials.stateChanged.connect(self._credentials)
         credbutlayout = QtWidgets.QHBoxLayout()
         credbutlayout.addWidget(credentials)
         self.keylist = []
         keybox = QtWidgets.QLineEdit(self)
-        keybox.move(10, 90)
+        keybox.move(20, 120)
         keybox.setEnabled(False)
         keybox.textChanged.connect(self._keysProvided)
         keyboxlayout = QtWidgets.QHBoxLayout()
         keyboxlayout.addWidget(keybox)
         self.keylist.append(keybox)
         applybut = QtWidgets.QPushButton("Apply", self)
-        applybut.move(230, 460)
+        applybut.move(100, 460)
         applybut.clicked.connect(self._applyAction)
+        applyexitbut = QtWidgets.QPushButton("Apply and Exit", self)
+        applyexitbut.move(180, 460)
+        applyexitbut.clicked.connect(self._applyAndClose)
         cancelbut = QtWidgets.QPushButton("Cancel", self)
         cancelbut.move(310, 460)
         cancelbut.clicked.connect(self.close)
         cancelapplylayout = QtWidgets.QHBoxLayout()
         cancelapplylayout.addWidget(applybut)
+        cancelapplylayout.addWidget(applyexitbut)
         cancelapplylayout.addWidget(cancelbut)
         self.layout = QtWidgets.QVBoxLayout()
         self.layout.addLayout(dblabellayout)
@@ -109,13 +114,37 @@ class TangleBase(QtWidgets.QDialog):
         x, y, xend, yend = sender.geometry().getCoords()
         if yend < 450:
             newkeybox = QtWidgets.QLineEdit(self)
-            newkeybox.move(x, yend+20)
+            newkeybox.move(x, y+25)
             newkeybox.textChanged.connect(self._keysProvided)
+            keyboxlayout = QtWidgets.QHBoxLayout()
+            keyboxlayout.addWidget(newkeybox)
+            self.layout.addLayout(keyboxlayout)
             self.keylist.append(newkeybox)
-            self.layout.addWidget(newkeybox)
 
     def _applyAction(self):
         """Adds the API to the Database."""
+        db = QtSql.QSqlDatabase.addDatabase("QSQLITE")
+        db.setHostName("localhost")
+        db.setDatabaseName("../rc/creds")
+        db.setUserName("root")
+        db.setPassword("")
+        passwd, ok = QtWidgets.QInputDialog.getText(self, "Password Dialog",
+                "Please enter your password:")
+        return
+        if not ok:
+            return
+        ok = db.open()
+        if not ok:
+            message = QtWidgets.QErrorMessage(self)
+            message.showMessage("Could not connect to Database.")
+            message.exec()
+            return
+        for keybox in self.keylist:
+            keybox.text()
+
+    def _applyAndClose(self):
+        """Applies the changes and closes the window."""
+        self._applyAction()
         self.close()
 
 
