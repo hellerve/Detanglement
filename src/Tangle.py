@@ -9,9 +9,9 @@ from argparse import ArgumentParser
 path = ""
 ## Version information #########################################################
 ## Inspired by the Makehuman Project ###########################################
-version = [0, 1, 1]                     # Major, minor and patch version number
-release = False                         # False for nightly
-versionSub = ""                         # Short version description
+__version__ = [0, 1, 2]                     # Major, minor and patch version number
+__release__ = False                         # False for nightly
+__versionSub__ = "Alpha/Test"               # Short version description
 ################################################################################
 
 def getVersionDigitsStr():
@@ -19,14 +19,14 @@ def getVersionDigitsStr():
     String representation of the version number only (no additional info)
     Inspired by the Makehuman Project
     """
-    return ".".join( [str(v) for v in version] )
+    return ".".join( [str(v) for v in __version__] )
 
 def _versionStr():
     """
     Inspired by the Makehuman Project
     """
-    if versionSub:
-        return getVersionDigitsStr() + " " + versionSub
+    if __versionSub__:
+        return getVersionDigitsStr() + " " + __versionSub__
     else:
         return getVersionDigitsStr()
 
@@ -35,7 +35,7 @@ def isRelease():
     True when release version, False for nightly (dev) build
     Inspired by the Makehuman Project
     """
-    return release
+    return __release__
 
 def isBuild():
     """
@@ -51,7 +51,7 @@ def getVersion():
     Comparable version as list of ints
     Inspired by the Makehuman Project
     """
-    return version
+    return __version__
 
 def getVersionStr(verbose=True):
     """
@@ -74,8 +74,8 @@ def getShortVersion():
     Useful for tagging assets
     Inspired by the Makehuman Project
     """
-    if versionSub:
-        return versionSub.replace(' ', '_').lower()
+    if __versionSub__:
+        return __versionSub__.replace(' ', '_').lower()
     else:
         return "v" + getVersionDigitsStr()
 
@@ -142,7 +142,7 @@ def _parseArguments():
         sys.exit(0)
 
     if options.v:
-        print("Tangle Version:", getVersionDigitsStr())
+        print("Tangle Version:", _versionStr())
         sys.exit(0)
 
     if options.d:
@@ -210,7 +210,7 @@ def _showDevel():
     Prints developer informations to stdout.
     """
     print("\033[92m####   General Information   ####\033[0m")
-    print("Tangle Version:", getVersionDigitsStr())
+    print("Tangle Version:", _versionStr())
     print("Build:", isBuild())
     print("\n\033[91m####   KNOWN BUGS   ####\033[0m")
     with open(path + "/rc/KNOWN_BUGS", "r") as f:
