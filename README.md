@@ -126,7 +126,7 @@ If you are able to provide those features, you are ready to try them out. The ea
 is to provide the needed API keys and the API name to Detanglement via the database 
 window(the dotted rectangle in the iconed bar of the main window) and then restart it.
 
-[The API adding window](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/addingapis.png "You can provide up to ten keys to the database")
+![The API adding window](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/addingapis.png "You can provide up to ten keys to the database")
 
 To be completely sure that the API will be loaded, you can run `Tangle.py -a MyApiName`
 which will load your API if possible. If not, nothing will be loaded.
