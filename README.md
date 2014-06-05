@@ -56,21 +56,31 @@ can explore the tool by typing:
 Which loads the script with WorldBanks' Indicator API and shows the tools
 capabilities pretty well. Click around, make yourself at home.
 
-(NOTE: In case you are wondering what the empty window popping up when you
-click on the dotted rectangle means: that is where you will be able to add
-APIs in the app itself, providing keys et cetera)
+![This is what you should see](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/startup.png, "This is what you should see")
+
+![Geolocation](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/geolocation.png, "If you want it to, the tool, even geolocalizes you!")
 
 Sooner or later you will want to visualize something, because, you know,
 that is what the tool is about. You can click any marker; a window will pop
-open and ask you to apply filters. First you can set the time: world bank will
-only visualize until 2012. Certain filters will not be available for certain
+open and ask you to apply filters. 
+
+![You will be greeted by this window](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/filter.png, "You will be greeted by this window")
+
+Certain filters will not be available for certain
 areas, but you will see that by experimenting. Other filters(like `Population
 (Total)`) will almost always be available. You can fiddle around, search them
 by the search bar or by hand(but that might be pretty unconformtable, because
-WorldBank provides well over 9000(no pun intended) filters. Dragging them into
+WorldBank provides well over 9000(no pun intended) filters. You can also supply it
+regular expressions. If those are not valid, it will try to search it literally.
+
+![Regexes! Yay!](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/regex.png, "Regexes! Yay!")
+
+Sooner or later you will find the filters you want to apply: Dragging them into
 the second(empty) list will select them and if you click apply, a different window
 should open and visualize the filters for you - except if you get a notification that
 the filter did not provide any data.
+
+![Score! Visuals!](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/visuals.png, "Score! Visuals")
 
 If you click the settings icon(the little cogwheel in the toolbar), you will also
 have the possibility to select an alternative map(Kartograph is not working right now,
