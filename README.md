@@ -80,7 +80,7 @@ the second(empty) list will select them and if you click apply, a different wind
 should open and visualize the filters for you - except if you get a notification that
 the filter did not provide any data.
 
-![Score! Visuals!](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/visuals.png "Score! Visuals")
+![Score! Visuals!](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/visuals.png "Score! Visuals")
 
 If you click the settings icon(the little cogwheel in the toolbar), you will also
 have the possibility to select an alternative map(Kartograph is not working right now,
