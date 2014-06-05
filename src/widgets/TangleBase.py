@@ -64,7 +64,7 @@ class TangleBase(QtWidgets.QDialog):
         credbutlayout.addWidget(credentials)
         self.keylist = []
         keybox = QtWidgets.QLineEdit(self)
-        keybox.move(20, 120)
+        keybox.move(40, 120)
         keybox.setEnabled(False)
         keybox.textChanged.connect(self._keysProvided)
         keyboxlayout = QtWidgets.QHBoxLayout()
@@ -112,7 +112,7 @@ class TangleBase(QtWidgets.QDialog):
         sender = self.keylist[-1]
         sender.textChanged.disconnect(self._keysProvided)
         x, y, xend, yend = sender.geometry().getCoords()
-        if yend < 450:
+        if yend < 430:
             newkeybox = QtWidgets.QLineEdit(self)
             newkeybox.move(x, y+25)
             newkeybox.textChanged.connect(self._keysProvided)
@@ -120,6 +120,7 @@ class TangleBase(QtWidgets.QDialog):
             keyboxlayout.addWidget(newkeybox)
             self.layout.addLayout(keyboxlayout)
             self.keylist.append(newkeybox)
+            newkeybox.show()
 
     def _applyAction(self):
         """Adds the API to the Database."""
@@ -130,7 +131,6 @@ class TangleBase(QtWidgets.QDialog):
         db.setPassword("")
         passwd, ok = QtWidgets.QInputDialog.getText(self, "Password Dialog",
                 "Please enter your password:")
-        return
         if not ok:
             return
         ok = db.open()
@@ -139,6 +139,15 @@ class TangleBase(QtWidgets.QDialog):
             message.showMessage("Could not connect to Database.")
             message.exec()
             return
+        query = QtSql.QSqlQuery()
+        query.exec("create table if not exists apis(id int, api_name varchar(30) primary key)")
+        query.exec("create table if not exists credentials(credential varchar(60), api_id int)")
+        query.exec("select * from apis order by id desc limit 1")
+        query.next()
+        idn = query.value(0)
+        if not idn:
+            idn = 1
+        query.exec("insert into apis values(" + str(idn) + ", " + self.dbnamebox.text() + ")")
         for keybox in self.keylist:
             keybox.text()
 
