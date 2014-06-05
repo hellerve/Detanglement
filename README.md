@@ -56,15 +56,15 @@ can explore the tool by typing:
 Which loads the script with WorldBanks' Indicator API and shows the tools
 capabilities pretty well. Click around, make yourself at home.
 
-![This is what you should see](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/startup.png, "This is what you should see")
+![This is what you should see](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/startup.png "This is what you should see")
 
-![Geolocation](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/geolocation.png, "If you want it to, the tool, even geolocalizes you!")
+![Geolocation](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/geolocation.png "If you want it to, the tool even geolocalizes you!")
 
 Sooner or later you will want to visualize something, because, you know,
 that is what the tool is about. You can click any marker; a window will pop
 open and ask you to apply filters. 
 
-![You will be greeted by this window](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/filter.png, "You will be greeted by this window")
+![You will be greeted by this window](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/filter.png "You will be greeted by this window")
 
 Certain filters will not be available for certain
 areas, but you will see that by experimenting. Other filters(like `Population
@@ -73,7 +73,7 @@ by the search bar or by hand(but that might be pretty unconformtable, because
 WorldBank provides well over 9000(no pun intended) filters. You can also supply it
 regular expressions. If those are not valid, it will try to search it literally.
 
-![Regexes! Yay!](https://github.com/hellerve/Detanglement/tree/master/rc/Documentation/regex.png, "Regexes! Yay!")
+![Regexes! Yay!](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/regex.png "Regexes! Yay!")
 
 Sooner or later you will find the filters you want to apply: Dragging them into
 the second(empty) list will select them and if you click apply, a different window
