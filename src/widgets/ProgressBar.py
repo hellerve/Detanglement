@@ -60,7 +60,6 @@ class ProgressBar(QtWidgets.QWidget, QtCore.QThread):
         layout.addWidget(self.pbar)
         layout.addWidget(cancelbut)
 
-
     def run(self):
         QtWidgets.QApplication.processEvents()
 
