@@ -12,10 +12,10 @@ different APIs; that is the goal, anyway.
 
 Table of Contents
 -----------------
-1. [Requirements](#requirements)
-2. [Usage](#usage)
-3. [Writing Plugins](#writing-plugins)
-4. [Contribute](#contribute)
+1. **[Requirements](#requirements)**
+2. **[Usage](#usage)**
+3. **[Writing Plugins](#writing-plugins)**
+4. **[Contribute](#contribute)**
 
 Requirements
 ------------
