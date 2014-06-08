@@ -10,6 +10,13 @@ At the moment, only a proof-of-concept plugin for WorldBanks' Indicator API
 is working with it, but it can theoretically be extended to work with many
 different APIs; that is the goal, anyway.
 
+Table of Contents
+-----------------
+* [Requirements](#requirements)
+* [Usage](#usage)
+* [Writing Plugins](#writing-plugins)
+* [Contribute](#contribute)
+
 Requirements
 ------------
 
