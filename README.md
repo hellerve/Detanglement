@@ -12,10 +12,10 @@ different APIs; that is the goal, anyway.
 
 Table of Contents
 -----------------
-* [Requirements](#requirements)
-* [Usage](#usage)
-* [Writing Plugins](#writing-plugins)
-* [Contribute](#contribute)
+1. [Requirements](#requirements)
+2. [Usage](#usage)
+3. [Writing Plugins](#writing-plugins)
+4. [Contribute](#contribute)
 
 Requirements
 ------------
@@ -63,15 +63,15 @@ can explore the tool by typing:
 Which loads the script with WorldBanks' Indicator API and shows the tools
 capabilities pretty well. Click around, make yourself at home.
 
-![This is what you should see](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/startup.png "This is what you should see")
+![This is what you should see](rc/Documentation/startup.png "This is what you should see")
 
-![Geolocation](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/geolocation.png "If you want it to, the tool even geolocalizes you!")
+![Geolocation](rc/Documentation/geolocation.png "If you want it to, the tool even geolocalizes you!")
 
 Sooner or later you will want to visualize something, because, you know,
 that is what the tool is about. You can click any marker; a window will pop
 open and ask you to apply filters. 
 
-![You will be greeted by this window](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/filters.png "You will be greeted by this window")
+![You will be greeted by this window](rc/Documentation/filters.png "You will be greeted by this window")
 
 Certain filters will not be available for certain
 areas, but you will see that by experimenting. Other filters(like `Population
@@ -80,14 +80,14 @@ by the search bar or by hand(but that might be pretty unconformtable, because
 WorldBank provides well over 9000(no pun intended) filters. You can also supply it
 regular expressions. If those are not valid, it will try to search it literally.
 
-![Regexes! Yay!](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/regex.png "Regexes! Yay!")
+![Regexes! Yay!](rc/Documentation/regex.png "Regexes! Yay!")
 
 Sooner or later you will find the filters you want to apply: Dragging them into
 the second(empty) list will select them and if you click apply, a different window
 should open and visualize the filters for you - except if you get a notification that
 the filter did not provide any data.
 
-![Score! Visuals!](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/visuals.png "Score! Visuals")
+![Score! Visuals!](rc/Documentation/visuals.png "Score! Visuals")
 
 If you click the settings icon(the little cogwheel in the toolbar), you will also
 have the possibility to select an alternative map(Kartograph is not working right now,
@@ -114,26 +114,26 @@ Your plugin needs to have a single file that needs to be called from outside,
 with a single class(there can be more, but I need that one class) in it that 
 needs to meet the following criteria:
 
-    [1] The constructor is either called without arguments or with the API
-        keys as arguments.
-    [2] There is a public(no underscore) variable of type bool named 
-        `requiresFilter` which is either set to true(the API needs filters) or
-        false(it does not).
-    [3] There is a public method named `getLocations()` that takes no arguments
-        and returns a list of locations. Locations can either be country names
-        or city names.
-    [4] If the API requires a Filter(`requiresFilter = True`), there must be a
-        method named `getFilters()` that returns a list of human-readable filters.
-    [5] There is a public method named `getDataForLocation()` that takes a location,
-        a filter(both in the format provided by `getLocations()` and `getFilters()`
-        respectively) and a time range(two values in a single string seperated by commas,
-        e.g. "2010:2012" for a timeline from 2010 until 2012(both years included)).
+    1. The constructor is either called without arguments or with the API
+       keys as arguments.
+    2. There is a public(no underscore) variable of type bool named 
+       `requiresFilter` which is either set to true(the API needs filters) or
+       false(it does not).
+    3. There is a public method named `getLocations()` that takes no arguments
+       and returns a list of locations. Locations can either be country names
+       or city names.
+    4. If the API requires a Filter(`requiresFilter = True`), there must be a
+       method named `getFilters()` that returns a list of human-readable filters.
+    5. There is a public method named `getDataForLocation()` that takes a location,
+       a filter(both in the format provided by `getLocations()` and `getFilters()`
+       respectively) and a time range(two values in a single string seperated by commas,
+       e.g. "2010:2012" for a timeline from 2010 until 2012(both years included)).
 
 If you are able to provide those features, you are ready to try them out. The easiest way
 is to provide the needed API keys and the API name to Detanglement via the database 
 window(the dotted rectangle in the iconed bar of the main window) and then restart it.
 
-![The API adding window](https://github.com/hellerve/Detanglement/raw/master/rc/Documentation/addingapis.png "You can provide up to ten keys to the database")
+![The API adding window](master/rc/Documentation/addingapis.png "You can provide up to ten keys to the database")
 
 To be completely sure that the API will be loaded, you can run `Tangle.py -a MyApiName`
 which will load your API if possible. If not, nothing will be loaded.
