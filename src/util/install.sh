@@ -61,8 +61,10 @@ case $OSSTR in
                 echo "Cowardly exiting on failure."
                 exit 1
             fi
-            echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bashrc
-            echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bash_profile
+            [ ! -f ~/.bashrc ] || grep "tangle" ~/.bashrc > /dev/null || 
+                echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bashrc
+            [ ! -f ~/.bash_profile ] || grep "tangle" ~/.bash_profile /dev/null || 
+                echo "alias tangle=\"/usr/bin/Detanglement/src/Tangle.py\"" >> ~/.bash_profile
             returnval=$?
             if [ "${returnval}" != "0" ] ; then
                 echo "Cowardly exiting on failure."
