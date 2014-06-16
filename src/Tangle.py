@@ -132,7 +132,7 @@ def _parseArguments():
                         dest="s", action="store_true")
     options, unknown = parser.parse_known_args()
 
-    #if unknown != []:
+    #if unknown:
     #    print("The following arguments are unknown: ", unknown, "\n")
     #    parser.print_help()
     #    sys.exit(1)
@@ -165,7 +165,7 @@ def _parseArguments():
     if not options.apis:
         from util.ConfigObject import ConfigObject
         config = ConfigObject(path + "/src/config.json")
-        apis = config.configs["apis"]
+        apis = config.configs.value("apis", "WorldBank")
         return apis if type(apis) is list else [apis]
     else:
         return options.apis.split(',')
@@ -177,7 +177,6 @@ def _makeApiObjects(apis):
     Keyword arguments:
     apis -- a list of apis for which objects should be created
     """
-    #import importlib
     import sqlite3
     from plugins.APIInterface import APIInterface
     objects = []
@@ -235,22 +234,30 @@ def _makeConfFile():
     """
     Creates a Configuration File with default values.
     """
-    try:
-        open(path + "/src/config.json", "r")
-        choice = input("File already exists. Should it be overridden with " +
-                       "default values?")
-        if choice in ["y", "yes", "YES", "Yes"]:
-            raise FileNotFoundError
-    except FileNotFoundError:
-        import json
-        with open(path + "/src/config.json", "w+") as f:
-            gname = input("Which account name would you like to use " +
-                          "for authentication at geonames?")
-            f.write(json.dumps({"apis": ["Twitter"],
-                                "geo_location": False,
-                                "gnames": gname,
-                                "map": "google"}))
-            f.close()
+    gname = input("Which account name would you like to use " +
+                  "for authentication at geonames?")
+    from PyQt5.QtCore import QSettings
+    settings = QSettings("FKI", "Detanglement")
+    settings.setValue("apis", ["WorldBank"])
+    settings.setValue("geo_location", False)
+    settings.setValue("gnames", gname)
+    settings.setValue("map", "google")
+    #try:
+    #    open(path + "/src/config.json", "r")
+    #    choice = input("File already exists. Should it be overridden with " +
+    #                   "default values?")
+    #    if choice in ["y", "yes", "YES", "Yes"]:
+    #        raise FileNotFoundError
+    #except FileNotFoundError:
+    #    import json
+    #    with open(path + "/src/config.json", "w+") as f:
+    #        gname = input("Which account name would you like to use " +
+    #                      "for authentication at geonames?")
+    #        f.write(json.dumps({"apis": ["Twitter"],
+    #                            "geo_location": False,
+    #                            "gnames": gname,
+    #                            "map": "google"}))
+    #        f.close()
 
 def _sysCheck():
     """

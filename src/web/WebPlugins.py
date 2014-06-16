@@ -87,7 +87,7 @@ class TangleInterfaces(QtCore.QObject):
         """
         data = self._getInfo(loc)
         try:
-            if data != []:
+            if data:
                 pt = PlotterTrotter(self.filters, data, self.date[0],
                         self.path)
         except VisualizeError as e:

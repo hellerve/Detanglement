@@ -13,8 +13,10 @@ class ConfigObject():
         Keyword Arguments:
         config_file -- string representation of the config file name
         """
+        #self.settings = QSettings("FKI", "Detanglement")
         self.config_file = config_file
-        self.configs = self._parseConfFile()
+        #self.configs = self._parseConfFile()
+        self.configs = QSettings("FKI", "Detanglement")
 
     #internal function; parses the config.
     def _parseConfFile(self):
@@ -26,34 +28,36 @@ class ConfigObject():
         Returns:
         data -- data which was parsed
         """
-        try:
-            with open(self.config_file, "r") as f:
-                data = json.loads(f.read())
-            return data
-        except IOError as e:
-            print("\033[91mConfig File could not be found. Please run Tangle " +
-                  "again with the -f option set.\033[0m")
-            raise e
-        #settings = QSettings("FKI", "Detanglement")
-        #return {key: settings.value(key) for key in settings.allKeys()}
+        #try:
+        #    with open(self.config_file, "r") as f:
+        #        data = json.loads(f.read())
+        #    return data
+        #except IOError as e:
+        #    print("\033[91mConfig File could not be found. Please run Tangle " +
+        #          "again with the -f option set.\033[0m")
+        #    raise e
+        return {key: self.settings.value(key) for key
+                in self.settings.allKeys()}
 
     def refresh(self):
         """
         Refreshes the configuration in case a different object changed
         something.
         """
-        self.configs = self._parseConfFile()
+        #self.configs = self._parseConfFile()
+        pass
 
     def save(self):
         """Saves the momentary configurations into the json file"""
-        try:
-            with open(self.config_file, "w") as f:
-                f.write(json.dumps(self.configs))
-                f.close()
-        except IOError as e:
-            print("Config File could not be found. Please run Tangle " +
-                  "again with the -f option set.")
-            raise e
+        pass
+        #try:
+        #    with open(self.config_file, "w") as f:
+        #        f.write(json.dumps(self.configs))
+        #        f.close()
+        #except IOError as e:
+        #    print("Config File could not be found. Please run Tangle " +
+        #          "again with the -f option set.")
+        #    raise e
 
 #Not a main module
 if __name__ == "__main__":

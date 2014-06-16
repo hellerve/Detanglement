@@ -85,7 +85,7 @@ class TangleUI(QtWidgets.QMainWindow):
     def _setupApis(self):
         """Sets up all the APIs and the loading bar."""
         loc = GeoLocate(self.path + "/rc/GeoLiteCity.dat",
-                            self.preferences.configs['gnames'])
+                            self.preferences.configs.value('gnames', None))
         zoom = self.webView.getZoomLevel()
 
         #print("Start:" + str(datetime.datetime.now()))
@@ -217,29 +217,31 @@ class TangleUI(QtWidgets.QMainWindow):
         self.preferences.refresh()
         self.preferences.save()
         try:
-            if self.preferences.configs["toggled"]:
-                self._loadSettings(False)
-                del self.preferences.configs["toggled"]
+            if self.preferences.configs.value("toggled", False):
+                self._loadSettings()
+                self.preferences.configs.remove("toggled")
                 self.preferences.save()
         except KeyError:
-            self._loadSettings(True)
+            self._loadSettings()
 
-    def _loadSettings(self, api_switch):
+    def _loadSettings(self, api_switch=True):
         """Loads the settings."""
-        self.maps = self.preferences.configs['map']
+        self.maps = self.preferences.configs.value('map')
         self.webView.redrawMap(self.maps)
-        if not api_switch and self.preferences.configs['apis'] != []:
+        if not api_switch or self.preferences.configs.value('api_toggled', False):
             self._setupApis()
-        if self.apis == []:
+            self.preferences.configs.remove('api_toggled')
+        if not self.apis:
             self.webView.warning("No Datasets chosen!")
-        self.geo_location = self.preferences.configs['geo_location']
+        self.geo_location = self.preferences.configs.value('geo_location',
+                False)
         if self.geo_location:
             self.webView.locateUser()
 
     def _eraseSettings(self):
         """Erases all preferences except regarding APIs and saves defaults."""
-        self.preferences.configs['geo_location'] = False
-        self.preferences.configs['map'] = 'google'
+        self.preferences.configs.setValue('geo_location', False)
+        self.preferences.configs.setValue('map', 'google')
         self.preferences.save()
 
     def _addToDatabase(self):

@@ -64,7 +64,8 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         country -- the country name as a string (default None)
         city -- the city name as a string (default None)
         """
-        loc = GeoLocate(self.path + "/rc/GeoLiteCity.dat", self.preferences.configs["gnames"])
+        loc = GeoLocate(self.path + "/rc/GeoLiteCity.dat",
+                self.preferences.configs.value("gnames", None))
         if country and city:
             check = loc.ownCoordsFromAddr(country, city)
             if check == False:
