@@ -25,7 +25,8 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
-        os.path.join(PROJECT_ROOT, 'detanglement/templates').replace('\\', '/')
+        os.path.join(BASE_DIR, 'detanglement/templates').replace('\\', '/')
+)
 
 ALLOWED_HOSTS = []
 
