@@ -9,4 +9,3 @@ def apis(request):
     post = get_object_or_404(Api)
     return render(request, 'datavis/apis.html', {'apis': apis})
 
-# Create your views here.
