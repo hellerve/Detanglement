@@ -150,10 +150,8 @@ You can also look at both files by invoking `./Tangle.py -d` or `./Tangle.py --d
 or, if you have installed it (kudos, you are likely to use Linux, because it is a pain
 to install it on any other platform at the moment) `Tangle -d`.
 
-The feature I am currently working on is a GUI frontend for the database so you can
-conveniently add new APIs and API keys to the application. A database wrapper needs
-to be created sooner or later as well(as it stands, the only database code is inlined
-into a definition in the main script; not very beautiful).
+I am currently working on making the whole application a web app. I am using Django
+for that.
 
 Also, the help file is a mess that needs to be cleaned up by someone who enjoys writing
 HTML files more than me. It is a non-informative mess.
