@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^[home]?$', 'datavis.views.index'),
     url(r'^settings/', 'datavis.views.settings'),
-    url(r'^visualization/', 'datavis.views.visualize'),
+    url(r'^apis/', 'datavis.views.apis'),
 )

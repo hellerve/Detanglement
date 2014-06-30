@@ -30,6 +30,8 @@ TEMPLATE_DIRS = (
 
 ALLOWED_HOSTS = []
 
+ADMINS = ('Veit', 'veit.heller@hotmail.de')
+
 
 # Application definition
 
@@ -88,5 +90,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static').replace('\\', '/')
+        os.path.join(BASE_DIR, 'static').replace('\\', '/'),
 )
