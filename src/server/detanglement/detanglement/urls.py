@@ -4,8 +4,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^[home]?$', 'datavis.views.index'),
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^settings/', 'datavis.views.settings'),
     url(r'^apis/', 'datavis.views.apis'),
 )

@@ -14,8 +14,5 @@ class Authentication(models.Model):
     class Meta:
         ordering = ['id']
 
-    def get_absolute_url(self):
-        return reverse('blog.views.post')
-
     def __unicode__(self):
         return self.authentication
