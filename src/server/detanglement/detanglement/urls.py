@@ -4,8 +4,15 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^[home]?$', 'datavis.views.index'),
+    url('^login/?', 'django.contrib.auth.views.login',
+        {'template_name': 'authentication/login.html',
+        'redirect_field_name': 'datavis/index.html',
+        'current_app': 'Detanglement'}),
+    url(r'^[home]?$', 'datavis.views.serve',
+        {'site': 'datavis/index.html'}),
+    url(r'^settings/$', 'datavis.views.serve',
+        {'site': 'datavis/settings.html'}),
+    url(r'^apis/$', 'datavis.views.serve', {'site': 'datavis/apis.html'}),
+    url(r'^login/$', 'datavis.views.login'),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^settings/', 'datavis.views.settings'),
-    url(r'^apis/', 'datavis.views.apis'),
 )

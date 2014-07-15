@@ -1,16 +1,10 @@
 from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.forms import *
 from datavis.models import Api
 
-def index(request):
-    apis = Api.objects.filter()
-    return render(request, 'datavis/index.html')
+def serve(request, site):
+    return render(request, site)
 
-def apis(request):
-    post = get_object_or_404(Api)
-    return render(request, 'datavis/apis.html')
-
-def visualize(request):
-    return render(request, 'datavis/visualize.html')
-
-def settings(request):
-    return render(request, 'datavis/settings.html')
+def login(request):
+    form = AuthenticationForm()
+    return render(request, 'authentication/login.html', {'form': form})
