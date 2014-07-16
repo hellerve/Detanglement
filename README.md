@@ -1,6 +1,10 @@
 Detanglement
 ============
 
+![Version](http://img.shields.io/badge/version-0.1.2-orange.svg)
+![License](http://img.shields.io/badge/license-GPL-blue.svg)
+
+
 This repo contains a research project I work on at FKI/HTW Berlin.
 As with most of my repositories, this is a work-in-progress, more specifically,
 an alpha.
