@@ -4,7 +4,6 @@ Detanglement
 ![Version](http://img.shields.io/badge/version-0.1.2-orange.svg)
 ![License](http://img.shields.io/badge/license-GPL-blue.svg)
 
-
 This repo contains a research project I work on at FKI/HTW Berlin.
 As with most of my repositories, this is a work-in-progress, more specifically,
 an alpha.
@@ -154,33 +153,13 @@ You can also look at both files by invoking `./Tangle.py -d` or `./Tangle.py --d
 or, if you have installed it (kudos, you are likely to use Linux, because it is a pain
 to install it on any other platform at the moment) `Tangle -d`.
 
-I am currently working on making the whole application a web app. I am using Django
-for that.
+The feature I am currently working on is a GUI frontend for the database so you can
+conveniently add new APIs and API keys to the application. A database wrapper needs
+to be created sooner or later as well(as it stands, the only database code is inlined
+into a definition in the main script; not very beautiful).
 
 Also, the help file is a mess that needs to be cleaned up by someone who enjoys writing
 HTML files more than me. It is a non-informative mess.
 
 I suggest you code a plugin and see if it works. If it does not, we can look at what is
 the problem and fix it together.
-
-Technical Rant
---------------
-
-This section makes understanding the code much easier. It must not be read; however,
-if you plan on contributing to this software, you might as well spend some time on
-learning the philosophy behind it.
-
-I chose python for the job, because everything in Python is an object and I can theoretically
-apply category theory to it to transform any type of data you provide into a plottable,
-quantifiable set. The problem with that approach is the (admittedly very hard) problem of
-identifying the incoming data and what the significant bits to plot are. This is where
-philosophy comes in; one might not always get the output he expected or hoped for because
-the program applied the wrong filters. The basic problem boils down to this: identify the
-set, transform it, quantify it, plot it. The master branch of this program has only very basic 
-capabilities in identifiying the data and does not filter much of it. I am working on a more
-sophisticated mechanism that does the job, but it is very unstable, unreliable and not very 
-sharable at the moment, so if you wish to extend the project, keep in mind that this is only
-a rough sketch of what I wish to be possible.
-
-I tried to keep this intro as brief and high level as possible. If you have, questions, 
-suggestions or anything you want to talk to me about it, feel free to contact me.
