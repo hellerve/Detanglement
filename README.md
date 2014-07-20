@@ -162,3 +162,25 @@ HTML files more than me. It is a non-informative mess.
 
 I suggest you code a plugin and see if it works. If it does not, we can look at what is
 the problem and fix it together.
+
+Technical Rant
+--------------
+
+This section makes understanding the code much easier. It must not be read; however,
+if you plan on contributing to this software, you might as well spend some time on
+learning the philosophy behind it.
+
+I chose python for the job, because everything in Python is an object and I can theoretically
+apply category theory to it to transform any type of data you provide into a plottable,
+quantifiable set. The problem with that approach is the (admittedly very hard) problem of
+identifying the incoming data and what the significant bits to plot are. This is where
+philosophy comes in; one might not always get the output he expected or hoped for because
+the program applied the wrong filters. The basic problem boils down to this: identify the
+set, transform it, quantify it, plot it. The master branch of this program has only very basic 
+capabilities in identifiying the data and does not filter much of it. I am working on a more
+sophisticated mechanism that does the job, but it is very unstable, unreliable and not very 
+sharable at the moment, so if you wish to extend the project, keep in mind that this is only
+a rough sketch of what I wish to be possible.
+
+I tried to keep this intro as brief and high level as possible. If you have, questions, 
+suggestions or anything you want to talk to me about it, feel free to contact me.
