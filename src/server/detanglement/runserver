@@ -1,0 +1,7 @@
+jobs=()
+trap '((${#jobs} == 0)) || kill $jobs' EXIT HUP TERM INT
+stunnel stunnel/dev_https&
+python3.3 manage.py runserver& 
+jobs+=($!)
+print $(jobs)
+HTTPS=1 python3.3 manage.py runserver 8001 

@@ -16,17 +16,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
+SITE_ID = 1
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-=*u4@e%-#%4)n8=os-53qj4ix05#o=y7)03#k)tw2q6vyn2k('
-#SECURE_SSL_REDIRECT=True
-#SECURE_HSTS_SECONDS=5
-#SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+SECURE_SSL_REDIRECT=True
+SECURE_HSTS_SECONDS=5
+SECURE_HSTS_INCLUDE_SUBDOMAINS=True
 SECURE_FRAME_DENY=True
 SECURE_CONTENT_TYPE_NOSNIFF=True
 SECURE_BROWSER_XSS_FILTER=True
 SESSION_COOKIE_SECURE=True
 SESSION_COOKIE_HTTPONLY=True
-#CSRF_COOKIE_SECURE=True
+CSRF_COOKIE_SECURE=True
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,7 +51,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    #'django.contrib.sites',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'datavis',

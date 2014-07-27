@@ -134,7 +134,7 @@ class PlotterTrotter(QtWidgets.QMainWindow):
     def _getChildren(self, father):
         local = []
         if type(father) is dict:
-            for k, v in father.items():
+            for k, v in father.iteritems():
                 if type(v) is dict:
                     local.append(self._getChildren(v))
                 else:

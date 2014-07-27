@@ -65,7 +65,7 @@ class TangleInterfaces(QtCore.QObject):
                         if not t:
                             self.web_view.warning("No datasets for filter " +
                                     i + "!")
-                        else: req.update({k+'/'+i:v for k,v in t.items()})
+                        else: req.update({k+'/'+i:v for k,v in t.iteritems()})
                 else:
                     src, req = None, None
             else:
