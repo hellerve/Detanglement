@@ -1,4 +1,4 @@
-{% extends "authentication/base_site.html" %}
+{% extends "registration/base_site.html" %}
 {% load i18n admin_static %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />{% endblock %}
@@ -53,4 +53,8 @@
 document.getElementById('id_username').focus()
 </script>
 </div>
+
+<p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
+<p>{% trans "Not yet a member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+
 {% endblock %}

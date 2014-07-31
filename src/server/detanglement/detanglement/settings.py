@@ -18,6 +18,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SITE_ID = 1
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-=*u4@e%-#%4)n8=os-53qj4ix05#o=y7)03#k)tw2q6vyn2k('
 SECURE_SSL_REDIRECT=True
@@ -29,6 +31,9 @@ SECURE_BROWSER_XSS_FILTER=True
 SESSION_COOKIE_SECURE=True
 SESSION_COOKIE_HTTPONLY=True
 CSRF_COOKIE_SECURE=True
+ACCOUNT_ACTIVATION_DAYS = 7
+EMAIL_HOST = 'localhost'
+DEFAULT_FROM_EMAIL = 'webmaster@dlocalhost'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -56,6 +61,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'datavis',
     'djangosecure',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (

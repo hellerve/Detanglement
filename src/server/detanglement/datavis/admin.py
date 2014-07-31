@@ -1,5 +1,5 @@
 from django.contrib import admin
-from datavis.models import Api
+from datavis.models import Api, ApiKey
 
 class ApiAdmin(admin.ModelAdmin):
     list_display = ['api']
@@ -8,3 +8,4 @@ class ApiAdmin(admin.ModelAdmin):
     save_on_top = True
 
 admin.site.register(Api, ApiAdmin)
+admin.site.register(ApiKey)

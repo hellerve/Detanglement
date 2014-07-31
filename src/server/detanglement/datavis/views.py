@@ -6,15 +6,14 @@ from datavis.models import Api
 def serve(request, site):
     if request.user.is_authenticated():
         return render(request, site)
-    return redirect('/login/')
+    return redirect('accounts/login/')
 
-def login(request):
-    form = AuthenticationForm()
-    return render(request, 'authentication/login.html', {'form': form})
+def redir(request, site):
+    return redirect(site)
 
 def profile(request):
     if request.user.is_authenticated():
         if request.user.is_superuser:
             return redirect('/admin/')
-        return render(request, 'home')
+        return render(request, 'datavis/index.html')
     raise PermissionDenied()

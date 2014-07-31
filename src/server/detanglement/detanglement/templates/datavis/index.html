@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="description" content="TweeProto Home Window" />
+        <meta name="description" content="Home | Detanglement" />
 
         <link href="{% static 'javascript/toastr/toastr.css' %}" rel="stylesheet"/> 
         <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
@@ -24,7 +24,7 @@
             });
         </script>
 
-        <title title="TweeProto Home Window"></title>
+        <title title="Home | Detanglement"></title>
     </head>
     
 	<body class="body_main">
@@ -39,7 +39,7 @@
                         onpaste="this.onchange();" oninput="this.onchange()"></input>
                         <input type="button" id="submitBtn" value="Submit Location" onclick="getRegion()""></input>
                         </br>
-                        <input type="button" id="submitBtn" value="Get Localized Trends" onclick="getLocalizedTrends()()""></input>
+                        <input type="button" id="submitBtn" value="Get Localized Trends" onclick="getLocalizedTrends()"></input>
                     </form>
                 </div>
                 <div class="map_object" id="google-canvas"></div> 
@@ -47,11 +47,6 @@
                 <div class="map_object" id="osm-canvas"></div>
                 </br>
         </div>
-        <!--<div class="div_foot">
-            <hr />
-            &copy; No rights reserved. Proudly made with VI only. If you are seeing this, you have not installed the appropriate map
-            framework. You might want to choose a different setup via the Settings(CTRL+E).
-        </div>-->
         </div>
 	</body>
 </html>
