@@ -15,17 +15,17 @@ def profile():
 
 urlpatterns = patterns('',
     url(r'^admin/?', include(admin.site.urls)),
-    url(r'^login/?', 'datavis.views.auth_check',
+    url(r'^login/$', 'datavis.views.auth_check',
         {'fun': login}),
+    url(r'^help/$', 'datavis.views.serve', {'site': 'datavis/help.html'}),
     url(r'^accounts/?', include('registration.backends.default.urls')),
     url(r'^accounts/', include('django.contrib.auth.urls')),
     url(r'^$', 'datavis.views.serve', {'site': 'datavis/index.html'}),
-    url(r'^home/?$', 'datavis.views.serve',
-        {'site': 'datavis/index.html'}),
-    url(r'^settings/?', 'datavis.views.serve',
+    url(r'^home/?$', 'datavis.views.serve', {'site': 'datavis/index.html'}),
+    url(r'^settings/$', 'datavis.views.serve',
         {'site': 'datavis/settings.html'}),
-    url(r'^apis/?', 'datavis.views.serve', {'site': 'datavis/apis.html'}),
-    url(r'^accounts/profile/?', 'datavis.views.auth_check',
+    url(r'^apis/$', 'datavis.views.serve', {'site': 'datavis/apis.html'}),
+    url(r'^accounts/profile/$', 'datavis.views.auth_check',
         {'fun': profile}),
 )
 

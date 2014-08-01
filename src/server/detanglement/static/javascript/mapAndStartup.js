@@ -23,9 +23,7 @@ window.onresize = load;
 (function() {
   $(document).ready(function() {
     $('.menu').click(function() {
-      var navPosition;
-      navPosition = $(this).attr('data-position');
-      $('nav.' + navPosition + '').addClass('open');
+      $('nav.right').addClass('open');
       $('body').addClass('menu-open');
       return false;
     });

@@ -1,4 +1,4 @@
 stunnel stunnel/dev_https &
 trap 'kill 0' EXIT SIGINT SIGTERM
-python3.3 manage.py runserver&
-HTTPS=1 python3.3 manage.py runserver 8001 
+python3.3 -R manage.py runserver&
+HTTPS=1 python3.3 -R manage.py runserver 8001 

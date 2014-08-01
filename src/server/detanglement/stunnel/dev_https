@@ -4,7 +4,7 @@ cert = stunnel/stunnel.pem
 options = NO_SSLv2
 sslVersion = all
 foreground = yes
-output = stunnel.log
+output = stunnel/stunnel.log
 
 [https]
 accept=8443

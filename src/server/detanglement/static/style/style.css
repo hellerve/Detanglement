@@ -18,9 +18,9 @@ html, body{
 }
 
 .body_main{
-	background: url(SiteBackground.jpg);
+	background: url(../img/SiteBackground.jpg);
 	background-repeat:repeat;
-	font-family: Geneva;
+    font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
 	font-size:12px;
 	color:#D0D0D0;
 	line-height:18px;
@@ -92,7 +92,14 @@ hr{
 }
 
 .div_main_top_spacer{
-	height:180px;
+	height: 30px;
+}
+
+.overview{
+    margin-top:40px;
+    margin-left:30px;
+    margin-right:30px;
+    margin-bottom:50px;
 }
 
 h1{
@@ -100,12 +107,15 @@ h1{
 	padding-bottom:0px;
 	margin-top:0px;
 	margin-bottom:0px;
-	margin-left:15px;
+	margin-left:10px;
+    color: #1bb1e2; 
+    font-size: 26px;
 }
 
 h2{
 	font-size:20px;
 	color:#D0D0D0;
+	margin-bottom:10px;
 }
 
 
@@ -147,7 +157,7 @@ label{
 	font-size:12px;
 	font-family: Geneva;
 	line-height:18px;
-	color:#DBDBDB;
+    color: #eeeeee;
 }
 
 .p_home b{
@@ -155,8 +165,9 @@ label{
 }
 
 .table_about{
+    margin-left:40px;
 	padding-bottom:0px;
-	margin-bottom:0px;
+	margin-bottom:20px;
 }
 
 .table_about p{

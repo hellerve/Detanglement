@@ -2,7 +2,7 @@ header {
   height: 35px;
   padding: 2px 9px;
   background: #222222;
-  width: 80px;
+  width: 100px;
   -moz-border-bottom-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
   border-bottom-left-radius: 4px;
@@ -112,7 +112,8 @@ nav {
           background-color: rgba(0, 0, 0, 0.2); }
 
 nav.right{
-    width: 100px;
+    margin-top:36px;
+    width: 115px;
     height: 100%; 
 }
 
@@ -133,7 +134,7 @@ nav.right ul > li {
       transform: translate(100%, 0); }
 
 body.menu-open {
-  cursor: url(../img/close.png) 20 20, auto; }
+  cursor: url(../img/close.png) 100 35, auto; }
 
 body.menu-open .overlay {
     display: block; }
