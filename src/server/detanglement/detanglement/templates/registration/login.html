@@ -1,5 +1,5 @@
-{% extends "registration/base_site.html" %}
-{% load i18n admin_static %}
+{%extends "registration/base_site.html" %}
+{% load i18n staticfiles %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/login.css" %}" />{% endblock %}
 
@@ -53,8 +53,7 @@
 document.getElementById('id_username').focus()
 </script>
 </div>
-
-<p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
+<p>{% trans "Forgotten your password or username" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
 <p>{% trans "Not yet a member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
 
 {% endblock %}

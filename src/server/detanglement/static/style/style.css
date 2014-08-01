@@ -17,14 +17,6 @@ html, body{
     height: 100%;
 }
 
-/*@font-face{
-	font-family: Rokkitt;
-	src: local("Rokkitt"),
-	     url('../fonts/Rokkitt.ttf') format('truetype'),
-	font-weight: normal;
-	font-style: normal;
-}*/
-
 .body_main{
 	background: url(SiteBackground.jpg);
 	background-repeat:repeat;

@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--The index html. A form and two divs for maps. Not much more.-->
-{% load static %}
+{% load staticfiles %}
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,7 +30,7 @@
     
 	<body class="body_main">
     <header class="clearfix">
-      <a class="menu pull-left" data-position="left" href="#">
+      <a class="menu pull-right" data-position="right" href="#">
         <div class="bar"></div>
         <div class="bar"></div>
         <div class="bar"></div>
@@ -38,22 +38,25 @@
 
     <div class="overlay"></div>
 
-    <nav class="left">
+    <nav class="right">
       <ul>
         <li>
-          <a href="accounts/profile">Profile</a>
+          <a href="/accounts/logout">Logout</a>
         </li>
         <li>
-          <a href="help">About</a>
+          <a href="/help">About</a>
         </li>
         <li>
-          <a href="settings">Settings</a>
+          <a href="/settings">Settings</a>
         </li>
         <li>
-          <a href="contact">Contact</a>
+          <a href="/contact">Contact</a>
         </li>
         <li>
-          <a href="imprint">Imprint</a>
+          <a href="/imprint">Imprint</a>
+        </li>
+        <li>
+          <a href="https://github.com/hellerve/Detanglement">Github</a>
         </li>
       </ul>
     </nav>

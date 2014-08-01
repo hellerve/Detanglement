@@ -7,7 +7,9 @@ body.login {
 .login #container {
     background: white;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    -webkit-border-radius: 4px;
+    -mozborder-radius: 4px;
+    border-radius: 4px;
     width: 28em;
     min-width: 300px;
     margin-left: auto;
@@ -31,15 +33,15 @@ body.login {
 
 .login .form-row label {
     padding-right: 0.5em;
-    line-height: 2em;
+    line-height: 1em;
     font-size: 1em;
     clear: both;
-    color: #333;
+    color: #000000;
 }
 
 .login .form-row #id_username, .login .form-row #id_password {
     clear: both;
-    padding: 6px;
+    padding: 5px;
     width: 100%;
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;
@@ -47,15 +49,16 @@ body.login {
 }
 
 .login span.help {
-    font-size: 10px;
+    font-size: 8px;
     display: block;
 }
 
 .login .submit-row {
     clear: both;
-    padding: 1em 0 0 9.4em;
+    padding: 0.6em 0 0 9.4em;
 }
 
-.login .password-reset-link {
+.login .password-reset-link{
     text-align: center;
 }
+
