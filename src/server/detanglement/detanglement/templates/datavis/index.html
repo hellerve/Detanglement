@@ -8,6 +8,7 @@
 
         <link href="{% static 'javascript/toastr/toastr.css' %}" rel="stylesheet"/> 
         <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
+        <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
 
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_fBTp5an2gjpXabgV35JO6FHuXCAGVhQ&sensor=false""></script>
         <script src="{% static 'javascript/modernizr.js'%}"></script>
@@ -28,6 +29,34 @@
     </head>
     
 	<body class="body_main">
+    <header class="clearfix">
+      <a class="menu pull-left" data-position="left" href="#">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </header>
+
+    <div class="overlay"></div>
+
+    <nav class="left">
+      <ul>
+        <li>
+          <a href="accounts/profile">Profile</a>
+        </li>
+        <li>
+          <a href="help">About</a>
+        </li>
+        <li>
+          <a href="settings">Settings</a>
+        </li>
+        <li>
+          <a href="contact">Contact</a>
+        </li>
+        <li>
+          <a href="imprint">Imprint</a>
+        </li>
+      </ul>
+    </nav>
     	<div class="div_center" align="center">
                 <div class="fillForm">
                     <form>
