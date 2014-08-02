@@ -31,12 +31,13 @@ SECURE_BROWSER_XSS_FILTER=True
 SESSION_COOKIE_SECURE=True
 SESSION_COOKIE_HTTPONLY=True
 CSRF_COOKIE_SECURE=True
+CSRF_COOKIE_AGE=2620800
 SESSION_EXPIRE_AT_BROWSER_CLOSE=True
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
 DEFAULT_FROM_EMAIL = 'webmaster@dlocalhost'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING: donq't run with debug turned on in production!
 DEBUG = True
 
 TEMPLATE_DEBUG = True
@@ -45,7 +46,7 @@ TEMPLATE_DIRS = (
         os.path.join(BASE_DIR, 'detanglement/templates').replace('\\', '/')
 )
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'detanglement.com', ]
 
 ADMINS = ('Veit', 'veit.heller@hotmail.de')
 
