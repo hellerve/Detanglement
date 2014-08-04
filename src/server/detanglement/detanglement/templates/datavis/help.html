@@ -9,9 +9,43 @@
         <title>Help | Detanglement</title>
         
         <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}" />
+        <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
+        <script src="{% static 'javascript/jquery-1.10.2.min.js'%}"></script>
+        <script src="{% static 'javascript/navStartup.js' %}"></script>
     </head>
     
 	<body align="center" class="body_main">
+    <header class="clearfix">
+      <a class="menu pull-right" data-position="right" href="#">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </header>
+
+    <div class="overlay"></div>
+
+    <nav class="right">
+      <ul>
+        <li>
+          <a href="/accounts/logout">Logout</a>
+        </li>
+        <li>
+          <a href="/help">About</a>
+        </li>
+        <li>
+          <a href="/settings">Settings</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+        <li>
+          <a href="/imprint">Imprint</a>
+        </li>
+        <li>
+          <a href="https://github.com/hellerve/Detanglement">Github</a>
+        </li>
+      </ul>
+      </nav>
     	<div class="div_center" align="center">
             <div class="div_main">
               <div class="div_main_top_spacer"></div>

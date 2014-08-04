@@ -10,6 +10,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.decorators.csrf import csrf_protect
+from django.views.generic.edit import FormView
 
 # Avoid shadowing the login() and logout() views below.
 from django.contrib.auth import REDIRECT_FIELD_NAME, login as auth_login, logout as auth_logout, get_user_model
@@ -18,8 +19,9 @@ from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm, Set
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.models import get_current_site
 
+from .forms import ContactForm
+
 def serve(request, site):
-    print("serve")
     if request.user.is_authenticated():
         return render(request, site)
     return redirect('/login/')
@@ -28,12 +30,27 @@ def redir(request, site):
     return redirect(site)
 
 def auth_check(request, fun):
-    print("auth check")
     if request.user.is_authenticated():
         if request.user.is_superuser:
             return redirect('/admin/')
         return redirect('/home/')
     return fun()
+
+class ContactFormView(FormView):
+    form_class = ContactForm
+    template_name = 'contact/contact_form.html'
+
+    def form_valid(self, form):
+        form.save()
+        return super(ContactFormView, self).form_valid(form)
+
+    def get_form_kwargs(self):
+        kwargs = super(ContactFormView, self).get_form_kwargs()
+        kwargs.update({'request': self.request})
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('sent')
 
 @sensitive_post_parameters()
 @csrf_protect
