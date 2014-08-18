@@ -85,6 +85,7 @@ hr{
 }
 
 .div_main{
+    margin-top:10px;
 	width: 980px;
 	background: url(Header.png) #101010 no-repeat;
 	padding-bottom: 2px;
@@ -99,7 +100,7 @@ hr{
     margin-top:40px;
     margin-left:30px;
     margin-right:30px;
-    margin-bottom:50px;
+    margin-bottom:30px;
 }
 
 h1{
@@ -127,7 +128,7 @@ h2{
 }
 
 label{
-    color: #000;
+    color: #D0D0D0;
 }
 
 .map_object{

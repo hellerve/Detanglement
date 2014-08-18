@@ -1,0 +1,3 @@
+User {{ name }} sent you mail via {{ email }} at {{ datetime }}:
+
+{{ body }}

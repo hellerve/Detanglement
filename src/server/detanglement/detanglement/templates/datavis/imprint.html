@@ -1,55 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--The help file in HTML. I am not very good at web design, so I still use tables and tds. Shame on me.-->
-<html xmlns="http://www.w3.org/1999/xhtml">
-{% load staticfiles %}
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="description" content="TweeProto Help File" />
-        
-        <title>Imprint | Detanglement</title>
-        
-        <link rel="stylesheet" type="text/css" href="{% static 'style/style.css' %}" />
-        <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
-        <script src="{% static 'javascript/jquery-1.10.2.min.js'%}"></script>
-        <script src="{% static 'javascript/navStartup.js' %}"></script>
-    </head>
-    
-	<body align="center" class="body_main">
-    <header class="clearfix">
-      <a class="menu pull-right" data-position="right" href="#">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </header>
-
-    <div class="overlay"></div>
-
-    <nav class="right">
-      <ul>
-        <li>
-          <a href="/accounts/logout">Logout</a>
-        </li>
-        <li>
-          <a href="/help">About</a>
-        </li>
-        <li>
-          <a href="/settings">Settings</a>
-        </li>
-        <li>
-          <a href="/contact">Contact</a>
-        </li>
-        <li>
-          <a href="/imprint">Imprint</a>
-        </li>
-        <li>
-          <a href="https://github.com/hellerve/Detanglement">Github</a>
-        </li>
-      </ul>
-    </nav>
-    	<div class="div_center" align="center">
-            <div class="div_main">
-              <div class="div_main_top_spacer"></div>
-                <div class="div_body">
+{% extends "datavis/base.html" %}
+{% block content %}
                 <h1>Imprint</h1>
                     <div class="overview">
                         <p>
@@ -69,10 +19,4 @@
                             please contact the team via mail or the <a href="/contact">contact form</a>.
                         </p>
                     </div>
-        <div class="div_foot">
-            <hr />
-            &copy; No rights reserved. Proudly made with VI only.
-            </div>
-        </div>
-	</body>
-</html>
+{% endblock %}

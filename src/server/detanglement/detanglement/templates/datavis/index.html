@@ -1,85 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--The index html. A form and two divs for maps. Not much more.-->
-{% load staticfiles %}
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="description" content="Home | Detanglement" />
-
-        <link href="{% static 'javascript/toastr/toastr.css' %}" rel="stylesheet"/> 
-        <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
-        <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
-
-        <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
-        <script src="{% static 'javascript/modernizr.js'%}"></script>
-        <script src="{% static 'javascript/jquery-1.10.2.min.js'%}"></script>
-        <script src="{% static 'javascript/toastr/toastr.js' %}"></script>
-        <script src="{% static 'javascript/navStartup.js' %}"></script>
-
-        <script type="text/javascript">
-            Modernizr.load({
-                test: Modernizr.svg && Modernizr.inlinesvg,
-                yep : [ //"javascript/kartograph.js",
-                        "https://www.openlayers.org/api/OpenLayers.js",
-                        "{% static 'javascript/mapAndStartup.js'%}" ],
-                        fails : ["{% static 'javascript/nope.js'%}"] 
-            });
-        </script>
-
-        <title title="Home | Detanglement"></title>
-    </head>
-    
-	<body class="body_main">
-    <header class="clearfix">
-      <a class="menu pull-right" data-position="right" href="#">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-    </header>
-
-    <div class="overlay"></div>
-
-    <nav class="right">
-      <ul>
-        <li>
-          <a href="/accounts/logout">Logout</a>
-        </li>
-        <li>
-          <a href="/help">About</a>
-        </li>
-        <li>
-          <a href="/settings">Settings</a>
-        </li>
-        <li>
-          <a href="/contact">Contact</a>
-        </li>
-        <li>
-          <a href="/imprint">Imprint</a>
-        </li>
-        <li>
-          <a href="https://github.com/hellerve/Detanglement">Github</a>
-        </li>
-      </ul>
-    </nav>
-    	<div class="div_center" align="center">
+{% extends "datavis/index_base.html" %}
+{% block main %}
                 <div class="fillForm">
                     <form>
                         <label for="country">Country:</label>
                         <input type="text" name="country" id="country" onchange="fillForm();" onkeyup="this.onchange();"
-                        onpaste="this.onchange();" oninput="this.onchange()"></input>
+                        onpaste="this.onchange();" oninput="this.onchange()">
                         <label for="city">City:</label>
                         <input type="text" name="city" id="city" onchange="fillForm();" onkeyup="this.onchange();"
-                        onpaste="this.onchange();" oninput="this.onchange()"></input>
-                        <input type="button" id="submitBtn" value="Submit Location" onclick="getRegion()""></input>
-                        </br>
-                        <input type="button" id="submitBtn" value="Get Localized Trends" onclick="getLocalizedTrends()"></input>
+                        onpaste="this.onchange();" oninput="this.onchange()">
+                        <input type="button" id="submitBtn" value="Submit Location" onclick="getRegion()">
+                        <br/>
+                        <input type="button" id="submitBtn" value="Get Localized Trends" onclick="getLocalizedTrends()">
                     </form>
                 </div>
                 <div class="map_object" id="google-canvas"></div> 
                 <div class="map_object" id="kartograph-canvas"></div>
                 <div class="map_object" id="osm-canvas"></div>
-                </br>
-        </div>
-        </div>
-	</body>
-</html>
+{% endblock %}

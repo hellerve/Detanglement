@@ -63,30 +63,30 @@ nav {
       -webkit-transition: all 0.4s;
       -moz-transition: all 0.4s;
       transition: all 0.4s; }
-      nav ul > li:nth-child(2) {
+      nav ul > li:nth-child(1) {
         background-color: #1bb1e2; }
-      nav ul > li:nth-child(3) {
+      nav ul > li:nth-child(2) {
         background-color: #19a6d4;
         -webkit-transition-delay: 0.1s;
         -moz-transition-delay: 0.1s;
         transition-delay: 0.1s; }
-      nav ul > li:nth-child(4) {
+      nav ul > li:nth-child(3) {
         background-color: #189cc7;
         -webkit-transition-delay: 0.2s;
         -moz-transition-delay: 0.2s;
         transition-delay: 0.2s; }
-      nav ul > li:nth-child(5) {
+      nav ul > li:nth-child(4) {
         background-color: #1691b9;
         -webkit-transition-delay: 0.3s;
         -moz-transition-delay: 0.3s;
         transition-delay: 0.3s; }
-      nav ul > li:nth-child(6) {
+      nav ul > li:nth-child(5) {
         background-color: #1486ab;
         -webkit-transition-delay: 0.4s;
         -moz-transition-delay: 0.4s;
         transition-delay: 0.4s; 
       }
-      nav ul > li:nth-child(7) {
+      nav ul > li:nth-child(6) {
         background-color: #127899;
         -webkit-transition-delay: 0.5s;
         -moz-transition-delay: 0.5s;
