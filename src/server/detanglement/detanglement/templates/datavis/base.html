@@ -1,0 +1,100 @@
+{% load staticfiles %}{% load firstof from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<!--Stylesheets-->
+        <link href="{% static 'javascript/toastr/toastr.css' %}" rel="stylesheet"/> 
+        <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
+        <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
+
+        <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+        <script src="{% static 'javascript/modernizr.js'%}"></script>
+        <script src="{% static 'javascript/jquery-1.10.2.min.js'%}"></script>
+        <script src="{% static 'javascript/toastr/toastr.js' %}"></script>
+        <script src="{%static 'javascript/navStartup.js' %}"></script>
+
+        <script type="text/javascript">
+            Modernizr.load({
+                test: Modernizr.svg && Modernizr.inlinesvg,
+                yep : [ //"javascript/kartograph.js",
+                        "https://www.openlayers.org/api/OpenLayers.js",
+                        "{% static 'javascript/mapAndStartup.js'%}"],
+                        fails : ["{% static 'javascript/nope.js'%}"] 
+            });
+        </script>
+
+        <title title="Home | Detanglement"></title>
+    
+{% block extrahead %}{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+{% load i18n %}
+
+<body class="body_main" align="center">
+    <header class="clearfix">
+    <a class="menu pull-right" data-position="right" href="#">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </a>
+    </header>
+
+    <div class="overlay"></div>
+
+    <nav class="right">
+      <ul>
+        <li>
+          <a href="/accounts/logout">Logout</a>
+        </li>
+        <li>
+          <a href="/help">About</a>
+        </li>
+        <li>
+          <a href="/settings">Settings</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+        <li>
+          <a href="/imprint">Imprint</a>
+        </li>
+        <li>
+          <a href="https://github.com/hellerve/Detanglement">Github</a>
+        </li>
+      </ul>
+    </nav>
+<!-- Container -->
+    <div class="div_center" align="center">
+    <div class="div_main">
+            {% block main %}
+            {{ main }}
+            {% endblock %}
+            {% if not main %}
+            <div class="div_main_top_spacer"></div>
+            <div id="content" class="div_body">
+
+                    <!-- Content -->
+                        <br/>
+                        {% block pretitle %}{% endblock %}
+                        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+                        {% block content %}
+                        {% block object-tools %}{% endblock %}
+                        {{ content }}
+                        {% endblock %}
+                        {% block sidebar %}{% endblock %}
+                        <br/>
+
+                        <div class="div_foot">
+                            <hr />
+                            &copy; No rights reserved. Proudly made with VI only.
+                        </div>
+                        <!-- END Content -->
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+<!-- END Container -->
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "registration/base_site.html" %}
+{% load i18n %}
+
+{% block content %}
+
+{% if account %}
+
+<p>{% trans "Account successfully activated!" %}</p>
+
+<p><a href="{% url auth_login %}">{% trans "Log in" %}</a></p>
+
+{% else %}
+
+<p>{% trans "Activation failed or site obsolete. If login fails, please contact the site administrator." %}</p>
+
+<p><a href="{% url 'auth_login' %}">{% trans "Log in" %}</a></p>
+
+{% endif %}
+
+{% endblock %}

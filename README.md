@@ -1,7 +1,7 @@
 Detanglement
 ============
 
-![Version](http://img.shields.io/badge/version-0.1.2-orange.svg)
+![Version](http://img.shields.io/badge/version-0.2.0-yellow.svg)
 ![License](http://img.shields.io/badge/license-GPL-blue.svg)
 
 
@@ -13,6 +13,9 @@ It is a tool that visualizes big amounts of geolocalized data on-demand.
 At the moment, only a proof-of-concept plugin for WorldBanks' Indicator API
 is working with it, but it can theoretically be extended to work with many
 different APIs; that is the goal, anyway.
+
+Right now, the application is updated to be a webapp using django. As soon
+as it is online, I will get you a link.
 
 Table of Contents
 -----------------
@@ -142,8 +145,6 @@ window(the dotted rectangle in the iconed bar of the main window) and then resta
 To be completely sure that the API will be loaded, you can run `Tangle.py -a MyApiName`
 which will load your API if possible. If not, nothing will be loaded.
 
-More coming soon.
-
 Contribute
 ----------
 
@@ -162,6 +163,9 @@ HTML files more than me. It is a non-informative mess.
 
 I suggest you code a plugin and see if it works. If it does not, we can look at what is
 the problem and fix it together.
+
+Right now, the application is made into a webapp. I use django for that purpose, but I am
+still a rookie in using it, so any help is appreciated.
 
 Technical Rant
 --------------

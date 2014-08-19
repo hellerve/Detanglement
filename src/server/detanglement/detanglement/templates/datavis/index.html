@@ -1,0 +1,19 @@
+{% extends "datavis/index_base.html" %}
+{% block main %}
+                <div class="fillForm">
+                    <form>
+                        <label for="country">Country:</label>
+                        <input type="text" name="country" id="country" onchange="fillForm();" onkeyup="this.onchange();"
+                        onpaste="this.onchange();" oninput="this.onchange()">
+                        <label for="city">City:</label>
+                        <input type="text" name="city" id="city" onchange="fillForm();" onkeyup="this.onchange();"
+                        onpaste="this.onchange();" oninput="this.onchange()">
+                        <input type="button" id="submitBtn" value="Submit Location" onclick="getRegion()">
+                        <br/>
+                        <input type="button" id="submitBtn" value="Get Localized Trends" onclick="getLocalizedTrends()">
+                    </form>
+                </div>
+                <div class="map_object" id="google-canvas"></div> 
+                <div class="map_object" id="kartograph-canvas"></div>
+                <div class="map_object" id="osm-canvas"></div>
+{% endblock %}

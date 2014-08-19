@@ -1,0 +1,15 @@
+{% extends "registration/base_site.html" %}
+{%load i18n %}
+
+{% block content %}
+<form method="post" action=".">{% csrf_token %}
+  {% if form.is_multipart %}
+    <form enctype="multipart/form-data" method="post" action="/foo/">
+  {% else %}
+    <form method="post" action="/foo/">
+  {% endif %}
+  {{ form.as_p }}
+
+  <input type="submit" value="{% trans 'Submit' %}" />
+</form>
+{% endblock %}
