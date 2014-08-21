@@ -1,7 +1,7 @@
 {% load staticfiles %}{% load firstof from future %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
-<title>{% block title %}{% endblock %}</title>
+<title>{% block title %}{% endblock %} | Detanglement</title>
 <!--Stylesheets-->
         <link href="{% static 'javascript/toastr/toastr.css' %}" rel="stylesheet"/> 
         <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
@@ -23,8 +23,6 @@
             });
         </script>
 
-        <title title="Home | Detanglement"></title>
-    
 {% block extrahead %}{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 </head>
@@ -38,31 +36,54 @@
         <div class="bar"></div>
     </a>
     </header>
-
+    {% if user.is_authenticated %}
     <div class="overlay"></div>
 
     <nav class="right">
       <ul>
         <li>
-          <a href="/accounts/logout">Logout</a>
-        </li>
-        <li>
-          <a href="/help">About</a>
+          <a href="/home">Home</a>
         </li>
         <li>
           <a href="/settings">Settings</a>
         </li>
         <li>
+          <a href="/help">About</a>
+        </li>
+        <li>
           <a href="/contact">Contact</a>
+        </li>
+        <li>
+          <a href="https://github.com/hellerve/Detanglement">Github</a>
         </li>
         <li>
           <a href="/imprint">Imprint</a>
         </li>
         <li>
-          <a href="https://github.com/hellerve/Detanglement">Github</a>
+          <a href="/accounts/logout">Logout</a>
         </li>
       </ul>
+      </nav>
+    {% else %}
+    <div class="overlay"></div>
+
+    <nav class="right">
+      <ul>
+        <li>
+          <a href="/login">Home</a>
+        </li>
+        <li>
+          <a href="/imprint">Imprint</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+        <li>
+          <a href="https://github.com/hellerve/Detanglement">Github</a>
+        </li>
+      <ul>
     </nav>
+    {% endif %}
 <!-- Container -->
     <div class="div_center" align="center">
     <div class="div_main">

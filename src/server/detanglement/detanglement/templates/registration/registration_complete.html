@@ -1,6 +1,10 @@
-{% extends "registration/base_site.html" %}
+{% extends "registration/datavis_base_site.html" %}
 {% load i18n %}
 
+{% block title %}Registration complete{% endblock %}
+
 {% block content %}
+<div class="overview">
 <p>{% trans "You are now registered. Activation email sent." %}</p>
+</div>
 {% endblock %}

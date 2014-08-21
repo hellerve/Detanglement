@@ -21,8 +21,8 @@ from django.contrib.sites.models import get_current_site
 
 from .forms import ContactForm
 
-def serve(request, site):
-    if request.user.is_authenticated():
+def serve(request, site, auth=True):
+    if auth == False or request.user.is_authenticated():
         return render(request, site)
     return redirect('/login/')
 

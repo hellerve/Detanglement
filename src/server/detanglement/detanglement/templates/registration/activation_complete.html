@@ -1,8 +1,11 @@
-{% extends "registration/base_site.html" %}
+{% extends "registration/datavis_base_site.html" %}
 {% load i18n %}
+
+{%block title %}Activation{% endblock %}
 
 {% block content %}
 
+<div class="overview">
 {% if account %}
 
 <p>{% trans "Account successfully activated!" %}</p>
@@ -16,5 +19,7 @@
 <p><a href="{% url 'auth_login' %}">{% trans "Log in" %}</a></p>
 
 {% endif %}
+
+</div>
 
 {% endblock %}

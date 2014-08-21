@@ -18,7 +18,7 @@ html, body{
 }
 
 .body_main{
-	background: url(../img/SiteBackground.jpg);
+	background: url(../img/startup.png);
 	background-repeat:repeat;
     font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
 	font-size:12px;
@@ -87,7 +87,7 @@ hr{
 .div_main{
     margin-top:10px;
 	width: 980px;
-	background: url(Header.png) #101010 no-repeat;
+	background: #101010;
 	padding-bottom: 2px;
 	border-radius: 8px;
 }
@@ -119,6 +119,10 @@ h2{
 	margin-bottom:10px;
 }
 
+h3{
+	font-size:16px;
+    color: #1691b9;
+}
 
 .fillForm{
     margin-top: 60px;

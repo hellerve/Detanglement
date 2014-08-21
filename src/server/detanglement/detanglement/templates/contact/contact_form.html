@@ -1,14 +1,17 @@
 {% extends "contact/base_site.html" %}
 {%load i18n %}
+{%block title %}Contact{% endblock %}
 {% block content %}
-<form method="post" action=".">{% csrf_token %}
+<h1>Contact</h1>
+<div class="overview">
   {% if form.is_multipart %}
-    <form enctype="multipart/form-data" method="post" action="">
+    <form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
   {% else %}
-    <form method="post" action="">
+    <form method="post" action=".">{% csrf_token %}
   {% endif %}
   {{ form.as_p }}
 
   <input type="submit" value="{% trans 'Submit' %}" />
 </form>
+</div>
 {% endblock %}

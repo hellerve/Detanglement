@@ -1,10 +1,29 @@
 {% extends "datavis/base.html" %}
-        <title>Help | Detanglement</title>
-
+        {%block title %}Settings{% endblock %}
         {% block content %}
                 <h1>Settings</h1>
                 <div class="overview">
                     <p>In this pane, you can add APIs and tweak a few things regarding maps and geolocation
                     (which is switched of by default, because, you know, privacy).</p>
+                    <br/>
+                    <h3>Privacy</h3>
+                    <br/>
+                    <p>Geolocation</p>
+                    <br/>
+                    <h3>Display</h3>
+                    <br/>
+                    <p>Google Maps(privacy warning!)</p>
+                    <p>OpenLayers</p>
+                    <p>Kartograph</p>
+                    <br/>
+                    <h3>APIs</h3>
+                    <br/>
+                    <!--for API in APIs list-->
+                    <p>WorldBank</p>
+                    <p>Twitter</p>
+                    <p>OpenLayers</p>
+                    <p>Private Dataset</p>
+                    <br/>
+                    <input type="submit" value="Apply"></input>
                 </div>
         {% endblock %}

@@ -91,10 +91,16 @@ nav {
         -webkit-transition-delay: 0.5s;
         -moz-transition-delay: 0.5s;
         transition-delay: 0.5s; 
+      }
+      nav ul > li:nth-child(7) {
+        /*find rgb*/
+        background-color: #106587;
+        -webkit-transition-delay: 0.5s;
+        -moz-transition-delay: 0.5s;
         -moz-border-bottom-left-radius: 4px;
         border-bottom-left-radius: 4px;
         border-bottom-left-radius: 4px;
-        }
+      }
       nav ul > li > a {
         color: #eeeeee;
         text-transform: uppercase;
@@ -113,7 +119,7 @@ nav {
 
 nav.right{
     margin-top:36px;
-    width: 115px;
+    width: 118px;
     height: 100%; 
 }
 
