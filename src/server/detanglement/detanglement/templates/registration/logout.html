@@ -2,12 +2,14 @@
 {% load i18n %}
 
     
-{% block title %}Logged out{% title %}
+{% block title %}Logged out{% endblock %}
 
 {% block content %}
 
 <div class="overview">
     <p>Successfully logged out.</p>
+    <br/>
+    <a href="/login">Log in again</a>
 </div>
 
 {% endblock %}
