@@ -87,7 +87,7 @@ hr{
 .div_main{
     margin-top:10px;
 	width: 980px;
-	background: url(Header.png) #101010 no-repeat;
+	background: #101010;
 	padding-bottom: 2px;
 	border-radius: 8px;
 }
