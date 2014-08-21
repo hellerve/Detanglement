@@ -29,7 +29,6 @@
 {% load i18n %}
 
 <body class="body_main" align="center">
-    {% if user.is_authenticated %}
     <header class="clearfix">
     <a class="menu pull-right" data-position="right" href="#">
         <div class="bar"></div>
@@ -37,7 +36,7 @@
         <div class="bar"></div>
     </a>
     </header>
-
+    {% if user.is_authenticated %}
     <div class="overlay"></div>
 
     <nav class="right">
@@ -65,7 +64,26 @@
         </li>
       </ul>
       </nav>
-      {% endif %}
+    {% else %}
+    <div class="overlay"></div>
+
+    <nav class="right">
+      <ul>
+        <li>
+          <a href="/login">Home</a>
+        </li>
+        <li>
+          <a href="/imprint">Imprint</a>
+        </li>
+        <li>
+          <a href="/contact">Contact</a>
+        </li>
+        <li>
+          <a href="https://github.com/hellerve/Detanglement">Github</a>
+        </li>
+      <ul>
+    </nav>
+    {% endif %}
 <!-- Container -->
     <div class="div_center" align="center">
     <div class="div_main">
