@@ -1,7 +1,11 @@
-{% extends "registration/base_site.html" %}
+{% extends "registration/datavis_base_site.html" %}
 {%load i18n %}
 
 {% block content %}
+<h1>Registration</h1>
+<div class="overview">
+<p>Please enter your details:</p>
+<br/>
 <form method="post" action=".">{% csrf_token %}
   {% if form.is_multipart %}
     <form enctype="multipart/form-data" method="post" action="/foo/">
@@ -12,4 +16,5 @@
 
   <input type="submit" value="{% trans 'Submit' %}" />
 </form>
+</div>
 {% endblock %}

@@ -1,10 +1,10 @@
-{% extends "registration/base_site.html" %}
+{% extends "registration/datavis_base_site.html" %}
 {% load i18n %}
-
-{% block breadcrumbs %}<div class="breadcrumbs"><a href="{% url 'login' %}">{% trans 'Log in again' %}</a></div>{% endblock %}
 
 {% block content %}
 
-<p>{% trans "Successfully logged out." %}</p>
+<div class="overview">
+    <p>Successfully logged out.</p>
+</div>
 
 {% endblock %}
