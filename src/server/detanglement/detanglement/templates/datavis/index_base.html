@@ -11,17 +11,9 @@
         <script src="{% static 'javascript/modernizr.js'%}"></script>
         <script src="{% static 'javascript/jquery-1.10.2.min.js'%}"></script>
         <script src="{% static 'javascript/toastr/toastr.js' %}"></script>
-        <script src="{%static 'javascript/navStartup.js' %}"></script>
-
-        <script type="text/javascript">
-            Modernizr.load({
-                test: Modernizr.svg && Modernizr.inlinesvg,
-                yep : [ //"javascript/kartograph.js",
-                        "https://www.openlayers.org/api/OpenLayers.js",
-                        "{% static 'javascript/mapAndStartup.js'%}"],
-                        fails : ["{% static 'javascript/nope.js'%}"] 
-            });
-        </script>
+        <script src="{% static 'javascript/navStartup.js' %}"></script>
+        <script src="{% static 'javascript/OpenLayers.js' %}"></script>
+        <script src="{% static 'javascript/mapAndStartup.js'%}"></script>
 
 {% block extrahead %}{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}

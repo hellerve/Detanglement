@@ -12,12 +12,11 @@ tangle.kartographMarkers = [];
 tangle.googleMarkerNames = [];
 tangle.osmMarkerNames = [];
 tangle.kartographMarkerNames = [];
-tangle.mapchoice = 0;
+tangle.mapchoice = 2;
 tangle.loc = [];
-load();
+window.onload = load;
 
 toastr.options.closeButton = true;
-checkButtonDisplay();
 window.onresize = load;
 
 //Startup function; checks whether the button should be disabled
@@ -30,6 +29,7 @@ function load(){
     }else if(tangle.mapchoice === 2){
         initializeOSM();
     }
+    checkButtonDisplay();
 };
 
 //Gets the currently used map.
