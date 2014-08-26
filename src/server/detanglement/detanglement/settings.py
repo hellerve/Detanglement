@@ -43,7 +43,7 @@ DEBUG = True
 TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = (
-        os.path.join(BASE_DIR, 'detanglement/templates').replace('\\', '/')
+        os.path.join(BASE_DIR, 'detanglement/templates').replace('\\', '/'),
 )
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'detanglement.com', ]
@@ -83,12 +83,28 @@ WSGI_APPLICATION = 'detanglement.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+CONN_MAX_AGE = 10
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': 'tangle.db',
     }
+}
+
+# Caches
+# Database Caching
+# https://docs.djangoproject.com/en/dev/topics/cache/
+
+CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+            'LOCATION': 'detanglement_cache',
+            'TIMEOUT': 360,
+            'OPTIONS': {
+                'MAX_ENTRIES': 10000
+            },
+        }
 }
 
 # Internationalization

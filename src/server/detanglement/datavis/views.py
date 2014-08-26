@@ -2,9 +2,11 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
 from django.views.generic.edit import FormView
+from django.views.decorators.cache import cache_page
 
 from .forms import ContactForm, SettingsForm
 
+@cache_page(60 * 10)
 def serve(request, site, auth=True):
     if auth == False or request.user.is_authenticated():
         return render(request, site)

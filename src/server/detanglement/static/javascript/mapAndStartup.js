@@ -132,7 +132,7 @@ function addBasicLayers(){
 function getRegion(){
     var countryVal = document.getElementById('country').value;
     var cityVal = document.getElementById('city').value;
-    interfaces.submitLocation(countryVal, cityVal);
+    //addLocationMarker(countryVal, cityVal);
 };
 
 //Deletes a data marker at a specific location.
