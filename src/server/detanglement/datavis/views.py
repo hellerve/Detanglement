@@ -6,7 +6,7 @@ from django.views.decorators.cache import cache_page
 
 from .forms import ContactForm, SettingsForm
 
-@cache_page(0)
+@cache_page(60 * 10)
 def serve(request, site, auth=True):
     if auth == False or request.user.is_authenticated():
         return render(request, site)
