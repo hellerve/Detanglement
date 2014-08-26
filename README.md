@@ -1,7 +1,7 @@
 Detanglement
 ============
 
-![Version](http://img.shields.io/badge/version-0.2.0-yellow.svg)
+![Version](http://img.shields.io/badge/version-0.3.0-yellow.svg)
 ![License](http://img.shields.io/badge/license-GPL-blue.svg)
 
 
