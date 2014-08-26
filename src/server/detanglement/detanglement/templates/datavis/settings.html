@@ -3,27 +3,47 @@
         {% block content %}
                 <h1>Settings</h1>
                 <div class="overview">
-                    <p>In this pane, you can add APIs and tweak a few things regarding maps and geolocation
+                    <p>In this pane, you can change APIs and tweak a few things regarding maps and geolocation
                     (which is switched of by default, because, you know, privacy).</p>
-                    <br/>
+                    <br></br>
+                    <form action="." method="post">{% csrf_token %}
                     <h3>Privacy</h3>
                     <br/>
-                    <p>Geolocation</p>
+                    {{ form.privacy.errors }}
+                    <label for="id_privacy">Geolocation</label>
+                    {{ form.privacy }}
+                    <br/>
                     <br/>
                     <h3>Display</h3>
                     <br/>
-                    <p>Google Maps(privacy warning!)</p>
-                    <p>OpenLayers</p>
-                    <p>Kartograph</p>
+                    {{ form.display.errors }}
+                    <label for="id_display">Maps</label>
+                    {{ form.display }}
+                    <br/>
                     <br/>
                     <h3>APIs</h3>
                     <br/>
-                    <!--for API in APIs list-->
-                    <p>WorldBank</p>
-                    <p>Twitter</p>
-                    <p>OpenLayers</p>
-                    <p>Private Dataset</p>
+                    <p>If you want to add a new API or dataset, go <a href="/contact/">here</a>.</p>
                     <br/>
+                    {{form.apis.errors }}
+                    <label for="id_apis">Apis</label>
+                    {{ form.apis }}
+                    <br/>
+                    <br/>
+                    <h3>Email</h3>
+                    <br/>
+                    <p>You can change your email address here if you need to. For password resets,
+                    look <a href="/accountspassword/reset/">here</a>.</p>
+                    <br/>
+                    {{form.email.errors }}
+                    <label for="id_email">New email address:</label>
+                    {{ form.email }}
+                    <br/>
+                    {{ form.email_sec.errors }}
+                    <label for="id_email_sec">Retype email address:</label>
+                    {{ form.email_sec }}
+                    <br></br>
                     <input type="submit" value="Apply"></input>
                 </div>
+            </form>
         {% endblock %}

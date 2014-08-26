@@ -3,8 +3,8 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.template import loader
 from django.template import RequestContext
-from django.contrib.sites.models import RequestSite
-from django.contrib.sites.models import Site
+from django.contrib.sites.models import RequestSite, Site
+from .models import Api
 
 
 class ContactForm(forms.Form):
@@ -66,3 +66,25 @@ class ContactForm(forms.Form):
     def save(self, fail_silently=False):
         send_mail(fail_silently=fail_silently, **self.get_message_dict())
 
+
+class SettingsForm(forms.Form):
+    privacy = forms.BooleanField(required=False)
+    display = forms.ChoiceField(choices=(("OSM", "Open Street Maps"),
+                                        ("Google", "Google Maps"),
+                                        ("Kartograph", "Kartograph")),
+                                required=False)
+    apis = forms.MultipleChoiceField(choices=(), required=False)
+    email = forms.EmailField(max_length=200, label="New email address",
+                            required=False)
+    email_sec = forms.EmailField(max_length=200, label="Retype email address",
+                                required=False)
+
+    def __init__(self, request):
+        super(SettingsForm, self).__init__()
+        choices = []
+        for api in Api.objects.all():
+            if str(request.user) == str(getattr(api, 'user')):
+                choices.append((getattr(api, 'api'), getattr(api, 'api')),)
+        print(choices)
+        self.fields['apis'].choices = choices
+        print(self.fields['apis'].choices)
