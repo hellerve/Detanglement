@@ -38,6 +38,7 @@ class ContactFormView(FormView):
     def get_success_url(self):
         return reverse('sent')
 
+@cache_page(60 * 10)
 def settings(request):
     if not request.user.is_authenticated():
         return redirect('/login/')

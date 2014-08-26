@@ -16,6 +16,7 @@ tangle.mapchoice = 2;
 tangle.loc = [];
 window.onload = load;
 
+
 toastr.options.closeButton = true;
 window.onresize = load;
 
@@ -71,7 +72,7 @@ function initializeGoogleMap(){
         };
         tangle.map = new google.maps.Map(document.getElementById("google-canvas"), 
                                   mapOptions);
-        var image = "../images/pinico.png";
+        var image = STATIC_URL + "/img/pinico.png";
         tangle.googleLocationMarker = new google.maps.Marker({position: berlin, 
                                 map: null,
                                 title: "Your Location",
@@ -89,7 +90,7 @@ function initializeKartograph(){
     document.getElementById("google-canvas").style.height = "0px";
     document.getElementById("google-canvas").style.width = "0px";
     tangle.map = kartograph.map('#kartograph-canvas');
-    tangle.map.loadMap('../images/worldView.svg', addBasicLayers);
+    tangle.map.loadMap(STATIC_URL + '/img/worldView.svg ', addBasicLayers);
 };
 
 //initializes the OSM map
@@ -110,10 +111,11 @@ function initializeOSM(){
     tangle.map.addLayer(tangle.osmMarkers);
     tangle.map.setCenter(position, zoom);
     if(tangle.osmLocationMarker === null){
+        var size = new OpenLayers.Size(24,24);
+        var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+        var icon = new OpenLayers.Icon(STATIC_URL + "/img/osmicon.png", size, offset);
         tangle.osmLocationMarker = new OpenLayers.Marker(position);
         tangle.osmLocationMarker.icon.imageDiv.title = "Your Location";
-        var image = "../images/osmicon.png";
-        tangle.osmLocationMarker.setUrl(image);
     }
 };
 
@@ -132,7 +134,7 @@ function addBasicLayers(){
 function getRegion(){
     var countryVal = document.getElementById('country').value;
     var cityVal = document.getElementById('city').value;
-    //addLocationMarker(countryVal, cityVal);
+    addLocationMarker(Dajaxice.datavis.locate(Dajax.process, {'country': countryVal, 'city': cityVal}));
 };
 
 //Deletes a data marker at a specific location.
@@ -226,7 +228,9 @@ function addOsmMarker(lat, lon, name){
 
 
 //adds a location marker at a specific location.
-function addLocationMarker(lat, lon){
+function addLocationMarker(data){
+    lat = data[0];
+    lon = data[1];
     if(tangle.mapchoice === 0)
         addGoogleLocationMarker(lat, lon, name);
     else if(tangle.mapchoice === 1)

@@ -5,8 +5,10 @@ from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from datavis.views import ContactFormView
+from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 
 admin.autodiscover()
+dajaxice_autodiscover()
 
 def login():
     return redirect('/accounts/login/')
@@ -32,6 +34,7 @@ urlpatterns = patterns('',
     url(r'^contact/$', ContactFormView.as_view(), name='contact'),
     url(r'^contact/sent/$', 'datavis.views.serve',
         {'site': 'contact/sent.html'}, name='sent'),
+    url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
 )
 
 urlpatterns += staticfiles_urlpatterns()

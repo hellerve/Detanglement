@@ -1,15 +1,18 @@
 {% load staticfiles %}{% load firstof from future %}<!DOCTYPE html>
+{% load dajaxice_templatetags %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
 <head>
 <title>{% block title %}{% endblock %} | Detanglement</title>
 <!--Stylesheets-->
+        <script language="javascript">var STATIC_URL = "{{ STATIC_URL|escapejs }}";</script>
         <link href="{% static 'javascript/toastr/toastr.css' %}" rel="stylesheet"/> 
         <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
         <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
 
         <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
+        <script src="{% static 'javascript/jquery-1.10.2.min.js' %}"></script>
         <script src="{% static 'javascript/modernizr.js'%}"></script>
-        <script src="{% static 'javascript/jquery-1.10.2.min.js'%}"></script>
+        <script src="{% static 'dajax/jquery.dajax.core.js'%}"></script>
         <script src="{% static 'javascript/toastr/toastr.js' %}"></script>
         <script src="{% static 'javascript/navStartup.js' %}"></script>
         <script src="{% static 'javascript/OpenLayers.js' %}"></script>
@@ -17,6 +20,8 @@
 
 {% block extrahead %}{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+{% dajaxice_js_import %}
+{% static "/static/dajax/jquery.dajax.core.js" %}
 </head>
 {% load i18n %}
 
