@@ -1,5 +1,7 @@
 {% extends "datavis/base.html" %}
+{% load staticfiles %}
         {%block title %}Settings{% endblock %}
+        {%block extrastyle %}<link rel="stylesheet" href="{% static 'style/settings.css' %}"/>{% endblock %}
         {% block content %}
                 <h1>Settings</h1>
                 <div class="overview">
@@ -10,14 +12,14 @@
                     <h3>Privacy</h3>
                     <br/>
                     {{ form.privacy.errors }}
-                    <label for="id_privacy">Geolocation</label>
+                    <label for="id_privacy">Geolocation:</label>
                     {{ form.privacy }}
                     <br/>
                     <br/>
                     <h3>Display</h3>
                     <br/>
                     {{ form.display.errors }}
-                    <label for="id_display">Maps</label>
+                    <label for="id_display">Maps:</label>
                     {{ form.display }}
                     <br/>
                     <br/>
@@ -26,7 +28,7 @@
                     <p>If you want to add a new API or dataset, go <a href="/contact/">here</a>.</p>
                     <br/>
                     {{form.apis.errors }}
-                    <label for="id_apis">Apis</label>
+                    <label for="id_apis">Apis:</label>
                     {{ form.apis }}
                     <br/>
                     <br/>

@@ -28,6 +28,9 @@ html, body{
 
 .div_body{
 	text-align:left;
+    -webkit-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
+    -moz-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
+    box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64); 
 }
 
 .div_center{

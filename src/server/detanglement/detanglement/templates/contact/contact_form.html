@@ -1,6 +1,8 @@
 {% extends "contact/base_site.html" %}
 {%load i18n %}
+{%load static %}
 {%block title %}Contact{% endblock %}
+{%block extrastyle %}<link rel="stylesheet" href="{% static 'style/contact.css' %}"></script>{% endblock %}
 {% block content %}
 <h1>Contact</h1>
 <div class="overview">
@@ -11,7 +13,7 @@
   {% endif %}
   {{ form.as_p }}
 
-  <input type="submit" value="{% trans 'Submit' %}" />
+  <input id="submit" type="submit" value="{% trans 'Submit' %}" />
 </form>
 </div>
 {% endblock %}
