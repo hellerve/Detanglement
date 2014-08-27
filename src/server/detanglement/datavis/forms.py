@@ -109,9 +109,7 @@ class SettingsForm(forms.Form):
             email_sec = request.POST.get('email_sec', None)
             print(email, email_sec)
             if email != email_sec:
-                raise forms.ValidationError("The emails did not match.")
-            validate_email(email)
-            validate_email(email_sec)
+                return None
             user = User.objects.get(username=request.user)
             user.email = email
             user.save()

@@ -43,7 +43,10 @@ def settings(request):
     if not request.user.is_authenticated():
         return redirect('/login/')
     form = SettingsForm(request)
-    if form.is_valid():
-        return redirect('/home/')
+    if form == None:
+        return redirect('/settings/')
 
-    return render(request, 'datavis/settings.html', {'form': form})
+    if request.method == 'GET':
+        return render(request, 'datavis/settings.html', {'form': form})
+    else:
+        return redirect('/settings/success/')

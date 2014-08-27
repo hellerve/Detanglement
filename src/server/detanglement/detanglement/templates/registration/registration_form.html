@@ -1,7 +1,9 @@
 {% extends "registration/datavis_base_site.html" %}
-{%load i18n %}
+{% load i18n %}
+{% load static %}
 
 {% block title %}Registration{% endblock %}
+{% block extrastyle %}<link rel="stylesheet" href="{% static 'style/registration.css' %}">{% endblock %}
 
 {% block content %}
 <h1>Registration</h1>
@@ -15,7 +17,7 @@
   {% endif %}
   {{ form.as_p }}
 
-  <input type="submit" value="{% trans 'Submit' %}" />
+  <input type="submit" id="submit" value="{% trans 'Submit' %}" />
 </form>
 </div>
 {% endblock %}

@@ -1,0 +1,23 @@
+#id_username{
+  margin-left: 50px;
+  margin-bottom: 10px;
+}
+
+#id_email{
+  margin-left: 70px;
+  margin-bottom: 10px;
+}
+
+#id_password1{
+  margin-left: 54px;
+  margin-bottom: 10px;
+}
+
+#id_password2{
+  margin-left: 11px;
+  margin-bottom: 15px;
+}
+
+#submit{
+  margin-left: 210px;
+}

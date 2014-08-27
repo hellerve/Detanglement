@@ -5,21 +5,33 @@
 
 {% block content %}
 
-<div class="overview">
 {% if account %}
+
+<h1>Registration successful</h1>
+
+<div class="overview">
 
 <p>{% trans "Account successfully activated!" %}</p>
 
 <p><a href="{% url auth_login %}">{% trans "Log in" %}</a></p>
 
+</div>
+
 {% else %}
 
-<p>{% trans "Activation failed or site obsolete. If login fails, please contact the site administrator." %}</p>
+<h1>Something went wrong...</h1>
+
+<div class="overview">
+
+<p>{% trans "Activation failed or site obsolete. You can try to login anyway. If it fails, please contact the <a href='/contact/'>site administrator</a>." %}</p>
+
+<br/>
 
 <p><a href="{% url 'auth_login' %}">{% trans "Log in" %}</a></p>
 
+</div>
+
 {% endif %}
 
-</div>
 
 {% endblock %}
