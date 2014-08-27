@@ -18,3 +18,11 @@ class ApiKey(models.Model):
 
     def __unicode__(self):
         return self.authentication
+
+class Settings(models.Model):
+    user = models.OneToOneField(User, primary_key=True)
+    geolocation = models.BooleanField(default=False)
+    uses_map = models.CharField(choices=(("OSM", "Open Street Maps"),
+                                        ("Google", "Google Maps"),
+                                        ("Kartograph", "Kartograph")),
+                                default='OSM', max_length=25)

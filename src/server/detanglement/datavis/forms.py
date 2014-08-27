@@ -1,10 +1,13 @@
 from django import forms
 from django.conf import settings
 from django.core.mail import send_mail
+from django.core.validators import validate_email
 from django.template import loader
 from django.template import RequestContext
+from django.contrib.auth.models import User
 from django.contrib.sites.models import RequestSite, Site
-from .models import Api
+
+from .models import Api, Settings
 
 
 class ContactForm(forms.Form):
@@ -80,11 +83,36 @@ class SettingsForm(forms.Form):
                                 required=False)
 
     def __init__(self, request):
-        super(SettingsForm, self).__init__()
-        choices = []
-        for api in Api.objects.all():
-            if str(request.user) == str(getattr(api, 'user')):
-                choices.append((getattr(api, 'api'), getattr(api, 'api')),)
-        print(choices)
-        self.fields['apis'].choices = choices
-        print(self.fields['apis'].choices)
+        if request.method == 'GET':
+            super(SettingsForm, self).__init__()
+            choices = []
+            for api in Api.objects.all():
+                if str(request.user) == str(getattr(api, 'user')):
+                    choices.append((getattr(api, 'api'), getattr(api, 'api')),)
+            self.fields['apis'].choices = choices
+            settings = Settings.objects.get(user=request.user)
+            if settings.geolocation:
+                self.fields['privacy'].initial = True
+            self.fields['display'].initial = settings.uses_map
+        if request.method == 'POST':
+            super(SettingsForm, self).__init__()
+            settings = Settings.objects.get(user=request.user)
+            if request.POST.get('privacy', 'off') == 'on':
+                settings.geolocation = True
+                self.fields['privacy'].initial = True
+            else:
+                settings.geolocation = False
+            settings.uses_map = request.POST.get('display', 'OSM')
+            self.fields['display'].initial = settings.uses_map
+            settings.save()
+            email = request.POST.get('email', None)
+            email_sec = request.POST.get('email_sec', None)
+            print(email, email_sec)
+            if email != email_sec:
+                raise forms.ValidationError("The emails did not match.")
+            validate_email(email)
+            validate_email(email_sec)
+            user = User.objects.get(username=request.user)
+            user.email = email
+            user.save()
+
