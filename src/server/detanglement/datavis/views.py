@@ -42,11 +42,8 @@ class ContactFormView(FormView):
 def settings(request):
     if not request.user.is_authenticated():
         return redirect('/login/')
-    if request.method == 'POST':
-        form = SettingsForm(request.POST, request)
-        if form.is_valid():
-            return redirect('/home/')
-    else:
-        form = SettingsForm(request)
+    form = SettingsForm(request)
+    if form.is_valid():
+        return redirect('/home/')
 
     return render(request, 'datavis/settings.html', {'form': form})
