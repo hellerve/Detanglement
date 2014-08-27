@@ -12,10 +12,10 @@ tangle.kartographMarkers = [];
 tangle.googleMarkerNames = [];
 tangle.osmMarkerNames = [];
 tangle.kartographMarkerNames = [];
-tangle.mapchoice = 2;
 tangle.loc = [];
 window.onload = load;
 
+Dajaxice.datavis.mapchoice(Dajax.process);
 
 toastr.options.closeButton = true;
 window.onresize = load;
