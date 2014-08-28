@@ -84,7 +84,15 @@ function initializeGoogleMap(){
                                 title: "Your Location",
                                 icon: image});
     }else
-        googleLocationMarker.setMap(tangle.map);
+        tangle.googleLocationMarker.setMap(tangle.map);
+    $('.refresh').css("margin-left", "30px");
+    //document.getElementById('refreshButton').style.marginTop = "400px";
+    document.getElementById('refreshButton').style.width = "30px";
+    document.getElementById('refreshButton').style.height = "30px";
+    document.getElementById('refreshButton').style.background = "url(../img/google_refresh.png) no-repeat";
+    document.getElementById('refreshButton').style.backgroundSize = "20px";
+    document.getElementById('refreshButton').style.zIndex = "2";
+    document.getElementById('refreshButton').style.position = "relative";
 };
 
 //Initializes the Kartograph Map.
@@ -116,13 +124,8 @@ function initializeOSM(){
     tangle.map.addLayer(new OpenLayers.Layer.OSM());
     tangle.map.addLayer(tangle.osmMarkers);
     tangle.map.setCenter(position, zoom);
-    if(tangle.osmLocationMarker === null){
-        var size = new OpenLayers.Size(24,24);
-        var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-        var icon = new OpenLayers.Icon(STATIC_URL + "/img/osmicon.png", size, offset);
-        tangle.osmLocationMarker = new OpenLayers.Marker(position);
-        tangle.osmLocationMarker.icon.imageDiv.title = "Your Location";
-    }
+    addOsmLocationMarker(13.401, 52.524);
+    tangle.osmLocationMarker.display(false);
 };
 
 //Adds layers to the Kartograph SVG. Needed for Kartograph's setup.
@@ -244,7 +247,7 @@ function addLocationMarker(data){
     else if(tangle.mapchoice === 1)
         addKartographMarker(lat, lon, name);
     else if(tangle.mapchoice === 2)
-        addOsmMarker(lat, lon, name);
+        addOsmLocationMarker(lat, lon, name);
     toastr.success("Located you at: " + lat + ", " + lon, "Location success");
 };
 
@@ -261,10 +264,16 @@ function addKartographLocationMarker(lat, lon){
 
 //adds an osm location marker at a specific location
 function addOsmLocationMarker(lat, lon){
-    var lonlat = new OpenLayer.LonLat(lon, lat).tranfrom(
-                    newOpenLayers.Projection("EPSG:4326"),
-                    tangle.map.getProjectionObject());
-    tangle.osmLocationMarker.setPosition(lonlat);
+    if(tangle.osmLocationMarker != null)
+        tangle.osmLocationMarker.destroy();
+    var position = new OpenLayers.LonLat(lon, lat);
+    var size = new OpenLayers.Size(24,24);
+    var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+    var icon = new OpenLayers.Icon(STATIC_URL + "/img/osmicon.png", size, offset);
+    tangle.osmLocationMarker = new OpenLayers.Marker(position);
+    tangle.osmLocationMarker.icon.imageDiv.title = "Your Location";
+    tangle.osmLocationMarker.icon = icon;
+    tangle.osmLocationMarker.map = tangle.map;
     tangle.osmLocationMarker.display(true);
 };
 

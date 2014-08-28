@@ -93,8 +93,7 @@ nav {
         transition-delay: 0.5s; 
       }
       nav ul > li:nth-child(7) {
-        /*find rgb*/
-        background-color: #106587;
+        background-color: #106c89;
         -webkit-transition-delay: 0.5s;
         -moz-transition-delay: 0.5s;
         -moz-border-bottom-left-radius: 4px;
@@ -140,7 +139,8 @@ nav.right ul > li {
       transform: translate(100%, 0); }
 
 body.menu-open {
-  cursor: url(../img/close.png) 100 35, auto; }
+  cursor: url(../img/close.png) 100 35, auto; 
+}
 
 body.menu-open .overlay {
     display: block; }

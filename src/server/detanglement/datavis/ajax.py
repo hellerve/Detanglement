@@ -1,4 +1,4 @@
-from django.conf import settings
+from django.conf import settings as preferences
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 
@@ -12,7 +12,7 @@ from .models import Settings, Api
 @dajaxice_register
 def geolocate(request):
     dajax = Dajax()
-    g = pygeoip.GeoIP(settings.BASE_DIR + '/static/rc/GeoLiteCity.dat')
+    g = pygeoip.GeoIP(preferences.BASE_DIR + '/static/rc/GeoLiteCity.dat')
     ip = request.META.get('REMOTE_ADDR', None)
     if ip:
         if ip == '127.0.0.1':

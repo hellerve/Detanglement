@@ -15,6 +15,11 @@
   position: relative;
 }
 
+#refreshButton:hover {
+  background: url(../img/refresh_over.png) no-repeat;
+  background-size: 20px;
+}
+
 .fillForm{
     margin-top: 60px;
     margin-left: 100px;
