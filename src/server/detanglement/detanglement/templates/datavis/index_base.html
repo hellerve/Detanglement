@@ -6,7 +6,7 @@
 <!--Stylesheets-->
         <script language="javascript">var STATIC_URL = "{{ STATIC_URL|escapejs }}";</script>
         <link href="{% static 'javascript/toastr/toastr.css' %}" rel="stylesheet"/> 
-        <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
+        <link href="{% static 'style/index_style.css' %}" rel="stylesheet"/> 
         <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
 
         <script src="https://maps.google.com/maps/api/js?sensor=false"></script>
@@ -17,15 +17,15 @@
         <script src="{% static 'javascript/navStartup.js' %}"></script>
         <script src="{% static 'javascript/OpenLayers.js' %}"></script>
         <script src="{% static 'javascript/mapAndStartup.js'%}"></script>
+        {% dajaxice_js_import %}
+        <script src="{% static "/static/dajax/jquery.dajax.core.js" %}"></script>
 
 {% block extrahead %}{% endblock %}
 {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
-{% dajaxice_js_import %}
-{% static "/static/dajax/jquery.dajax.core.js" %}
 </head>
 {% load i18n %}
 
-<body class="body_main" align="center">
+<body class="body_main">
     <header class="clearfix">
     <a class="menu pull-right" data-position="right" href="#">
         <div class="bar"></div>
@@ -62,7 +62,7 @@
       </ul>
       </nav>
 <!-- Container -->
-    <div class="div_center" align="center">
+    <div class="div_center">
             {% block main %}
             {{ main }}
             {% endblock %}

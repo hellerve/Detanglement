@@ -15,7 +15,6 @@ tangle.kartographMarkerNames = [];
 tangle.loc = [];
 window.onload = load;
 
-Dajaxice.datavis.mapchoice(Dajax.process);
 
 toastr.options.closeButton = true;
 window.onresize = load;
@@ -23,13 +22,18 @@ window.onresize = load;
 //Startup function; checks whether the button should be disabled
 //and initializes the map.
 function load(){
-    if(tangle.mapchoice === 0){
-        initializeGoogleMap();
-    }else if(tangle.mapchoice === 1){
-        initializeKartograph();
-    }else if(tangle.mapchoice === 2){
-        initializeOSM();
-    }
+    Dajaxice.datavis.settings(function(data){
+        Dajax.process(data);
+        if(tangle.mapchoice === 0)
+            initializeGoogleMap();
+        else if(tangle.mapchoice === 1)
+            initializeKartograph();
+        else if(tangle.mapchooice === 2)
+            initializeOSM();
+        if(tangle.geolocation)
+            Dajaxice.datavis.geolocate(Dajax.process);
+        Dajaxice.datavis.visualize(Dajax.process);
+    });
     checkButtonDisplay();
 };
 
@@ -229,6 +233,8 @@ function addOsmMarker(lat, lon, name){
 
 //adds a location marker at a specific location.
 function addLocationMarker(data){
+    if(!(data instanceof Array))
+        return;
     lat = data[0];
     lon = data[1];
     if(tangle.mapchoice === 0)

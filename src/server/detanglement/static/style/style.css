@@ -28,9 +28,6 @@ html, body{
 
 .div_body{
     text-align:left;
-    -webkit-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
-    -moz-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
-    box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64); 
 }
 
 .div_center{
@@ -88,15 +85,22 @@ hr{
 }
 
 .div_main{
+    background: url(../img/blackLinen.png);
     margin-top:10px;
     width: 980px;
-    background: #101010;
+    /*background: #101010;*/
     padding-bottom: 2px;
     border-radius: 8px;
+    -webkit-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
+    -moz-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
+    box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64); 
 }
 
 .div_main_top_spacer{
+    background: url(../img/blackLinen.png);
     height: 30px;
+    /*background: #101010;*/
+    border-radius: 8px;
 }
 
 .overview{
@@ -127,35 +131,13 @@ h3{
     color: #1691b9;
 }
 
-.fillForm{
-    margin-top: 60px;
-    margin-left: 100px;
-    width: 500px;
-    height: 55px;
-    position: absolute;
-    z-index: 2;
-}
 
-.fillForm #localizedBtn{
-    margin-top: 10px;
-    margin-left: 5px;
-}
-
-.fillForm #submitBtn{
-    margin-left: 65px;
-}
 
 label{
     color: #D0D0D0;
 }
 
-.map_object{
-    margin: auto;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
-}
+
 
 .axis path,
 

@@ -140,6 +140,26 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Logging
+
+OGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'logfile': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': BASE_DIR+'/log.log'
+                },
+            },
+        'loggers': {
+            'dajaxice': {
+                'handlers': ['logfile'],
+                'level': 'DEBUG',
+                'propagate': True,
+                },
+            }
+        }
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/

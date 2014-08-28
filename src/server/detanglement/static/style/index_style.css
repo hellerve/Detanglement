@@ -1,0 +1,57 @@
+.refresh{
+  width: 30px;
+  height:30px;
+  margin-left: 10px;
+  margin-top: 70px;
+}
+
+#refreshButton{
+  width: 24px;
+  height: 24px;
+  background: url(../img/refresh.png) no-repeat;
+  border: none;
+  background-size: 20px;
+  z-index: 2;
+  position: relative;
+}
+
+.fillForm{
+    margin-top: 60px;
+    margin-left: 100px;
+    width: 500px;
+    height: 55px;
+    position: absolute;
+    z-index: 2;
+}
+
+.fillForm #localizedBtn{
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
+.fillForm #submitBtn{
+    margin-left: 65px;
+}
+
+.body_main{
+    background: url(../img/startup.png);
+    background-repeat:repeat;
+    font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    font-size:12px;
+    color:#D0D0D0;
+    line-height:18px;
+    margin: 0px;
+}
+
+.map_object{
+    margin: auto;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+}
+.div_center{
+    overflow:auto;
+    padding-bottom:15px;
+}
+

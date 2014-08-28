@@ -1,7 +1,7 @@
 {% extends "datavis/index_base.html" %}
 {%block title %}Home{% endblock %}
 {% block main %}
-                <div class="fillForm">
+                <div class="fillForm" align="center">
                     <form>
                         <label for="country">Country:</label>
                         <input type="text" name="country" id="country" onchange="fillForm();" onkeyup="this.onchange();"
@@ -12,6 +12,9 @@
                         <input type="button" id="submitBtn" value="Submit Location" onclick="getRegion()">
                         <input type="button" id="localizedBtn" value="Get Localized Trends" onclick="getLocalizedTrends()">
                     </form>
+                </div>
+                <div class="refresh">
+                    <input type="button" id="refreshButton" onclick="load()">
                 </div>
                 <div class="map_object" id="google-canvas"></div> 
                 <div class="map_object" id="kartograph-canvas"></div>

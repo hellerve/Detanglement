@@ -1,3 +1,4 @@
+from django.conf import settings
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 
@@ -6,16 +7,20 @@ from geopy import exc, distance
 from geopy.point import Point
 from geopy.geocoders import GeoNames
 
-from .models import Settings
+from .models import Settings, Api
 
 @dajaxice_register
 def geolocate(request):
     dajax = Dajax()
-    g = pygeoipGeoIP('static/rc/GeoLiteCity.dat', pygeoip.GEOIP_STANDARD)
+    g = pygeoip.GeoIP(settings.BASE_DIR + '/static/rc/GeoLiteCity.dat')
     ip = request.META.get('REMOTE_ADDR', None)
     if ip:
-        dajax.add_data(list(g.record_by_addr(ip).split()),
-                    'addLocationMarker')
+        if ip == '127.0.0.1':
+            ip = '141.45.146.48'
+        data = g.record_by_addr(ip)
+        dajax.add_data([round(data['latitude'], 2),
+                        round(data['longitude'], 2)],
+                        'addLocationMarker')
     return dajax.json()
 
 @dajaxice_register
@@ -27,30 +32,36 @@ def locate(request, country, city):
     return dajax.json()
 
 @dajaxice_register
-def mapchoice(request):
+def settings(request):
     dajax = Dajax()
-    m = Settings.objects.get(username=request.user).get('uses_map', None)
-    if m == "Google":
+    m = Settings.objects.get(user=request.user)
+    if m == None:
+        m = Settings.objects.create_settings(user=request.user,
+                                            uses_map="OSM",
+                                            geolocation=False)
+        m.save()
+    if m.uses_map == "Google":
         dajax.script("tangle.mapchoice = 0")
-    elif m == "OSM":
-        dajax.script("tangle.mapchoice = 0")
-    elif m == "Kartograph":
-        dajax.script("tangle.mapchoice = 0")
+    elif m.uses_map == "Kartograph":
+        dajax.script("tangle.mapchoice = 1")
+    elif m.uses_map == "OSM":
+        dajax.script("tangle.mapchoice = 2")
+    if m.geolocation == True:
+        dajax.script("tangle.geolocation = true")
+    else:
+        dajax.script("tangle.geolocation = false")
     return dajax.json()
 
-@dajax_register
-def refresh():
-    dajax = Dajax()
-    dajax.script("load();")
-    return dajax.json()
-
-@dajax_register
+@dajaxice_register
 def visualize(request):
     dajax = Dajax()
-    apis = Settings.objects.get(username=request.user).get('apis', None)
-    if m == None:
+    apis= []
+    for api in Api.objects.all():
+        if str(request.user) == str(getattr(api, 'user')):
+            apis.append(getattr(api, 'api'))
+    if not apis:
         return dajax.json()
     for api in apis:
         # get location for api and add a marker
-        pass
+        continue
     return dajax.json()
