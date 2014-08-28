@@ -24,14 +24,16 @@ window.onresize = load;
 function load(){
     Dajaxice.datavis.settings(function(data){
         Dajax.process(data);
-        if(tangle.mapchoice === 0)
+        if(tangle.mapchoice === 0){
             initializeGoogleMap();
-        else if(tangle.mapchoice === 1)
+        }else if(tangle.mapchoice === 1){
             initializeKartograph();
-        else if(tangle.mapchooice === 2)
+        }else if(tangle.mapchoice === 2){
             initializeOSM();
-        if(tangle.geolocation)
+        }
+        if(tangle.geolocation){
             Dajaxice.datavis.geolocate(Dajax.process);
+        }
         Dajaxice.datavis.visualize(Dajax.process);
     });
     checkButtonDisplay();
