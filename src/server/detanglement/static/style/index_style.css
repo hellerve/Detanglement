@@ -53,11 +53,11 @@
 }
 
 .progress{
-    width: 230px;
+    width: 220px;
     height: 140px;
     margin-left: 45%;
     margin-right: 45%;
-    margin-top: 5%;
+    margin-top: 10%;
     background: white;
     border-radius: 3px;
     z-index: 2;
@@ -73,15 +73,15 @@
     background-color: #189cc7;
     color: #D0D0D0;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 progress{  
-    margin-left: 18%;
+    margin-left: 20%;
     margin-right: 20%;
     margin-top: 0px;
     margin-bottom: 0px;
-    background-color: #DDDDDD;  
+    background-color: #CCCCCC;  
     border: 0;  
     height: 18px;  
     position: relative;
@@ -111,7 +111,8 @@ progress{
     width: 60px;
     height: 15px;
     border: none;
-    background-color: #DDDDDD;
+    background-color: #CCCCCC;
+    border-radius: 2px;
 }
 
 .body_main{

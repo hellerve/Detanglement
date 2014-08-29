@@ -22,38 +22,42 @@ window.onresize = setupMap;
 $(document).ready(progress);
         
 function progress(){  
-    var progressbar = $('#progressbar'),  
-        max = getNumOfItems(),  
-        time = (1000/max)*5,      
-        value = 0;  
+    Dajaxice.datavis.count_items(function(data){
+        Dajax.process(data);
+        var progressbar = $('#progressbar'),  
+            time = (1000/max)*5,      
+            value = 0;  
   
-    progressbar.attr('max', max);
-    $('.progress').show();
-    progressbar.val(0);
+        progressbar.attr('max', max);
+        $('.progress').show();
+        progressbar.val(0);
 
-    var loading = function() {  
+        var loading = function() {  
 
-        addMarker(Math.random() * 360 - 180 , Math.random() * 360 - 180, "test");
+            addMarker(Math.random() * 360 - 180 , Math.random() * 360 - 180, "test");
 
-        value += 1;  
-        progressbar.val(value);  
-          
-        $('.progress-value').html(value + '%');  
-  
-        if (value >= max) {  
-            clearInterval(animate);
-            $('.progress').hide()
-        }  
-    };  
-  
-    var animate = setInterval(function() {  
-        if(!tangle.breakvis)
-            loading();
-        else{
-            clearInterval(animate);
-            $('.progress').hide()
-        }
-    }, time);  
+            value += 1;  
+            progressbar.val(value);  
+              
+            $('.progress-value').html(value + '%');  
+      
+            if (value >= max) {  
+                clearInterval(animate);
+                $('.progress').hide()
+                max = undefined;
+            }  
+        };  
+      
+        var animate = setInterval(function() {  
+            if(!tangle.breakvis)
+                loading();
+            else{
+                clearInterval(animate);
+                $('.progress').hide()
+                max = undefined;
+            }
+        }, time);  
+    });
 };  
 
 //Startup function; checks whether the button should be disabled
@@ -368,10 +372,6 @@ function getLocation(){
 
 function endVisualization(){
     tangle.breakvis = true;
-}
-
-function getNumOfItems(){
-    return 400;
 }
 
 function visualization(){

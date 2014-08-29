@@ -65,3 +65,9 @@ def visualize(request):
         # get location for api and add a marker
         continue
     return dajax.json()
+
+@dajaxice_register
+def count_items(request):
+    dajax = Dajax()
+    dajax.script("max = 400")
+    return dajax.json()
