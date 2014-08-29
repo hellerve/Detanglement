@@ -5,6 +5,7 @@ tangle.country = false;
 tangle.map = null;
 tangle.googleLocationMarker = null;
 tangle.osmLocationMarker = null;
+tangle.osmLocationLayer = null;;
 tangle.kartographLocationMarker = null;
 tangle.googleMarkers = [];
 tangle.osmMarkers = [];
@@ -17,27 +18,32 @@ window.onload = load;
 
 
 toastr.options.closeButton = true;
-window.onresize = load;
+window.onresize = setupMap;
 
 //Startup function; checks whether the button should be disabled
 //and initializes the map.
 function load(){
     Dajaxice.datavis.settings(function(data){
         Dajax.process(data);
-        if(tangle.mapchoice === 0){
-            initializeGoogleMap();
-        }else if(tangle.mapchoice === 1){
-            initializeKartograph();
-        }else if(tangle.mapchoice === 2){
-            initializeOSM();
-        }
+        setupMap();
         if(tangle.geolocation){
             Dajaxice.datavis.geolocate(Dajax.process);
         }
-        Dajaxice.datavis.visualize(Dajax.process);
     });
     checkButtonDisplay();
 };
+
+//sets up the map
+function setupMap(){
+    if(tangle.mapchoice === 0){
+        initializeGoogleMap();
+    }else if(tangle.mapchoice === 1){
+        initializeKartograph();
+    }else if(tangle.mapchoice === 2){
+        initializeOSM();
+    }
+    Dajaxice.datavis.visualize(Dajax.process);
+}
 
 //Gets the currently used map.
 function getMap(){
@@ -85,14 +91,9 @@ function initializeGoogleMap(){
                                 icon: image});
     }else
         tangle.googleLocationMarker.setMap(tangle.map);
-    $('.refresh').css("margin-left", "30px");
-    //document.getElementById('refreshButton').style.marginTop = "400px";
-    document.getElementById('refreshButton').style.width = "30px";
-    document.getElementById('refreshButton').style.height = "30px";
-    document.getElementById('refreshButton').style.background = "url(../img/google_refresh.png) no-repeat";
-    document.getElementById('refreshButton').style.backgroundSize = "20px";
-    document.getElementById('refreshButton').style.zIndex = "2";
-    document.getElementById('refreshButton').style.position = "relative";
+    $('.refresh').css("margin-left", "34px");
+    $('.refresh').css("margin-top", "360px");
+    $('#refreshButton').attr("id", "refreshButtonGoogle");
 };
 
 //Initializes the Kartograph Map.
@@ -115,17 +116,20 @@ function initializeOSM(){
     document.getElementById('kartograph-canvas').style.width = "0px";
     document.getElementById('google-canvas').style.height = "0px";
     document.getElementById('google-canvas').style.width = "0px";
-    tangle.map = new OpenLayers.Map("osm-canvas");
-    var fromProjection = new OpenLayers.Projection("EPSG:4326");
-    var toProjection = new OpenLayers.Projection("EPSG:900913");
-    var position = new OpenLayers.LonLat(13.401, 52.524).transform(fromProjection, toProjection);
-    var zoom = 3; 
-    tangle.osmMarkers = new OpenLayers.Layer.Markers("Markers"); 
-    tangle.map.addLayer(new OpenLayers.Layer.OSM());
-    tangle.map.addLayer(tangle.osmMarkers);
-    tangle.map.setCenter(position, zoom);
-    addOsmLocationMarker(13.401, 52.524);
-    tangle.osmLocationMarker.display(false);
+    if(!tangle.map){
+        tangle.map = new OpenLayers.Map("osm-canvas");
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");
+        var toProjection = new OpenLayers.Projection("EPSG:900913");
+        var position = new OpenLayers.LonLat(13.401, 52.524).transform(fromProjection, toProjection);
+        var zoom = 3; 
+        tangle.osmMarkers = new OpenLayers.Layer.Markers("Markers"); 
+        tangle.osmLocationLayer = new OpenLayers.Layer.Markers("Location"); 
+        tangle.map.addLayer(new OpenLayers.Layer.OSM());
+        tangle.map.addLayer(tangle.osmMarkers);
+        tangle.map.addLayer(tangle.osmLocationLayer);
+        tangle.map.setCenter(position, zoom);
+        addOsmLocationMarker(52.524, 13.401);
+    }
 };
 
 //Adds layers to the Kartograph SVG. Needed for Kartograph's setup.
@@ -243,11 +247,11 @@ function addLocationMarker(data){
     lat = data[0];
     lon = data[1];
     if(tangle.mapchoice === 0)
-        addGoogleLocationMarker(lat, lon, name);
+        addGoogleLocationMarker(lat, lon);
     else if(tangle.mapchoice === 1)
-        addKartographMarker(lat, lon, name);
+        addKartographMarker(lat, lon);
     else if(tangle.mapchoice === 2)
-        addOsmLocationMarker(lat, lon, name);
+        addOsmLocationMarker(lat, lon);
     toastr.success("Located you at: " + lat + ", " + lon, "Location success");
 };
 
@@ -264,16 +268,21 @@ function addKartographLocationMarker(lat, lon){
 
 //adds an osm location marker at a specific location
 function addOsmLocationMarker(lat, lon){
-    if(tangle.osmLocationMarker != null)
+    if(tangle.osmLocationMarker != null && 
+            tangle.osmLocationMarker.isDrawn()){
         tangle.osmLocationMarker.destroy();
-    var position = new OpenLayers.LonLat(lon, lat);
+        tangle.osmLocationLayer.clearMarkers();
+    }
+    var position = new OpenLayers.LonLat(lon, lat).transform(
+            new OpenLayers.Projection("EPSG:4326"),
+            tangle.map.getProjectionObject()
+            );
     var size = new OpenLayers.Size(24,24);
-    var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+    var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
     var icon = new OpenLayers.Icon(STATIC_URL + "/img/osmicon.png", size, offset);
-    tangle.osmLocationMarker = new OpenLayers.Marker(position);
+    tangle.osmLocationMarker = new OpenLayers.Marker(position, icon);
     tangle.osmLocationMarker.icon.imageDiv.title = "Your Location";
-    tangle.osmLocationMarker.icon = icon;
-    tangle.osmLocationMarker.map = tangle.map;
+    tangle.osmLocationLayer.addMarker(tangle.osmLocationMarker);
     tangle.osmLocationMarker.display(true);
 };
 
