@@ -32,6 +32,9 @@ function progress(){
     progressbar.val(0);
 
     var loading = function() {  
+
+        addMarker(Math.random() * 360 - 180 , Math.random() * 360 - 180, "test");
+
         value += 1;  
         progressbar.val(value);  
           
@@ -265,7 +268,10 @@ function addOsmMarker(lat, lon, name){
     var lonlat = new OpenLayers.LonLat(lon, lat).transform(
             new OpenLayers.Projection("EPSG:4326"),
             tangle.map.getProjectionObject());
-    var marker = new OpenLayers.Marker(lonlat);
+    var size = new OpenLayers.Size(16, 20);
+    var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
+    var icon = new OpenLayers.Icon(STATIC_URL + "/img/osm_marker.png", size, offset);
+    var marker = new OpenLayers.Marker(lonlat, icon);
     marker.icon.imageDiv.title = name;
     tangle.osmMarkers.addMarker(marker);
     tangle.osmMarkerNames.push(name);
@@ -312,7 +318,7 @@ function addOsmLocationMarker(lat, lon){
             new OpenLayers.Projection("EPSG:4326"),
             tangle.map.getProjectionObject()
             );
-    var size = new OpenLayers.Size(24,24);
+    var size = new OpenLayers.Size(20,20);
     var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
     var icon = new OpenLayers.Icon(STATIC_URL + "/img/osmicon.png", size, offset);
     tangle.osmLocationMarker = new OpenLayers.Marker(position, icon);
