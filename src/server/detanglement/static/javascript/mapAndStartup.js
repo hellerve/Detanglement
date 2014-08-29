@@ -16,9 +16,42 @@ tangle.kartographMarkerNames = [];
 tangle.loc = [];
 window.onload = load;
 
-
 toastr.options.closeButton = true;
 window.onresize = setupMap;
+
+$(document).ready(progress);
+        
+function progress(){  
+    var progressbar = $('#progressbar'),  
+        max = getNumOfItems(),  
+        time = (1000/max)*5,      
+        value = 0;  
+  
+    progressbar.attr('max', max);
+    $('.progress').show();
+    progressbar.val(0);
+
+    var loading = function() {  
+        value += 1;  
+        progressbar.val(value);  
+          
+        $('.progress-value').html(value + '%');  
+  
+        if (value >= max) {  
+            clearInterval(animate);
+            $('.progress').hide()
+        }  
+    };  
+  
+    var animate = setInterval(function() {  
+        if(!tangle.breakvis)
+            loading();
+        else{
+            clearInterval(animate);
+            $('.progress').hide()
+        }
+    }, time);  
+};  
 
 //Startup function; checks whether the button should be disabled
 //and initializes the map.
@@ -27,7 +60,8 @@ function load(){
         Dajax.process(data);
         setupMap();
         if(tangle.geolocation){
-            Dajaxice.datavis.geolocate(Dajax.process);
+            if(!geolocate())
+                Dajaxice.datavis.geolocate(Dajax.process);
         }
     });
     checkButtonDisplay();
@@ -129,6 +163,7 @@ function initializeOSM(){
         tangle.map.addLayer(tangle.osmLocationLayer);
         tangle.map.setCenter(position, zoom);
         addOsmLocationMarker(52.524, 13.401);
+        tangle.osmLocationMarker.display(false);
     }
 };
 
@@ -299,7 +334,7 @@ function getLocalizedTrends(){
 //geolocates the user
 function geolocate(){
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(locationSuccess(), locationError());
+        navigator.geolocation.getCurrentPosition(locationSuccess, locationError);
         return true;
     } else {
         toastr.error('Geolocalization is not supported by your device. Trying ip-based localization.', 
@@ -312,14 +347,27 @@ function geolocate(){
 function locationError(error){
     toastr.error('Geolocalization failed with code ' + error.code + '; the returned message states' +
                  error.message, 'Localization error');
+    return false;
 };
 
 //reacts to success of the localization
 function locationSuccess(pos){
-    tangle.loc = [pos.coords.latitude, pos.coords.longitude];
+    addLocationMarker([pos.coords.latitude, pos.coords.longitude]);
+    return true;
 };
 
 function getLocation(){
     return tangle.loc;
 }
 
+function endVisualization(){
+    tangle.breakvis = true;
+}
+
+function getNumOfItems(){
+    return 400;
+}
+
+function visualization(){
+    //visualize
+}

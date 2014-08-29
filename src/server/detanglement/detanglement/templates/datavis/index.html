@@ -14,7 +14,13 @@
                     </form>
                 </div>
                 <div class="refresh">
-                    <input type="button" id="refreshButton" onclick="load()">
+                    <input type="button" id="refreshButton" onclick="load(); progress();">
+                </div>
+                <div class="progress">
+                    <p>Loading</p>
+                    <progress id="progressbar" value="10" max="100"></progress>  
+                    <p>The data is being processed.</p>
+                    <input type="button" value="Interrupt" onclick="endVisualization();">
                 </div>
                 <div class="map_object" id="google-canvas"></div> 
                 <div class="map_object" id="kartograph-canvas"></div>

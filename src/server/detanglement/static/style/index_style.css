@@ -52,6 +52,49 @@
     margin-left: 65px;
 }
 
+.progress{
+    width: 200px;
+    height: 110px;
+    margin-left: 45%;
+    margin-right: 45%;
+    margin-top: 5%;
+    background: white;
+    border-radius: 3px;
+    z-index: 2;
+    position: relative;
+    -webkit-box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64);
+    -moz-box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64);
+    box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64); 
+}
+
+progress{  
+    margin-left: 18%;
+    margin-right: 20%;
+    margin-top: 0px;
+    margin-bottom: 8px;
+    background-color: #f3f3f3;  
+    border: 0;  
+    height: 18px;  
+    position: relative;
+}  
+
+.progress p{
+    margin-top: 0px;
+    margin-bottom: 5px;
+    margin-left: 18%;
+    margin-right: 18%;
+    font-size: 9px;
+}
+
+.progress input{
+    margin-top: 0px;
+    margin-left: 55%;
+    margin-bottom: 10px;
+    font-size: 9px;
+    width: 60px;
+    height: 10px;
+}
+
 .body_main{
     background: url(../img/map_background.png);
     background-repeat:repeat;
