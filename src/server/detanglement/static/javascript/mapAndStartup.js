@@ -322,7 +322,7 @@ function addOsmLocationMarker(lat, lon){
             new OpenLayers.Projection("EPSG:4326"),
             tangle.map.getProjectionObject()
             );
-    var size = new OpenLayers.Size(24,24);
+    var size = new OpenLayers.Size(24, 24);
     var offset = new OpenLayers.Pixel(-(size.w/2), -(size.h/2));
     var icon = new OpenLayers.Icon(STATIC_URL + "/img/osmicon.png", size, offset);
     tangle.osmLocationMarker = new OpenLayers.Marker(position, icon);
