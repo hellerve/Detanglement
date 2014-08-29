@@ -17,7 +17,9 @@
                     <input type="button" id="refreshButton" onclick="load(); progress();">
                 </div>
                 <div class="progress">
-                    <p>Loading</p>
+                    <div class="header">
+                        <h2>Loading</h2>
+                    </div>
                     <progress id="progressbar" value="10" max="100"></progress>  
                     <p>The data is being processed.</p>
                     <input type="button" value="Interrupt" onclick="endVisualization();">
