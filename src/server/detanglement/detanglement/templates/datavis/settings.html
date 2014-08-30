@@ -8,7 +8,7 @@
                     <p>In this pane, you can change APIs and tweak a few things regarding maps and geolocation
                     (which is switched of by default, because, you know, privacy).</p>
                     <br></br>
-                    <form action="." method="post">{% csrf_token %}
+                    <form action="/settings/" method="post">{% csrf_token %}
                     <h3>Privacy</h3>
                     <br/>
                     {{ form.privacy.errors }}
@@ -46,6 +46,6 @@
                     {{ form.email_sec }}
                     <br></br>
                     <input type="submit" value="Apply"></input>
+                    </form>
                 </div>
-            </form>
         {% endblock %}

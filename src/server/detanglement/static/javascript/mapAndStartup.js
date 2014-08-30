@@ -133,8 +133,10 @@ function initializeGoogleMap(){
     }else
         tangle.googleLocationMarker.setMap(tangle.map);
     $('.refresh').css("margin-left", "34px");
-    $('.refresh').css("margin-top", "360px");
+    $('.refresh').css("margin-top", "0px");
     $('#refreshButton').attr("id", "refreshButtonGoogle");
+    $('.refresh').insertAfter('.progress');
+    $('.progress').css('margin-top', '220px');
 };
 
 //Initializes the Kartograph Map.
