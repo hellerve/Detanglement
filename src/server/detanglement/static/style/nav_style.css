@@ -107,7 +107,7 @@ nav {
         vertical-align: middle;
         font-size: 12px;
         text-decoration: none;
-        font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+        font-family: "Courier New", Courier, monospace;
         letter-spacing: 0.05em;
         -webkit-transition: all 0.2s linear;
         -moz-transition: all 0.2s linear;
