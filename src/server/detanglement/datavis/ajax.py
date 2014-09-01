@@ -8,6 +8,7 @@ from geopy.point import Point
 from geopy.geocoders import GeoNames
 
 from .models import Settings, Api
+from .plugins.APIInterface import APIInterface
 
 @dajaxice_register
 def geolocate(request):
@@ -54,16 +55,25 @@ def settings(request):
 
 @dajaxice_register
 def visualize(request):
-    dajax = Dajax()
-    apis= []
-    for api in Api.objects.all():
-        if str(request.user) == str(getattr(api, 'user')):
-            apis.append(getattr(api, 'api'))
+    objects = []
+    plugindir = os.listdir(path + "/src/plugins")
+    apis = Api.objects.filter(user=request.user)
     if not apis:
+        error = "'Could not load API " + api + ". No API selected.'"
+        dajax.script("toastr.warning(" + error + ", 'API warning')")
         return dajax.json()
     for api in apis:
-        # get location for api and add a marker
-        continue
+        if not api + ".py" in plugindir:
+            error = "'Could not load API " + api + ". No such API.'"
+            dajax.script("toastr.error(" + error + ", 'API error')")
+        credentials = ApiKey.objects.get(identification=api)
+        if not credentials:
+            error = "'Could not load API " + api + ". No credentials.'"
+            dajax.script("toastr.error(" + error + ", 'API error')")
+            continue
+        impobj = getattr(__import__("plugins", fromlist=[api]), api)
+        objects.append(APIInterface(api, impobj,
+                credentials.authentication))
     return dajax.json()
 
 @dajaxice_register
