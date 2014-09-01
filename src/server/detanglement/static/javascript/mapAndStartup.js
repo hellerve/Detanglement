@@ -38,7 +38,7 @@ function progress(){
                 $('.progress').hide();
                 markers = undefined;
                 if($('.filters').is(':visible'))
-                    $('.filters').css("margin-left", "45%");
+                    $('.filters').css("margin-left", "37%");
                 return;
             }
             var marker = markers.pop();
