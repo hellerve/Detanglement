@@ -1,3 +1,5 @@
+import random
+
 from django.conf import settings as preferences
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
@@ -77,7 +79,17 @@ def visualize(request):
     return dajax.json()
 
 @dajaxice_register
-def count_items(request):
+def load(request):
     dajax = Dajax()
-    dajax.script("max = 400")
+    script = "markers = ["
+    for i in range(100):
+        script += ("[" + str(random.randrange(-180.0, 180.0)) + ", "  +
+                str(random.randrange(-180.0, 180.0)) + ", 'test" +
+                str(i) + "'],")
+    script = script[:-1] + script[-1:].replace(",","]")
+    dajax.script(script)
     return dajax.json()
+
+@dajaxice_register
+def visualize_location_trends(request, lat, lon):
+    return

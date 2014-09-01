@@ -22,41 +22,33 @@ window.onresize = setupMap;
 $(document).ready(progress);
         
 function progress(){  
-    Dajaxice.datavis.count_items(function(data){
+    Dajaxice.datavis.load(function(data){
         Dajax.process(data);
         var progressbar = $('#progressbar'),  
-            time = (1000/max)*5,      
+            max = markers.length,
             value = 0;  
   
         progressbar.attr('max', max);
         $('.progress').show();
         progressbar.val(0);
 
-        var loading = function() {  
+        function step(){
+            var marker = markers.pop();
 
-            addMarker(Math.random() * 360 - 180 , Math.random() * 360 - 180, "test");
+            addMarker(marker[0], marker[1], marker[2]);
 
             value += 1;  
             progressbar.val(value);  
               
             $('.progress-value').html(value + '%');  
-      
-            if (value >= max) {  
-                clearInterval(animate);
+            if(value >= max || tangle.breakvis){
+                clearInterval(interval);
                 $('.progress').hide()
-                max = undefined;
-            }  
-        };  
-      
-        var animate = setInterval(function() {  
-            if(!tangle.breakvis)
-                loading();
-            else{
-                clearInterval(animate);
-                $('.progress').hide()
-                max = undefined;
-            }
-        }, time);  
+                markers = undefined;
+           }
+        };
+
+        var interval = setInterval(step, 0.1);
     });
 };  
 
@@ -83,7 +75,6 @@ function setupMap(){
     }else if(tangle.mapchoice === 2){
         initializeOSM();
     }
-    Dajaxice.datavis.visualize(Dajax.process);
 }
 
 //Gets the currently used map.
@@ -171,8 +162,6 @@ function initializeOSM(){
         tangle.map.addLayer(tangle.osmMarkers);
         tangle.map.addLayer(tangle.osmLocationLayer);
         tangle.map.setCenter(position, zoom);
-        addOsmLocationMarker(52.524, 13.401);
-        tangle.osmLocationMarker.display(false);
     }
 };
 
@@ -261,7 +250,7 @@ function addGoogleMarker(lat, lon, name){
     tangle.googleMarkers.push(marker);
     tangle.googleMarkerNames.push(name);
     google.maps.event.addListener(marker, 'click', function(){
-        Dajaxice.datavis.visualizeTrends(name);
+        Dajaxice.datavis.visualize_trends(Dajax.process, {'name': name});
     });
 };
 
@@ -282,7 +271,7 @@ function addOsmMarker(lat, lon, name){
     tangle.osmMarkers.addMarker(marker);
     tangle.osmMarkerNames.push(name);
     marker.events.register('click', tangle.osmMarkers, function(){
-        Dajaxice.datavis.visualizeTrends(name);
+        Dajaxice.datavis.visualize_trends(Dajax.process, {'name': name});
     });
 };
 
@@ -335,11 +324,13 @@ function addOsmLocationMarker(lat, lon){
 
 //Tells Python to visualize the data for a clicked location.
 function getLocalizedTrends(){
-    if(!tangle.osmLocationMarker.isDrawn()){
+    if(!tangle.osmLocationMarker){
         toastr.error("You have not submitted your location yet.", "Trends error");
     }else{
-        Dajaxice.datavis.visualizeLocationTrends(tangle.osmLocationMarker.lonlat.lat, 
-                                           tangle.osmLocationMarker.lonlat.lon);
+        Dajaxice.datavis.visualize_location_trends(Dajax.process, 
+                                                    {'lat': tangle.osmLocationMarker.lonlat.lat, 
+                                                     'lon': tangle.osmLocationMarker.lonlat.lon
+                                                });
     }
 };
 
