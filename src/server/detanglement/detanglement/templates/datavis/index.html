@@ -24,6 +24,21 @@
                     <p>The data is being processed.</p>
                     <input type="button" value="Interrupt" onclick="endVisualization();">
                 </div>
+                <div class="filters">
+                    <div class="header">
+                        <h2>Filters</h2>
+                    </div>
+                    <p>Select time boundaries here.</p>
+                    <input class="month" id="from" type="month" value="2014-09">
+                    <input class="month" id="to" type="month" value="2014-09">
+                    <p>Select filters here. Simply drag and drop them from one list to another.</p>
+                    <ul class="connected sortable list" id="sort_first">
+                    </ul>
+                    <ul class="connected sortable list" id="sort_second">
+                    </ul>
+                    <input class="button" type="button" value="Cancel" onclick="$('.filters').hide()">
+                    <input class="button" type="button" value="Apply">
+                </div>
                 <div class="map_object" id="google-canvas"></div> 
                 <div class="map_object" id="kartograph-canvas"></div>
                 <div class="map_object" id="osm-canvas"></div>

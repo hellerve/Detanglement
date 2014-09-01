@@ -85,10 +85,9 @@ hr{
 }
 
 .div_main{
-    background: url(../img/blackLinen.png);
     margin-top:10px;
     width: 980px;
-    /*background: #101010;*/
+    background: rgba(18, 18, 18, 0.94);
     padding-bottom: 2px;
     border-radius: 8px;
     -webkit-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
@@ -97,9 +96,8 @@ hr{
 }
 
 .div_main_top_spacer{
-    background: url(../img/blackLinen.png);
     height: 30px;
-    /*background: #101010;*/
+    background: rgba(60, 60, 60, 0.0);
     border-radius: 8px;
 }
 
@@ -156,7 +154,7 @@ label{
     margin-left:15px;
     padding-right:15px;
     font-size:12px;
-    font-family: Geneva;
+    font-family: "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     line-height:18px;
     color: #eeeeee;
 }

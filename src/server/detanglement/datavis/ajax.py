@@ -15,6 +15,8 @@ from geopy.geocoders import GeoNames
 from .models import Settings, Api, ApiKey
 from .plugins.APIInterface import APIInterface
 
+api_objects = []
+
 @dajaxice_register
 def geolocate(request):
     dajax = Dajax()
@@ -60,17 +62,20 @@ def settings(request):
 
 @dajaxice_register
 def visualize(request, name):
-    location = name.split(", ") if ", " in title else title
-    datas = []
-    apis = make_api_objects()
-    if not apis:
+    dajax = Dajax()
+    location = name.split(", ") if ", " in name else name
+    data = []
+    if not api_objects:
         error = "'Could not load location " + name + ". No APIs selected.'"
         dajax.script("toastr.warning(" + error + ", 'Visualization warning')")
         return dajax.json()
     dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")
-    for api in apis:
+    return dajax.json()
+    for api in api_objects:
         if api.requiresFilter():
             dajax.script("askForFilter(" + api.filters + ")")
+        else:
+            make_graph()
             if filters:
                 src = api.api_name
                 req = {}
@@ -114,7 +119,6 @@ def load(request):
         dajax.script("markers = []")
         return dajax.json()
     plugindir = os.listdir(preferences.BASE_DIR + "/datavis/plugins")
-    objects = []
     for api in apis:
         if not api.api + ".py" in plugindir:
             error = "'Could not load API " + api.api + ". No such API.'"
@@ -128,10 +132,10 @@ def load(request):
                                     fromlist=[api.api]),
                         api.api)
         if credentials:
-            objects.append(APIInterface(api.api, impobj,
+            api_objects.append(APIInterface(api.api, impobj,
                     credentials[0].authentication))
         else:
-            objects.append(APIInterface(api.api, impobj))
+            api_objects.append(APIInterface(api.api, impobj))
     for i in range(400):
         script += ("[" + str(random.randrange(-180.0, 180.0)) + ", "  +
                 str(random.randrange(-180.0, 180.0)) + ", 'test" +

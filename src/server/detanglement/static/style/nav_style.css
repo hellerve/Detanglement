@@ -1,7 +1,7 @@
 header {
   height: 35px;
   padding: 2px 9px;
-  background: #222222;
+  background: rgba(18, 18, 18, 0.8);
   width: 100px;
   -moz-border-bottom-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
@@ -21,7 +21,7 @@ a.menu {
 }
 
 a.menu .bar {
-  background-color: #6cb6e8;
+  background-color: rgba(108, 182, 232, 0.85);
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;

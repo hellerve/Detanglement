@@ -250,7 +250,7 @@ function addGoogleMarker(lat, lon, name){
     tangle.googleMarkers.push(marker);
     tangle.googleMarkerNames.push(name);
     google.maps.event.addListener(marker, 'click', function(){
-        Dajaxice.datavis.visualize_trends(Dajax.process, {'name': name});
+        visualization(name);
     });
 };
 
@@ -271,7 +271,7 @@ function addOsmMarker(lat, lon, name){
     tangle.osmMarkers.addMarker(marker);
     tangle.osmMarkerNames.push(name);
     marker.events.register('click', tangle.osmMarkers, function(){
-        Dajaxice.datavis.visualize_trends(Dajax.process, {'name': name});
+        visualization(name);
     });
 };
 
@@ -367,6 +367,17 @@ function endVisualization(){
     tangle.breakvis = true;
 }
 
-function visualization(){
-    //visualize
+function visualization(name){
+    var filters = $('.filters');
+    filters.find('.header').html("<h2>Filters for " + name + "</h2>");
+    Dajaxice.datavis.visualize(Dajax.process, {'name': name});
+    var list = filters.find('#sort_first');
+    $('<li>element 1</li>').appendTo(list);
+    $('<li>element 2</li>').appendTo(list);
+    var list = filters.find('#sort_second');
+    $('<li>element 1</li>').appendTo(list);
+    $('.filters').show();
+    filters.find('.sortable').sortable({
+        connectWith: '.connected'
+    });
 }
