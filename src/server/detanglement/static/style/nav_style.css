@@ -1,7 +1,7 @@
-header{
+.clearfix{
   height: 35px;
   padding: 2px 9px;
-  background: rgba(70, 70, 70, 0.35);
+  background-color: rgba(70, 70, 70, 0.35);
   width: 100px;
   -moz-border-bottom-left-radius: 4px;
   -webkit-border-bottom-left-radius: 4px;
@@ -12,8 +12,8 @@ header{
   position: relative;
 }
 
-header:hover {
-  background: #404040;
+.clearfix:hover {
+  background-color: #404040;
 }
 
 a.menu {
@@ -148,7 +148,8 @@ body.menu-open {
 }
 
 body.menu-open .overlay {
-    display: block; }
+    display: block; 
+}
 
 nav.open {
   -webkit-transition-delay: 0;
