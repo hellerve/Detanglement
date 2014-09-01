@@ -75,8 +75,9 @@
     width: 220px;
     height: 140px;
     margin-left: 45%;
-    margin-right: 45%;
     margin-top: 10%;
+    overflow: hidden;
+    float: left;
     background: white;
     border-radius: 3px;
     z-index: 2;
@@ -88,15 +89,16 @@
 
 .filters{
     width: 300px;
-    height: 450px;
+    height: 420px;
     margin-left: 45%;
-    margin-right: 45%;
-    margin-top: 10%;
+    margin-top: 5%;
     background: white;
     border-radius: 3px;
     z-index: 2;
     position: relative;
     display: none;
+    overflow: hidden;
+    float: left;
     -webkit-box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64);
     -moz-box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64);
     box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64); 
@@ -134,7 +136,7 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     font-size: 14px;
 }
 
-.progress p, .filters p{
+.progress p{
     margin-top: 10px;
     margin-bottom: 5px;
     margin-left: 15%;
@@ -142,6 +144,20 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     font-size: 11px;
 }
 
+.filters p{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 4%;
+    margin-right: 4%;
+    font-size: 11px;
+}
+.progress p{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-size: 11px;
+}
 .progress input, .filters .button{
     margin-top: 0px;
     margin-right: 8%;
@@ -160,6 +176,7 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     width: 40%;
     margin-left: 4%;
     margin-right: 4%;
+    margin-bottom: 10px;
     font-size: 11px;
     border: none;
     float: left;
@@ -179,6 +196,8 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     padding: 0px;
     margin-left: 2%;
     margin-right: 2%;
+    margin-top: 0%;
+    margin-bottom: 7%;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

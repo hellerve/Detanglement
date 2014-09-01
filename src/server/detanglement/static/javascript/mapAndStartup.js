@@ -37,6 +37,8 @@ function progress(){
                 clearInterval(interval);
                 $('.progress').hide();
                 markers = undefined;
+                if($('.filters').is(':visible'))
+                    $('.filters').css("margin-left", "45%");
                 return;
             }
             var marker = markers.pop();
@@ -369,6 +371,8 @@ function endVisualization(){
 
 function visualization(name){
     var filters = $('.filters');
+    if($('.progress').is(':visible'))
+    filters.css("margin-left", "3%");
     filters.find('.header').html("<h2>Filters for " + name + "</h2>");
     Dajaxice.datavis.visualize(Dajax.process, {'name': name});
     var list = filters.find('#sort_first');
