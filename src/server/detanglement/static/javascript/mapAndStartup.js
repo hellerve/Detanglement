@@ -261,7 +261,7 @@ function addGoogleMarker(lat, lon, name){
     tangle.googleMarkers.push(marker);
     tangle.googleMarkerNames.push(name);
     google.maps.event.addListener(marker, 'click', function(){
-        interfaces.visualizeTrends(name);
+        Dajaxice.datavis.visualizeTrends(name);
     });
 };
 
@@ -282,7 +282,7 @@ function addOsmMarker(lat, lon, name){
     tangle.osmMarkers.addMarker(marker);
     tangle.osmMarkerNames.push(name);
     marker.events.register('click', tangle.osmMarkers, function(){
-        interfaces.visualizeTrends(name);
+        Dajaxice.datavis.visualizeTrends(name);
     });
 };
 
@@ -335,11 +335,11 @@ function addOsmLocationMarker(lat, lon){
 
 //Tells Python to visualize the data for a clicked location.
 function getLocalizedTrends(){
-    if(tangle.locationMarker.getMap == null){
+    if(!tangle.osmLocationMarker.isDrawn()){
         toastr.error("You have not submitted your location yet.", "Trends error");
     }else{
-        interfaces.visualizeLocationTrends(locationMarker.getPosition().lat(), 
-                                           locationMarker.getPosition().lon());
+        Dajaxice.datavis.visualizeLocationTrends(tangle.osmLocationMarker.lonlat.lat, 
+                                           tangle.osmLocationMarker.lonlat.lon);
     }
 };
 
