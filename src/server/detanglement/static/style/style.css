@@ -87,12 +87,12 @@ hr{
 .div_main{
     margin-top:10px;
     width: 980px;
-    background: rgba(18, 18, 18, 0.94);
+    background: rgba(40, 40, 40, 0.9);
     padding-bottom: 2px;
     border-radius: 8px;
-    -webkit-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
-    -moz-box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64);
-    box-shadow: 22px 15px 10px -7px rgba(0,0,0,0.64); 
+    -webkit-box-shadow: 15px 12px 10px -7px rgba(0,0,0,0.6);
+    -moz-box-shadow: 15px 12px 10px -7px rgba(0,0,0,0.6);
+    box-shadow: 15px 12px 10px -7px rgba(0,0,0,0.6); 
 }
 
 .div_main_top_spacer{
