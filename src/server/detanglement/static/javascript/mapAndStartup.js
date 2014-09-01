@@ -321,6 +321,7 @@ function addOsmLocationMarker(lat, lon){
     tangle.osmLocationMarker = new OpenLayers.Marker(position, icon);
     tangle.osmLocationMarker.icon.imageDiv.title = "Your Location";
     tangle.osmLocationLayer.addMarker(tangle.osmLocationMarker);
+    tangle.osmLocationMarker.events.register('click', tangle.osmLocationMarker, getLocalizedTrends);
     tangle.osmLocationMarker.display(true);
 };
 

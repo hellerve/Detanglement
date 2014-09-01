@@ -146,4 +146,6 @@ def load(request):
 
 @dajaxice_register
 def visualize_location_trends(request, lat, lon):
-    return
+    dajax = Dajax()
+    dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")
+    return dajax.json()
