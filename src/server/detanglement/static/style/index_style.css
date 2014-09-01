@@ -74,7 +74,7 @@
 .progress{
     width: 18%;
     height: 140px;
-    margin-left: 41%;
+    margin-left: 43%;
     margin-top: 10%;
     overflow: hidden;
     float: left;
@@ -90,7 +90,7 @@
 .filters{
     width: 26%;
     height: 420px;
-    margin-left: 37%;
+    margin-left: 40%;
     margin-top: 5%;
     background: white;
     border-radius: 3px;
