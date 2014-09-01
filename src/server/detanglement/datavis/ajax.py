@@ -1,6 +1,9 @@
 import random
+import os
+import importlib
 
 from django.conf import settings as preferences
+from django.contrib.auth.models import User
 from dajax.core import Dajax
 from dajaxice.decorators import dajaxice_register
 
@@ -9,7 +12,7 @@ from geopy import exc, distance
 from geopy.point import Point
 from geopy.geocoders import GeoNames
 
-from .models import Settings, Api
+from .models import Settings, Api, ApiKey
 from .plugins.APIInterface import APIInterface
 
 @dajaxice_register
@@ -37,11 +40,11 @@ def locate(request, country, city):
 @dajaxice_register
 def settings(request):
     dajax = Dajax()
-    m = Settings.objects.get(user=request.user)
-    if m == None:
-        m = Settings.objects.create_settings(user=request.user,
-                                            uses_map="OSM",
-                                            geolocation=False)
+    m = Settings.objects.filter(user=User.objects.get(username=request.user))
+    m = m[0]
+    if not m:
+        m = Settings(user=User.objects.get(username=request.user),
+            uses_map="OSM", geolocation=False)
         m.save()
     if m.uses_map == "Google":
         dajax.script("tangle.mapchoice = 0")
@@ -56,33 +59,80 @@ def settings(request):
     return dajax.json()
 
 @dajaxice_register
-def visualize(request):
-    objects = []
-    plugindir = os.listdir(path + "/src/plugins")
-    apis = Api.objects.filter(user=request.user)
+def visualize(request, name):
+    location = name.split(", ") if ", " in title else title
+    datas = []
+    apis = make_api_objects()
     if not apis:
-        error = "'Could not load API " + api + ". No API selected.'"
-        dajax.script("toastr.warning(" + error + ", 'API warning')")
+        error = "'Could not load location " + name + ". No APIs selected.'"
+        dajax.script("toastr.warning(" + error + ", 'Visualization warning')")
         return dajax.json()
+    dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")
     for api in apis:
-        if not api + ".py" in plugindir:
-            error = "'Could not load API " + api + ". No such API.'"
-            dajax.script("toastr.error(" + error + ", 'API error')")
-        credentials = ApiKey.objects.get(identification=api)
-        if not credentials:
-            error = "'Could not load API " + api + ". No credentials.'"
-            dajax.script("toastr.error(" + error + ", 'API error')")
-            continue
-        impobj = getattr(__import__("plugins", fromlist=[api]), api)
-        objects.append(APIInterface(api, impobj,
-                credentials.authentication))
-    return dajax.json()
+        if api.requiresFilter():
+            dajax.script("askForFilter(" + api.filters + ")")
+            if filters:
+                src = api.api_name
+                req = {}
+                for i in filters: pass
+        locations = api.getLocations()
+        #location = title.split(", ") if ", " in title else title
+        #data = []
+        #for api in self.apis:
+        #    if api.requiresFilter():
+        #        self._askForFilter(api)
+        #        if self.filters:
+        #            src = api.api_name
+        #            req = {}
+        #            for i in self.filters:
+        #                if self.date:
+        #                    x, t = api.getDataForLocation(location[0], i, self.date)
+        #                else:
+        #                    x, t = api.getDataForLocation(location[0], i)
+        #                if not t:
+        #                    self.web_view.warning("No datasets for filter " +
+        #                            i + "!")
+        #                else: req.update({k+'/'+i:v for k,v in t.items()})
+        #        else:
+        #            src, req = None, None
+        #    else:
+        #        src, req = api.getDataForLocation(location, [], self.date)
+        #    if req:
+        #        data += [req, src]
+        #    else:
+        #        self.web_view.warning("Got no datasets from API " +
+        #                api.api_name + "!")
 
 @dajaxice_register
 def load(request):
     dajax = Dajax()
     script = "markers = ["
-    for i in range(100):
+    apis = Api.objects.filter(user=User.objects.get(username=request.user))
+    if not apis:
+        error = "'Could not load data. No API available.'"
+        dajax.script("toastr.warning(" + error + ", 'API warning')")
+        dajax.script("markers = []")
+        return dajax.json()
+    plugindir = os.listdir(preferences.BASE_DIR + "/datavis/plugins")
+    objects = []
+    for api in apis:
+        if not api.api + ".py" in plugindir:
+            error = "'Could not load API " + api.api + ". No such API.'"
+            dajax.script("toastr.error(" + error + ", 'API error')")
+        credentials = ApiKey.objects.filter(identification=api)
+        if api.needs_credentials and not credentials:
+            error = "'Could not load API " + api.api + ". No credentials.'"
+            dajax.script("toastr.error(" + error + ", 'API error')")
+            continue
+        impobj = getattr(__import__("datavis.plugins." + api.api,
+                                    fromlist=[api.api]),
+                        api.api)
+        if credentials:
+            objects.append(APIInterface(api.api, impobj,
+                    credentials[0].authentication))
+        else:
+            objects.append(APIInterface(api.api, impobj))
+    for i in range(400):
         script += ("[" + str(random.randrange(-180.0, 180.0)) + ", "  +
                 str(random.randrange(-180.0, 180.0)) + ", 'test" +
                 str(i) + "'],")

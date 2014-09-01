@@ -33,21 +33,21 @@ function progress(){
         progressbar.val(0);
 
         function step(){
+            if(value >= max || tangle.breakvis){
+                clearInterval(interval);
+                $('.progress').hide();
+                markers = undefined;
+                return;
+            }
             var marker = markers.pop();
 
             addMarker(marker[0], marker[1], marker[2]);
 
             value += 1;  
             progressbar.val(value);  
-              
+            
             $('.progress-value').html(value + '%');  
-            if(value >= max || tangle.breakvis){
-                clearInterval(interval);
-                $('.progress').hide()
-                markers = undefined;
-           }
         };
-
         var interval = setInterval(step, 0.1);
     });
 };  

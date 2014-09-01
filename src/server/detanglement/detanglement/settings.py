@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'registration',
     'dajaxice',
     'dajax',
+    'south'
 )
 
 MIDDLEWARE_CLASSES = (
