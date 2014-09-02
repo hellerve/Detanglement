@@ -127,9 +127,9 @@ input[type=submit]:active, input[type=button]:active {
     display: block;
     padding: 4px 5px 4px 25px;
     margin: 0 0 3px 0;
-    border-radius: 3px;
+    border-radius: 6px;
     border: 1px solid #909090;
-    color: #D0D0D0;
+    color: #C0C0C0;
     background: rgba(240, 240, 240, 0.3);
 }
 
@@ -145,8 +145,8 @@ ul.errorlist {
     padding: 1px 2px 1px 15px;
     margin: 0 0 3px 0;
     border: 1px solid red;
-    border-radius: 3px;
-    color: #D0D0D0;
+    border-radius: 6px;
+    color: #C0C0C0;
     background: rgba(240, 240, 240, 0.3);
 }
 
