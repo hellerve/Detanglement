@@ -393,6 +393,6 @@ function applyFilters(){
 }
 
 //sets the filters for localized trends
-function localizationTrendsFilter(data){
+function locationTrendsFilter(data){
    Dajax.process(data);
 }
