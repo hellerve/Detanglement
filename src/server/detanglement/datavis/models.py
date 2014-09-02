@@ -7,6 +7,8 @@ class Api(models.Model):
     user = models.ForeignKey(User)
     needs_credentials = models.BooleanField()
 
+    list_display = ('api', 'user', 'needs_creedentials')
+
     def __unicode__(self):
         return self.api
 
@@ -18,7 +20,7 @@ class ApiKey(models.Model):
         ordering = ['id']
 
     def __unicode__(self):
-        return self.authentication
+        return self.identification
 
 class Settings(models.Model):
     user = models.OneToOneField(User, primary_key=True)
@@ -27,3 +29,11 @@ class Settings(models.Model):
                                         ("Google", "Google Maps"),
                                         ("Kartograph", "Kartograph")),
                                 default='OSM', max_length=25)
+
+    list_display = ('user', 'geolocation', 'uses_map')
+
+    def __unicode__(self):
+        return self.user
+
+    class Meta:
+        verbose_name = "Settings"

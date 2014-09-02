@@ -18,6 +18,7 @@ def profile():
 
 urlpatterns = patterns('',
     url(r'^admin/?', include(admin.site.urls)),
+    url(r'^admin_tools/?', include('admin_tools.urls')),
     url(r'^login/$', 'datavis.views.auth_check',
         {'fun': login}),
     url(r'^help/?$', 'datavis.views.serve', {'site': 'datavis/help.html'}),

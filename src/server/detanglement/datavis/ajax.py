@@ -43,11 +43,12 @@ def locate(request, country, city):
 def settings(request):
     dajax = Dajax()
     m = Settings.objects.filter(user=User.objects.get(username=request.user))
-    m = m[0]
     if not m:
         m = Settings(user=User.objects.get(username=request.user),
             uses_map="OSM", geolocation=False)
         m.save()
+    else:
+        m = m[0]
     if m.uses_map == "Google":
         dajax.script("tangle.mapchoice = 0")
     elif m.uses_map == "Kartograph":
