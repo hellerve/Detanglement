@@ -57,6 +57,6 @@ document.getElementById('id_username').focus()
 <p>{% trans "Forgotten your password or username" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
 <p>{% trans "Not yet a member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
 <br/>
-<a href="/imprint">Imprint</a> <a href="/contact">Contact</a>  <a href="https://github.com/hellerve/Detanglement">Github</a>
+<a class="link" href="/imprint">Imprint</a> <a class="link" href="/contact">Contact</a>  <a class="link" href="https://github.com/hellerve/Detanglement">Github</a>
 
 {% endblock %}

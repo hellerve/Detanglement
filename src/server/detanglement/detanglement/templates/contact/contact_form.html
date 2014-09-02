@@ -7,9 +7,9 @@
 <h1>Contact</h1>
 <div class="overview">
   {% if form.is_multipart %}
-    <form enctype="multipart/form-data" method="post" action="">{% csrf_token %}
+    <form enctype="multipart/form-data" method="post" action="/contact">{% csrf_token %}
   {% else %}
-    <form method="post" action=".">{% csrf_token %}
+    <form method="post" action="/contact">{% csrf_token %}
   {% endif %}
   {{ form.as_p }}
 
