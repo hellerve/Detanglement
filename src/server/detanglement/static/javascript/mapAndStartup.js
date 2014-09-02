@@ -21,6 +21,7 @@ window.onresize = setupMap;
 
 $(document).ready(progress);
         
+//shows a progress bar and sets the markers
 function progress(){  
     Dajaxice.datavis.load(function(data){
         Dajax.process(data);
@@ -330,7 +331,7 @@ function getLocalizedTrends(){
     if(!tangle.osmLocationMarker){
         toastr.error("You have not submitted your location yet.", "Trends error");
     }else{
-        Dajaxice.datavis.visualize_location_trends(Dajax.process, 
+        Dajaxice.datavis.visualize_location_trends(locationTrendsFilter, 
                                                     {'lat': tangle.osmLocationMarker.lonlat.lat, 
                                                      'lon': tangle.osmLocationMarker.lonlat.lon
                                                 });
@@ -362,15 +363,13 @@ function locationSuccess(pos){
     return true;
 };
 
-function getLocation(){
-    return tangle.loc;
-}
-
+//sets a signal to end setting the markers
 function endVisualization(){
     tangle.breakvis = true;
 }
 
-function visualization(name){
+//sets the filters
+function filters(name){
     var filters = $('.filters');
     if($('.progress').is(':visible'))
     filters.css("margin-left", "3%");
@@ -388,6 +387,12 @@ function visualization(name){
     });
 }
 
+//applies the filters
 function applyFilters(){
     $('.filters').hide();
+}
+
+//sets the filters for localized trends
+function localizationTrendsFilter(data){
+   Dajax.process(data);
 }
