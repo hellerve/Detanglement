@@ -61,7 +61,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.media',
     'django.core.context_processors.static',
     'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages'
+    'django.contrib.messages.context_processors.messages',
 )
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'detanglement.com', ]

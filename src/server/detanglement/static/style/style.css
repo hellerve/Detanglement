@@ -120,6 +120,49 @@ input[type=submit]:active, input[type=button]:active {
     vertical-align: middle;
 }
 
+.errornote {
+    width: 200px;
+    font-size: 12px !important;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border-radius: 3px;
+    border: 1px solid #909090;
+    color: black;
+    background: #D0D0D0;
+}
+
+ul.errorlist {
+    width: 280px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.errorlist li {
+    font-size: 12px !important;
+    display: block;
+    padding: 1px 2px 1px 15px;
+    margin: 0 0 3px 0;
+    border: 1px solid red;
+    border-radius: 3px;
+    color: black;
+    background: #D0D0D0;
+}
+
+.errorlist li a {
+ 	color: white;
+    text-decoration: underline;
+}
+
+td ul.errorlist {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+td ul.errorlist li {
+    margin: 0 !important;
+}
+
 .div_main{
     margin-top:10px;
     width: 980px;
