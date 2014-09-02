@@ -94,6 +94,7 @@ input, #id_apis, #id_body{
     float: center;
     margin-top: 5px;
     margin-bottom: 5px;
+    padding: 0px 2px 0px 2px;
     font-size: 11px;
     border: none;
     border-radius: 2px;
@@ -128,8 +129,8 @@ input[type=submit]:active, input[type=button]:active {
     margin: 0 0 3px 0;
     border-radius: 3px;
     border: 1px solid #909090;
-    color: black;
-    background: #D0D0D0;
+    color: #D0D0D0;
+    background: rgba(240, 240, 240, 0.3);
 }
 
 ul.errorlist {
@@ -145,8 +146,8 @@ ul.errorlist {
     margin: 0 0 3px 0;
     border: 1px solid red;
     border-radius: 3px;
-    color: black;
-    background: #D0D0D0;
+    color: #D0D0D0;
+    background: rgba(240, 240, 240, 0.3);
 }
 
 .errorlist li a {
