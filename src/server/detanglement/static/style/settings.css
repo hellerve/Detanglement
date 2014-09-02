@@ -18,8 +18,8 @@
   margin-left: 50px;
 }
 
-#id_privacy{
-  margin-left: 10px;
-  width: 15px;
-  height: 15px;
+#id_privacy {
+    width: 15px;    
+    margin-left: 20px;
+    position: relative;
 }

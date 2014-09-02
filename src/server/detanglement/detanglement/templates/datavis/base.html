@@ -5,6 +5,7 @@
 <!--Stylesheets-->
         <link href="{% static 'style/style.css' %}" rel="stylesheet"/> 
         <link href="{% static 'style/nav_style.css' %}" rel="stylesheet"/> 
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
         {% block extrastyle %}{% endblock %}
 
         <script src="{% static 'javascript/jquery-1.10.2.min.js'%}"></script>
@@ -29,25 +30,25 @@
     <nav class="right">
       <ul>
         <li>
-          <a href="/home">Home</a>
+        <a href="/home"><i class="fa fa-home"></i>&nbsp;Home</a>
         </li>
         <li>
-          <a href="/settings">Settings</a>
+        <a href="/settings"><i class="fa fa-cog"></i>&nbsp;Settings</a>
         </li>
         <li>
-          <a href="/help">About</a>
+        <a href="/help"><i class="fa fa-question"></i>&nbsp;About</a>
         </li>
         <li>
-          <a href="/contact">Contact</a>
+        <a href="/contact"><i class="fa fa-envelope"></i>&nbsp;Contact</a>
         </li>
         <li>
-          <a href="https://github.com/hellerve/Detanglement">Github</a>
+        <a href="https://github.com/hellerve/Detanglement"><i class="fa fa-github"></i>&nbsp;Github</a>
         </li>
         <li>
-          <a href="/imprint">Imprint</a>
+        <a href="/imprint"><i class="fa fa-male"></i>&nbsp;Imprint</a>
         </li>
         <li>
-          <a href="/accounts/logout">Logout</a>
+        <a href="/accounts/logout"><i class="fa fa-power-off"></i>&nbsp;Logout</a>
         </li>
       </ul>
       </nav>
@@ -57,16 +58,16 @@
     <nav class="right">
       <ul>
         <li>
-          <a href="/login">Home</a>
+        <a href="/home"><i class="fa fa-home"></i>&nbsp;Home</a>
         </li>
         <li>
-          <a href="/imprint">Imprint</a>
+        <a href="/imprint"><i class="fa fa-male"></i>&nbsp;Imprint</a>
         </li>
         <li>
-          <a href="/contact">Contact</a>
+        <a href="/contact"><i class="fa fa-envelope"></i>&nbsp;Contact</a>
         </li>
         <li>
-          <a href="https://github.com/hellerve/Detanglement">Github</a>
+        <a href="https://github.com/hellerve/Detanglement"><i class="fa fa-github"></i>&nbsp;Github</a>
         </li>
       </ul>
     </nav>
@@ -94,7 +95,7 @@
 
                         <div class="div_foot">
                             <hr />
-                            &copy; No rights reserved. Proudly made with VI only.
+                            <p><i class="fa fa-copyright"></i>&nbsp;No rights reserved. Proudly made with VI only.</p>
                         </div>
                         <!-- END Content -->
             </div>

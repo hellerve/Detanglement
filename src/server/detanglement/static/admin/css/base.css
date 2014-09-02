@@ -15,8 +15,8 @@ body {
 
 .link {
     float: center;
-    margin-left: 25px;
-    margin-right: 25px;
+    margin-left: 22px;
+    margin-right: 22px;
     background: #F1F1F1;
     border: 1px solid #B1B1B1;
     border-radius: 3px;
@@ -554,16 +554,19 @@ ul.messagelist li.error{
 }
 
 .errornote {
+    width: 220px;
     font-size: 12px !important;
     display: block;
-    padding: 4px 5px 4px 25px;
+    padding: 4px 5px 4px 20px;
     margin: 0 0 3px 0;
-    border: 1px solid red;
-    color: red;
-    background: #ffc url(../img/icon_error.gif) 5px .3em no-repeat;
+    border-radius: 3px;
+    border: 1px solid #909090;
+    color: #404040;
+    background: rgba(210, 210, 210, 0.3);
 }
 
 ul.errorlist {
+    width: 280px;
     margin: 0 !important;
     padding: 0 !important;
 }
@@ -571,11 +574,12 @@ ul.errorlist {
 .errorlist li {
     font-size: 12px !important;
     display: block;
-    padding: 4px 5px 4px 25px;
+    padding: 2px 3px 2px 15px;
     margin: 0 0 3px 0;
     border: 1px solid red;
-    color: white;
-    background: red url(../img/icon_alert.gif) 5px .3em no-repeat;
+    border-radius: 3px;
+    color: #404040;
+    background: rgba(210, 210, 210, 0.3);
 }
 
 .errorlist li a {

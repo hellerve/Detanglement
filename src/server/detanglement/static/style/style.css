@@ -75,7 +75,7 @@ label{
     padding-right:5px;
     padding-left:5px;
     font-size:12px;
-    color:#505050;
+    color:#909090;
     position: relative;
 }
 
@@ -122,7 +122,7 @@ input[type=submit]:active, input[type=button]:active {
 }
 
 .errornote {
-    width: 200px;
+    width: 220px;
     font-size: 12px !important;
     display: block;
     padding: 4px 5px 4px 25px;

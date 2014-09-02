@@ -114,7 +114,9 @@
 }
 
 progress{  
-    margin-left: 20%;
+    vertical-align: middle;
+    overflow: hidden;
+    margin-left: 0%;
     margin-right: 20%;
     margin-top: 0px;
     margin-bottom: 0px;
@@ -134,6 +136,13 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     margin-left: 10%;
     margin-right: 15%;
     font-size: 14px;
+}
+
+.progress label{
+    vertical-align: middle;
+    overflow: hidden;
+    margin-left: 17%;
+    margin-right: 2%;
 }
 
 .progress p{

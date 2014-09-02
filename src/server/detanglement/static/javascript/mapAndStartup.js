@@ -253,7 +253,7 @@ function addGoogleMarker(lat, lon, name){
     tangle.googleMarkers.push(marker);
     tangle.googleMarkerNames.push(name);
     google.maps.event.addListener(marker, 'click', function(){
-        visualization(name);
+        filters(name);
     });
 };
 
@@ -274,7 +274,7 @@ function addOsmMarker(lat, lon, name){
     tangle.osmMarkers.addMarker(marker);
     tangle.osmMarkerNames.push(name);
     marker.events.register('click', tangle.osmMarkers, function(){
-        visualization(name);
+        filters(name);
     });
 };
 
