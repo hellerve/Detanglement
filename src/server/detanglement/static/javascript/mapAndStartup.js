@@ -377,12 +377,17 @@ function visualization(name){
     filters.find('.header').html("<h2>Filters for " + name + "</h2>");
     Dajaxice.datavis.visualize(Dajax.process, {'name': name});
     var list = filters.find('#sort_first');
+    list.empty();
     $('<li>element 1</li>').appendTo(list);
     $('<li>element 2</li>').appendTo(list);
     var list = filters.find('#sort_second');
-    $('<li>element 1</li>').appendTo(list);
+    list.empty();
     $('.filters').show();
     filters.find('.sortable').sortable({
         connectWith: '.connected'
     });
+}
+
+function applyFilters(){
+    $('.filters').hide();
 }
