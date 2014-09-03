@@ -68,16 +68,9 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'detanglement.com', ]
 
 ADMINS = ('Veit', 'veit.heller@hotmail.de')
 
-ADMIN_TOOLS_MENU = "detanglement.menu.CustomMenu"
-ADMIN_TOOLS_INDEX_DASHBOARD = "detanglement.dashboard.CustomIndexDashBoard"
-ADMIN_TOOLS_APP_INDEX_DASHBOARD = "detanglement.dashboard.CustomAppIndexDashBoard"
-
 # Application definition
 
 INSTALLED_APPS = (
-    'admin_tools.theming',
-    'admin_tools.menu',
-    'admin_tools.dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
