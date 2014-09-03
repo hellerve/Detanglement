@@ -1,6 +1,7 @@
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.shortcuts import redirect, render
+from django.forms.util import ErrorList
+from django.core.urlresolvers import reverse
 from django.views.generic.edit import FormView
 from django.views.decorators.cache import cache_page
 
@@ -43,10 +44,10 @@ def settings(request):
     if not request.user.is_authenticated():
         return redirect('/login/')
     form = SettingsForm(request)
-    if form == None:
-        return redirect('/settings/')
-
-    if request.method == 'GET':
-        return render(request, 'datavis/settings.html', {'form': form})
-    else:
-        return redirect('/settings/success/')
+    if request.method =="POST":
+        if form.is_valid():
+            return redirect("/settings/success")
+        else:
+            form.full_clean()
+            form._errors['email'] = ErrorList(['The email fields did not match'])
+    return render(request, 'datavis/settings.html', {'form': form })

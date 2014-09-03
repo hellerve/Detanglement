@@ -83,8 +83,25 @@ class SettingsForm(forms.Form):
                                 required=False)
 
     def __init__(self, request):
-        if request.method == 'GET':
-            super(SettingsForm, self).__init__()
+        super(SettingsForm, self).__init__()
+        if request.method == 'POST':
+            self.email = request.POST.get('email', None)
+            self.email_sec = request.POST.get('email_sec', None)
+            if self.email != self.email_sec:
+                setup =True
+            else:
+                settings = Settings.objects.get(user=request.user)
+                if request.POST.get('privacy', 'off') == 'on':
+                    settings.geolocation = True
+                else:
+                    settings.geolocation = False
+                settings.uses_map = request.POST.get('display', 'OSM')
+                settings.save()
+                setup = False
+                user = User.objects.get(username=request.user)
+                user.email = self.email
+                user.save()
+        if request.method == 'GET' or setup:
             choices = []
             for api in Api.objects.all():
                 if str(request.user) == str(getattr(api, 'user')):
@@ -94,23 +111,8 @@ class SettingsForm(forms.Form):
             if settings.geolocation:
                 self.fields['privacy'].initial = True
             self.fields['display'].initial = settings.uses_map
-        if request.method == 'POST':
-            super(SettingsForm, self).__init__()
-            settings = Settings.objects.get(user=request.user)
-            if request.POST.get('privacy', 'off') == 'on':
-                settings.geolocation = True
-                self.fields['privacy'].initial = True
-            else:
-                settings.geolocation = False
-            settings.uses_map = request.POST.get('display', 'OSM')
-            self.fields['display'].initial = settings.uses_map
-            settings.save()
-            email = request.POST.get('email', None)
-            email_sec = request.POST.get('email_sec', None)
-            print(email, email_sec)
-            if email != email_sec:
-                return None
-            user = User.objects.get(username=request.user)
-            user.email = email
-            user.save()
 
+    def is_valid(self):
+        if self.email != self.email_sec:
+            return False
+        return True
