@@ -5,12 +5,27 @@
 
 a{
     outline:none;
-    color:#708090;
-    text-decoration:underline;
+    color:#90A0B0;
+    text-decoration: none;
+}
+
+.link {
+    float: center;
+    background: rgba(241, 241, 241, 0.3);
+    border-bottom: 1px solid #B1B1B1;
+    border-radius: 8px;
+    padding-left: 2px;
+    padding-right: 2px;
+    cursor: pointer; 
+}
+
+.link:hover {
+    background: rgba(231, 231, 231, 0.1);
 }
 
 a.hover{
     text-decoration:none;
+    color:#A0B0C0;
 }
 
 html, body{
