@@ -16,6 +16,14 @@ def serve(request, site, auth=True):
 def redir(request, site):
     return redirect(site)
 
+def auth_check(request, fun):
+    if request.user.is_authenticated():
+        if request.user.is_superuser:
+            return redirect('/admin/')
+        return redirect('/home/')
+    return fun()
+
+
 class ContactFormView(FormView):
     form_class = ContactForm
     template_name = 'contact/contact_form.html'
