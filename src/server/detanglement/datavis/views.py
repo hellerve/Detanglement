@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.views.generic.edit import FormView
 from django.views.decorators.cache import cache_page
 
-from .forms import ContactForm, SettingsForm
+from .forms import ContactForm, SettingsForm, PasswordForm
 
 #@cache_page(60 * 10)
 def serve(request, site, auth=True):
@@ -15,13 +15,6 @@ def serve(request, site, auth=True):
 
 def redir(request, site):
     return redirect(site)
-
-def auth_check(request, fun):
-    if request.user.is_authenticated():
-        if request.user.is_superuser:
-            return redirect('/admin/')
-        return redirect('/home/')
-    return fun()
 
 class ContactFormView(FormView):
     form_class = ContactForm
@@ -51,3 +44,15 @@ def settings(request):
             form.full_clean()
             form._errors['email'] = ErrorList(['The email fields did not match'])
     return render(request, 'datavis/settings.html', {'form': form })
+
+def password_change(request):
+    if not request.user.is_authenticated():
+        return redirect('/login/')
+    form = PasswordForm(request)
+    if request.method =="POST":
+        if form.is_valid():
+            return redirect("/settings/success")
+        else:
+            form.full_clean()
+            form._errors['password'] = ErrorList(['The password fields did not match'])
+    return render(request, 'datavis/password_change.html', {'form': form })

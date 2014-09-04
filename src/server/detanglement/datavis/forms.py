@@ -78,7 +78,7 @@ class SettingsForm(forms.Form):
                                 required=False)
     apis = forms.MultipleChoiceField(choices=(), required=False)
     email = forms.EmailField(max_length=200, label="New email address",
-                            required=False)
+                                required=False)
     email_sec = forms.EmailField(max_length=200, label="Retype email address",
                                 required=False)
 
@@ -114,5 +114,34 @@ class SettingsForm(forms.Form):
 
     def is_valid(self):
         if self.email != self.email_sec:
+            return False
+        return True
+
+class PasswordForm(forms.Form):
+    password = forms.CharField(max_length=200,
+                                label="New password",
+                                required=True)
+    password_sec = forms.CharField(max_length=200,
+                                label="Retype password",
+                                required=True)
+
+    class Meta:
+        widgets = {
+                'password': forms.PasswordInput(),
+                'password_sec': forms.PasswordInput(),
+        }
+
+    def __init__(self, request):
+        super(PasswordForm, self).__init__()
+        if request.method == 'POST':
+            self.password = request.POST.get('password', None)
+            self.password_sec = request.POST.get('password_sec', None)
+            if self.password == self.password_sec:
+                user = User.objects.get(username=request.user)
+                user.set_password(self.password)
+                user.save()
+
+    def is_valid(self):
+        if self.password != self.password_sec:
             return False
         return True
