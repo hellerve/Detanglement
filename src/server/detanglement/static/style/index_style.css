@@ -88,9 +88,9 @@
 }
 
 .filters{
-    width: 26%;
-    height: 420px;
-    margin-left: 40%;
+    width: 36%;
+    height: 600px;
+    margin-left: 33%;
     margin-top: 5%;
     background: white;
     border-radius: 3px;
@@ -182,9 +182,9 @@ progress::-webkit-progress-value {background: #1AB1E2;}
 }
 
 .filters .month{
-    width: 40%;
-    margin-left: 4%;
-    margin-right: 4%;
+    width: 25%;
+    margin-left: 12%;
+    margin-right: 12%;
     margin-bottom: 10px;
     font-size: 11px;
     border: none;
@@ -197,7 +197,7 @@ progress::-webkit-progress-value {background: #1AB1E2;}
 
 .sortable{
     width: 45%;
-    height: 50%;
+    height: 63%;
     overflow: hidden;
     float: left;
     font-size: 11px;

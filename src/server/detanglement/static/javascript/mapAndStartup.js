@@ -39,7 +39,7 @@ function progress(){
                 $('.progress').hide();
                 markers = undefined;
                 if($('.filters').is(':visible'))
-                    $('.filters').css("margin-left", "40%");
+                    $('.filters').css("margin-left", "36%");
                 return;
             }
             var marker = markers.pop();

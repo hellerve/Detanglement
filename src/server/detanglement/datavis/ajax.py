@@ -154,5 +154,5 @@ def visualize_location_trends(request, lat, lon):
 @dajaxice_register
 def get_filters_for(request, location):
     dajax = Dajax()
-    dajax.script("available_filters = ['general']")
+    dajax.script("available_filters = ['General', 'Population(Total)', 'Population(%)']")
     return dajax.json()
