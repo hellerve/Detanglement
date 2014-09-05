@@ -15,8 +15,6 @@ from geopy.geocoders import GeoNames
 from .models import Settings, Api, ApiKey
 from .plugins.APIInterface import APIInterface
 
-api_objects = []
-
 @dajaxice_register
 def geolocate(request):
     dajax = Dajax()
@@ -114,6 +112,7 @@ def load(request):
     dajax = Dajax()
     script = "markers = ["
     apis = Api.objects.filter(user=User.objects.get(username=request.user))
+    api_objects = []
     if not apis:
         error = "'Could not load data. No API available.'"
         dajax.script("toastr.warning(" + error + ", 'API warning')")
@@ -154,5 +153,30 @@ def visualize_location_trends(request, lat, lon):
 @dajaxice_register
 def get_filters_for(request, location):
     dajax = Dajax()
-    dajax.script("available_filters = ['General', 'Population(Total)', 'Population(%)']")
+    apis = Api.objects.filter(user=User.objects.get(username=request.user))
+    api_objects = []
+    plugindir = os.listdir(preferences.BASE_DIR + "/datavis/plugins")
+    for api in apis:
+        credentials = ApiKey.objects.filter(identification=api)
+        if api.needs_credentials and not credentials:
+            error = "'Could not load API " + api.api + ". No credentials.'"
+            dajax.script("toastr.error(" + error + ", 'API error')")
+            continue
+        impobj = getattr(__import__("datavis.plugins." + api.api,
+                                    fromlist=[api.api]),
+                        api.api)
+        if credentials:
+            api_objects.append(APIInterface(api.api, impobj,
+                    credentials[0].authentication))
+        else:
+            api_objects.append(APIInterface(api.api, impobj))
+    script = "available_filters = "
+    for api in api_objects:
+        filter_list = api.getIndicators()
+        filter_list = filter_list[1]
+        filter_list = [i if type(i) is str else str(i) for i in filter_list]
+        script += ("[" + str(filter_list)[1:-1] + ",")
+    script = script[:-1] + script[-1:].replace(",","]")
+    print(script)
+    dajax.script(script)
     return dajax.json()

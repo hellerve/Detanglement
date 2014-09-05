@@ -207,6 +207,7 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     margin-right: 2%;
     margin-top: 0%;
     margin-bottom: 7%;
+    overflow-y: scroll;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -214,13 +215,15 @@ progress::-webkit-progress-value {background: #1AB1E2;}
 }
         
 .sortable li{
+    font-size: 10px;
+    line-height: 1.3;
     float: center;
     list-style: none;
     border: none;
     float: center;
     background-color: #D0D0D0;
     margin: 5px 5px 5px 5px;
-    height: 18px;
+    height: 47px;
     text-align: center;
     border-radius: 2px;
 }
