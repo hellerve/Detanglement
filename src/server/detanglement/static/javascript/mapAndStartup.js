@@ -370,21 +370,24 @@ function endVisualization(){
 
 //sets the filters
 function filters(name){
-    var filters = $('.filters');
-    if($('.progress').is(':visible'))
-    filters.css("margin-left", "3%");
-    filters.find('.header').html("<h2>Filters for " + name + "</h2>");
-    Dajaxice.datavis.visualize(Dajax.process, {'name': name});
-    var list = filters.find('#sort_first');
-    list.empty();
-    $('<li>element 1</li>').appendTo(list);
-    $('<li>element 2</li>').appendTo(list);
-    var list = filters.find('#sort_second');
-    list.empty();
-    $('.filters').show();
-    filters.find('.sortable').sortable({
-        connectWith: '.connected'
-    });
+    Dajaxice.datavis.get_filters_for(function(data){
+        Dajax.process(data);
+        var filters = $('.filters');
+        if($('.progress').is(':visible'))
+        filters.css("margin-left", "3%");
+        filters.find('.header').html("<h2>Filters for " + name + "</h2>");
+        Dajaxice.datavis.visualize(Dajax.process, {'name': name});
+        var list = filters.find('#sort_first');
+        list.empty();
+        for(i = 0; i < available_filters.length; i++)
+            $('<li>' + available_filters[i] + '</li>').appendTo(list);
+        var list = filters.find('#sort_second');
+        list.empty();
+        $('.filters').show();
+        filters.find('.sortable').sortable({
+            connectWith: '.connected'
+        });
+    }, {'location': name})
 }
 
 //applies the filters

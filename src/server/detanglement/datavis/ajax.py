@@ -139,7 +139,7 @@ def load(request):
             api_objects.append(APIInterface(api.api, impobj))
     for i in range(400):
         script += ("[" + str(random.randrange(-180.0, 180.0)) + ", "  +
-                str(random.randrange(-180.0, 180.0)) + ", 'test" +
+                str(random.randrange(-180.0, 180.0)) + ", 'Location " +
                 str(i) + "'],")
     script = script[:-1] + script[-1:].replace(",","]")
     dajax.script(script)
@@ -149,4 +149,10 @@ def load(request):
 def visualize_location_trends(request, lat, lon):
     dajax = Dajax()
     dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")
+    return dajax.json()
+
+@dajaxice_register
+def get_filters_for(request, location):
+    dajax = Dajax()
+    dajax.script("available_filters = ['general']")
     return dajax.json()
