@@ -177,6 +177,5 @@ def get_filters_for(request, location):
         filter_list = [i if type(i) is str else str(i) for i in filter_list]
         script += ("[" + str(filter_list)[1:-1] + ",")
     script = script[:-1] + script[-1:].replace(",","]")
-    print(script)
     dajax.script(script)
     return dajax.json()
