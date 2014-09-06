@@ -60,14 +60,10 @@ def settings(request):
     return dajax.json()
 
 @dajaxice_register
-def visualize(request, name):
+def visualize(request, location, fro, to, filters):
     dajax = Dajax()
     location = name.split(", ") if ", " in name else name
     data = []
-    if not api_objects:
-        error = "'Could not load location " + name + ". No APIs selected.'"
-        dajax.script("toastr.warning(" + error + ", 'Visualization warning')")
-        return dajax.json()
     dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")
     return dajax.json()
     for api in api_objects:
@@ -151,7 +147,7 @@ def visualize_location_trends(request, lat, lon):
     return dajax.json()
 
 @dajaxice_register
-def get_filters_for(request, location):
+def get_filters_for(request):
     dajax = Dajax()
     apis = Api.objects.filter(user=User.objects.get(username=request.user))
     api_objects = []

@@ -387,12 +387,18 @@ function filters(name){
         filters.find('.sortable').sortable({
             connectWith: '.connected'
         });
-    }, {'location': name})
+    });
 }
 
 //applies the filters
 function applyFilters(){
-    $('.filters').hide();
+    var filters = $('.filters');
+    Dajaxice.datavis.visualize(Dajax.process, {
+        'location': filters.find('.header').replace('Filters for ', ''),
+        'fro': filters.find('#from').val(),
+        'to': filters.find('#to').val(),
+        'filters': filters.find('#sort_second').val
+    });
 }
 
 //sets the filters for localized trends
