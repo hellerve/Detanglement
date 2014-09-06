@@ -106,7 +106,6 @@ def visualize(request, location, fro, to, filters):
 @dajaxice_register
 def load(request):
     dajax = Dajax()
-    script = "markers = ["
     apis = Api.objects.filter(user=User.objects.get(username=request.user))
     api_objects = []
     if not apis:
@@ -132,11 +131,18 @@ def load(request):
                     credentials[0].authentication))
         else:
             api_objects.append(APIInterface(api.api, impobj))
-    for i in range(400):
-        script += ("[" + str(random.randrange(-180.0, 180.0)) + ", "  +
-                str(random.randrange(-180.0, 180.0)) + ", 'Location " +
-                str(i) + "'],")
+    script = "markers = ["
+    g = GeoNames(None, "veitheller")
+    for api in api_objects:
+        for entry in api.locations:
+            entry_name = api.locations[entry][0] + ", " + entry
+            try:
+                place, (lat, lon) = g.geocode(entry_name)
+            except (TypeError, exc.GeopyError):
+                continue
+            script += str([lat, lon, entry_name]) + ","
     script = script[:-1] + script[-1:].replace(",","]")
+    print(script)
     dajax.script(script)
     return dajax.json()
 
