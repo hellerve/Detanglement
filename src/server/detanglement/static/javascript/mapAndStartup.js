@@ -394,11 +394,12 @@ function filters(name){
 function applyFilters(){
     var filters = $('.filters');
     Dajaxice.datavis.visualize(Dajax.process, {
-        'location': filters.find('.header').replace('Filters for ', ''),
+        'location': filters.find('.header').text().replace('Filters for ', ''),
         'fro': filters.find('#from').val(),
         'to': filters.find('#to').val(),
-        'filters': filters.find('#sort_second').val
+        'filters': filters.find('#sort_second').val()
     });
+    filters.hide();
 }
 
 //sets the filters for localized trends
