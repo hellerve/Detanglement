@@ -71,7 +71,7 @@
 }
 
 .progress{
-    width: 18%;
+    width: 220px;
     height: 140px;
     margin-left: 43%;
     margin-top: 10%;
@@ -107,9 +107,9 @@
 }
 
 .filters{
-    width: 36%;
+    width: 460px;
     height: 600px;
-    margin-left: 33%;
+    margin-left: 35%;
     margin-top: 5%;
     background: white;
     border-radius: 3px;
