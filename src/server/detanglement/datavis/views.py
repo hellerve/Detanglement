@@ -7,7 +7,7 @@ from django.views.decorators.cache import cache_page
 
 from .forms import ContactForm, SettingsForm, PasswordForm
 
-#@cache_page(60 * 10)
+@cache_page(60 * 10)
 def serve(request, site, auth=True):
     if auth == False or request.user.is_authenticated():
         return render(request, site)
@@ -40,7 +40,7 @@ class ContactFormView(FormView):
     def get_success_url(self):
         return reverse('sent')
 
-#@cache_page(60 * 10)
+@cache_page(60 * 10)
 def settings(request):
     if not request.user.is_authenticated():
         return redirect('/login/')

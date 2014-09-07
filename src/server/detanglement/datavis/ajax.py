@@ -62,6 +62,7 @@ def settings(request):
 @dajaxice_register
 def visualize(request, location, fro, to, filters):
     dajax = Dajax()
+    apis = Api.objects.filter(user=User.objects.get(username=request.user))
     location = name.split(", ") if ", " in name else name
     data = []
     dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")

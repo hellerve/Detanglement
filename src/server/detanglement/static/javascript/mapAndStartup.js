@@ -375,7 +375,11 @@ function filters(name){
         var filters = $('.filters');
         if($('.progress').is(':visible'))
         filters.css("margin-left", "3%");
-        filters.find('.header').html("<h2>Filters for " + name + "</h2>");
+        var title = name.split(", ");
+        if(title[0] === title[1])
+            filters.find('.header').html("<h2>Filters for " + title + "</h2>");
+        else
+            filters.find('.header').html("<h2>Filters for " + name + "</h2>");
         Dajaxice.datavis.visualize(Dajax.process, {'name': name});
         var list = filters.find('#sort_first');
         list.empty();
