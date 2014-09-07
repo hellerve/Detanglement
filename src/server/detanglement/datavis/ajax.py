@@ -142,7 +142,6 @@ def load(request):
                 continue
             script += str([lat, lon, entry_name]) + ","
     script = script[:-1] + script[-1:].replace(",","]")
-    print(script)
     dajax.script(script)
     return dajax.json()
 
