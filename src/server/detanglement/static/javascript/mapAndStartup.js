@@ -23,6 +23,7 @@ $(document).ready(progress);
         
 //shows a progress bar and sets the markers
 function progress(){  
+    $('.progress').show();
     Dajaxice.datavis.load(function(data){
         Dajax.process(data);
         var progressbar = $('#progressbar'),  
@@ -30,7 +31,6 @@ function progress(){
             value = 0;  
   
         progressbar.attr('max', max);
-        $('.progress').show();
         progressbar.val(0);
 
         function step(){

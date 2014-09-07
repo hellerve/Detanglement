@@ -86,6 +86,26 @@
     box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64); 
 }
 
+.progress:indeterminate {
+    background: repeating-linear-gradient(
+        -55deg,
+        #ffffff,
+        #ffffff 10px,
+        #465298 10px,
+        #465298 20px
+    );
+}
+
+.progress:indeterminate::-moz-progress-bar {
+    background: repeating-linear-gradient(
+        -55deg,
+        #ffffff,
+        #ffffff 10px,
+        #465298 10px,
+        #465298 20px
+    );
+}
+
 .filters{
     width: 36%;
     height: 600px;
