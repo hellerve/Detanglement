@@ -377,7 +377,7 @@ function filters(name){
         filters.css("margin-left", "3%");
         var title = name.split(", ");
         if(title[0] === title[1])
-            filters.find('.header').html("<h2>Filters for " + title + "</h2>");
+            filters.find('.header').html("<h2>Filters for " + title[0] + "</h2>");
         else
             filters.find('.header').html("<h2>Filters for " + name + "</h2>");
         Dajaxice.datavis.visualize(Dajax.process, {'name': name});

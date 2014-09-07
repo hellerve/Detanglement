@@ -119,7 +119,7 @@ DATABASES = {
 CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-            'LOCATION': 'detanglement_cache',
+            'LOCATION': 'datavis',
             'TIMEOUT': 360,
             'OPTIONS': {
                 'MAX_ENTRIES': 10000
