@@ -391,6 +391,15 @@ function filters(name){
         filters.find('.sortable').sortable({
             connectWith: '.connected'
         });
+        filters.find('#search').on('input', function(){
+            var search = $('.filters').find('#search').val();
+            for(i = 0; i < $('.filters #sort_first li').length; i++){
+                if($('.filters #sort_first li').eq(i).text().indexOf(search) > -1)
+                    $('filters #sort_first li').eq(i).show();
+                else
+                    $('filters #sort_first li').eq(i).hide();
+            }
+        });
     });
 }
 

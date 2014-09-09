@@ -210,9 +210,22 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     border-radius: 2px;
 }
 
+.filters .search{
+    width: 30%;
+    margin-left: 12%;
+    margin-right: 12%;
+    margin-bottom: 10px;
+    font-size: 11px;
+    border: none;
+    float: left;
+    padding: none;
+    background-color: #D0D0D0;
+    border-radius: 2px;
+}
+
 .sortable{
     width: 45%;
-    height: 63%;
+    height: 58%;
     overflow: hidden;
     float: left;
     font-size: 11px;
@@ -221,7 +234,7 @@ progress::-webkit-progress-value {background: #1AB1E2;}
     margin-left: 2%;
     margin-right: 2%;
     margin-top: 0%;
-    margin-bottom: 7%;
+    margin-bottom: 2%;
     overflow-y: scroll;
     -webkit-user-select: none;
     -moz-user-select: none;
