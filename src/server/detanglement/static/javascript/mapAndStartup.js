@@ -352,9 +352,9 @@ function geolocate(){
 
 //reacts to the failure of the localization
 function locationError(error){
-    toastr.error('Geolocalization failed with code ' + error.code + '; the returned message states: "' +
+    toastr.error('Geolocalization failed with code ' + error.code + '.\nThe returned message states: "' +
                  error.message + '"', 'Localization error');
-    return false;
+    toastr.info('If you want IP-based location, you can set that in the settings pane.', 'Localization info');
 };
 
 //reacts to success of the localization
