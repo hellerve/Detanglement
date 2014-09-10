@@ -86,26 +86,6 @@
     box-shadow: 10px 10px 10px -7px rgba(0,0,0,0.64); 
 }
 
-.progress:indeterminate {
-    background: repeating-linear-gradient(
-        -55deg,
-        #ffffff,
-        #ffffff 10px,
-        #465298 10px,
-        #465298 20px
-    );
-}
-
-.progress:indeterminate::-moz-progress-bar {
-    background: repeating-linear-gradient(
-        -55deg,
-        #ffffff,
-        #ffffff 10px,
-        #465298 10px,
-        #465298 20px
-    );
-}
-
 .filters{
     width: 460px;
     height: 600px;
@@ -139,15 +119,49 @@ progress{
     margin-right: 20%;
     margin-top: 0px;
     margin-bottom: 8px;
-    background-color: #D0D0D0;  
-    color: #1AB1E2;
+    background-size: 20px 20px;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+        transparent 75%, transparent);            
     border: 0;  
     height: 18px;  
     position: relative;
 }  
 
-progress::-moz-progress-bar {background: #1AB1E2;}
-progress::-webkit-progress-value {background: #1AB1E2;}
+progress::-webkit-progress-value {
+    background-size: 20px 20px;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+        transparent 75%, transparent);            
+}
+
+progress::-moz-progress-bar {
+    background-size: 20px 20px;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, .15) 50%, rgba(255, 255, 255, .15) 75%,
+        transparent 75%, transparent);            
+}
+
+progress:not([value])::-moz-progress-bar {
+    background-size: 20px 20px;
+    background-image: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, .15) 
+        25%, 
+        transparent 25%,
+        transparent 50%, 
+        rgba(255, 255, 255, .15) 50%, 
+        rgba(255, 255, 255, .15) 75%,
+        transparent 75%, 
+        transparent
+    );            
+    animation: barberpole 0.5s linear infinite;
+}
+
+@keyframes move {
+    from { background-position: 0 0; }
+    to   { background-position: 50px 50px; }
+}
 
 .progress h2, .filters h2{
     margin-top: 10px;
