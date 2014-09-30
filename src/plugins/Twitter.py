@@ -1,7 +1,8 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 
 import json
 import TwitterAPI
+
 
 class RequestError(Exception):
     """
@@ -10,8 +11,8 @@ class RequestError(Exception):
     """
     def __init__(self, api_message):
         self.message = ("Error " + str(api_message[0]['code']) +
-                       " occurred with message: \"" +
-                       str(api_message[0]['message']) + "\"")
+                        " occurred with message: \"" +
+                        str(api_message[0]['message']) + "\"")
 
     def __str__(self):
         return repr(self.message)
@@ -22,7 +23,8 @@ class Twitter(TwitterAPI.TwitterAPI):
         Provides content from Twitter. Trends and tweets
         for specific locations plus a list of locations we have trends for.
     """
-    def __init__(self, consumer_key, consumer_secret, access_key, access_secret):
+    def __init__(self, consumer_key, consumer_secret, access_key,
+                 access_secret):
         """
         Initializes the class
 
@@ -32,8 +34,8 @@ class Twitter(TwitterAPI.TwitterAPI):
         access_key -- ... you know what it is
         access_secret -- ...
         """
-        TwitterAPI.TwitterAPI.__init__(self, consumer_key,
-                                consumer_secret, access_key, access_secret)
+        TwitterAPI.TwitterAPI.__init__(self, consumer_key, consumer_secret,
+                                       access_key, access_secret)
         self.requiresFilter = False
         self.country_list = {}
         self.city_list = {}
@@ -114,6 +116,6 @@ class Twitter(TwitterAPI.TwitterAPI):
         return None
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")

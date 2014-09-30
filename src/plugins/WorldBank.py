@@ -1,5 +1,6 @@
 import wbpy
 
+
 class WorldBank(object):
     def __init__(self):
         self.api = wbpy.IndicatorAPI()
@@ -33,20 +34,25 @@ class WorldBank(object):
                 if self.indicators[j]['name'] == filt:
                     filters = j
                     break
-        else: raise ValueError("'filt' must be of type list or str")
+        else:
+            raise ValueError("'filt' must be of type list or str")
         if type(location) is list:
             try:
                 x = self.api.get_dataset(filters,
-                        [self.country_list[i][1] for i in location],
-                        date=":".join(str(i) for i in date)).as_dict()
+                                         [self.country_list[i][1]
+                                          for i in location],
+                                         date=":".join(str(i)
+                                                       for i in date)).as_dict()
             except ValueError as e:
                 return None
         elif type(location) is str:
             try:
                 x = self.api.get_dataset(filters,
-                        [self.country_list[location][1]],
-                        date=":".join(str(i) for i in date)).as_dict()
+                                         [self.country_list[location][1]],
+                                         date=":".join(str(i)
+                                                       for i in date)).as_dict()
             except ValueError as e:
                 return None
-        else: raise ValueError("'location' must be of type list or str")
+        else:
+            raise ValueError("'location' must be of type list or str")
         return x
