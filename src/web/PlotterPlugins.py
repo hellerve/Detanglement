@@ -2,7 +2,8 @@
 
 from PyQt5 import QtCore, QtWebKit
 
-#WARNING: STUB CLASS!
+
+# WARNING: STUB CLASS!
 class PlotterInterfaces(QtCore.QObject):
     """
         This provides an interface between Javascript and Python.
@@ -22,6 +23,6 @@ class PlotterInterfaces(QtCore.QObject):
         self.web_view = web_view
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")

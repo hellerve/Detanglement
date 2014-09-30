@@ -4,11 +4,12 @@ import os
 import sys
 import subprocess
 
+
 def check():
     print("##### System Information #####\n")
     print("Platform:", sys.platform)
     print("Operating System:", os.name)
-    print("Python:", sys.version.replace("\n", "")+ "\n")
+    print("Python:", sys.version.replace("\n", "") + "\n")
 
     print("\n\n##### System Status #####")
     print("\n## Tangle Requirements ##")
@@ -22,7 +23,6 @@ def check():
     except:
         print("PyGeoIp:", "missing")
         core_err.append("Please install pygeoip to use Tangle.")
-
 
     try:
         import geopy
@@ -67,7 +67,7 @@ def check():
         for err in core_err:
             print(err)
         choice = input("\nShould the dependencies be installed " +
-                        "automatically?[y/n]\t\033[0m")
+                       "automatically?[y/n]\t\033[0m")
         if choice in ["y", "Y", "YES", "Yes", "yes"]:
             if __name__ == "__main__":
                 okay = subprocess.call(["sh", "dependencies.sh"])

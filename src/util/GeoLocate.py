@@ -7,6 +7,7 @@ from geopy.point import Point
 from geopy.geocoders import GeoNames
 from urllib import request
 
+
 class GeoLocate(pygeoip.GeoIP):
     """
     Geolocation class that inherits from GeoIP.
@@ -30,8 +31,8 @@ class GeoLocate(pygeoip.GeoIP):
     def getOwnAddress(self):
         """Gets own address based on the IP Address of the user."""
         self.address = str(self._getIPAddress())[2:-1]
-        self.country, self.city, self.lat, self.lon = self.coordsFromAddr(
-                                                *self._locateAddress())
+        (self.country, self.city, self.lat,
+         self.lon) = self.coordsFromAddr(*self._locateAddress())
 
     def _getIPAddress(self):
         """
@@ -96,7 +97,7 @@ class GeoLocate(pygeoip.GeoIP):
         self.country = countryname
         try:
             place, (lat, lon) = self.gnames.geocode(str(cityname) +
-                                                   ", " + str(countryname))
+                                                    ", " + str(countryname))
             self.lat = lat
             self.lon = lon
             return True
@@ -140,6 +141,6 @@ class GeoLocate(pygeoip.GeoIP):
             return True, None
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")

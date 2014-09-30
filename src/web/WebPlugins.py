@@ -5,6 +5,7 @@ from PyQt5 import QtCore, QtWebKit
 from web.PlotterTrotter import *
 from widgets.FilterWindow import FilterWindow
 
+
 class TangleInterfaces(QtCore.QObject):
     """
     Class that provides an interface between Javascript and Python.
@@ -59,13 +60,15 @@ class TangleInterfaces(QtCore.QObject):
                     req = {}
                     for i in self.filters:
                         if self.date:
-                            x, t = api.getDataForLocation(location[0], i, self.date)
+                            x, t = api.getDataForLocation(location[0], i,
+                                                          self.date)
                         else:
                             x, t = api.getDataForLocation(location[0], i)
                         if not t:
                             self.web_view.warning("No datasets for filter " +
-                                    i + "!")
-                        else: req.update({k+'/'+i:v for k,v in t.items()})
+                                                  i + "!")
+                        else:
+                            req.update({k+'/'+i: v for k, v in t.items()})
                 else:
                     src, req = None, None
             else:
@@ -74,7 +77,7 @@ class TangleInterfaces(QtCore.QObject):
                 data += [req, src]
             else:
                 self.web_view.warning("Got no datasets from API " +
-                        api.api_name + "!")
+                                      api.api_name + "!")
         return data
 
     @QtCore.pyqtSlot(str)
@@ -89,10 +92,10 @@ class TangleInterfaces(QtCore.QObject):
         try:
             if data:
                 pt = PlotterTrotter(self.filters, data, self.date[0],
-                        self.path)
+                                    self.path)
         except VisualizeError as e:
-            self.webView.page().mainFrame().evaluateJavaScript(
-                                                "alert(" + str(e) + ")")
+            self.webView.page().mainFrame().evaluateJavaScript("alert(" +
+                                                               str(e) + ")")
 
     def _askForFilter(self, api):
         filter_choice = FilterWindow(self.path, *api.getIndicators())
@@ -107,7 +110,7 @@ class TangleInterfaces(QtCore.QObject):
         self.date = date
 
 
-#Warning: This class is a stub. Do not use it yet.
+# Warning: This class is a stub. Do not use it yet.
 class Plugins(QtWebKit.QWebPluginFactory):
     """
         This class is a stub and should not be used yet.
@@ -120,6 +123,6 @@ class Plugins(QtWebKit.QWebPluginFactory):
         QtWebKit.QWebPluginFactory.__init__(self, parent)
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")

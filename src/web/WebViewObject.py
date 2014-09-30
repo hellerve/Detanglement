@@ -5,6 +5,7 @@ from PyQt5 import QtWebKit, QtCore, QtWebKitWidgets, QtWidgets
 from web.WebPlugins import TangleInterfaces
 from util.GeoLocate import GeoLocate
 
+
 class WebViewObject(QtWebKitWidgets.QWebView):
     """
     Class used for the creation and management of the WebView.
@@ -25,12 +26,12 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         self.location = None
         self.preferences = preferences
         self.page().mainFrame().addToJavaScriptWindowObject("interfaces",
-                                self.interfaces)
+                                                            self.interfaces)
         self.setUrl(QtCore.QUrl.fromLocalFile(self.path +
-                                                "/html/index.html"))
-        self.settings().setAttribute(
-                QtWebKit.QWebSettings.LocalContentCanAccessRemoteUrls,
-                True)
+                                              "/html/index.html"))
+        qset = QtWebKit.QWebSettings
+        self.settings().setAttribute(qset.LocalContentCanAccessRemoteUrls,
+                                     True)
         self._setupInspector()
 
     def _setupInspector(self):
@@ -39,7 +40,8 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         This is for debugging purposes and will eventually vanish.
         """
         page = self.page()
-        page.settings().setAttribute(QtWebKit.QWebSettings.DeveloperExtrasEnabled, True)
+        qset = QtWebKit.QWebSettings
+        page.settings().setAttribute(qset.DeveloperExtrasEnabled, True)
         self.webInspector = QtWebKitWidgets.QWebInspector(self)
         self.webInspector.setPage(page)
 
@@ -55,7 +57,7 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         """
         self.webInspector.setVisible(not self.webInspector.isVisible())
 
-    #locates the user via pygeoip
+    # locates the user via pygeoip
     def locateUser(self, country=None, city=None):
         """
         Locates the user via the GeoLocate class.
@@ -65,10 +67,10 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         city -- the city name as a string (default None)
         """
         loc = GeoLocate(self.path + "/rc/GeoLiteCity.dat",
-                self.preferences.configs.value("gnames", None))
+                        self.preferences.configs.value("gnames", None))
         if country and city:
             check = loc.ownCoordsFromAddr(country, city)
-            if check == False:
+            if not check:
                 self.error("Could not locate provided address.")
                 return
         else:
@@ -100,16 +102,16 @@ class WebViewObject(QtWebKitWidgets.QWebView):
 
     def addLocationMark(self):
         """Adds a location mark to the location which webView knows of."""
+        mainframe = self.page().mainFrame()
         if self.location_marker:
-            self.page().mainFrame().evaluateJavaScript(
-                            'deleteLocationMarker()')
+            mainframe.evaluateJavaScript('deleteLocationMarker()')
         add_location_command = ("addLocationMarker('" +
                                 str(self.location[2]) + "', '" +
                                 str(self.location[3]) + "')")
-        self.page().mainFrame().evaluateJavaScript(add_location_command)
+        mainframe.evaluateJavaScript(add_location_command)
         self.location_marker = True
 
-    #adds a marker to the location specified via the API
+    # adds a marker to the location specified via the API
     def addMarker(self, place):
         """
         Adds a marker to a place specified.
@@ -124,8 +126,8 @@ class WebViewObject(QtWebKitWidgets.QWebView):
 
     def getZoomLevel(self):
         """Gets the maps' zoom level(wrapper around JS' getZoom())."""
-        return self.page().mainFrame().evaluateJavaScript(
-                                            'tangle.map.getZoom()')
+        mainframe = self.page().mainFrame()
+        return mainframe.evaluateJavaScript('tangle.map.getZoom()')
 
     def success(self, message):
         """
@@ -134,8 +136,9 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         Keyword arguments:
         message -- the message that is to be displayed by the function
         """
-        self.page().mainFrame().evaluateJavaScript(
-                            'toastr.success("'+ message +'", "Success")')
+        mainframe = self.page().mainFrame()
+        mainframe.evaluateJavaScript('toastr.success("' + message +
+                                     '", "Success")')
 
     def warning(self, message):
         """
@@ -144,8 +147,8 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         Keyword arguments:
         message -- the message that is to be displayed by the function
         """
-        self.page().mainFrame().evaluateJavaScript(
-                            'toastr.warning("'+ message +'", "Warning")')
+        self.page().mainFrame().evaluateJavaScript('toastr.warning("' +
+                                                   message + '", "Warning")')
 
     def error(self, message):
         """
@@ -154,10 +157,10 @@ class WebViewObject(QtWebKitWidgets.QWebView):
         Keyword arguments:
         message -- the message that is to be displayed by the function
         """
-        self.page().mainFrame().evaluateJavaScript(
-                            'toastr.error("'+ message +'", "Error")')
+        self.page().mainFrame().evaluateJavaScript('toastr.error("' + message +
+                                                   '", "Error")')
 
 
-#Not a  main module
+# Not a  main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")

@@ -5,11 +5,11 @@ import random
 from PyQt5 import QtWidgets, QtCore, QtWebKit, QtGui, QtWebKitWidgets
 from web.PlotterPlugins import PlotterInterfaces
 
-#Python 3 Hack; QString is not compatible with Py3 :(
+# Python 3 Hack; QString is not compatible with Py3 :(
 try:
     from PyQt4.QtCore import QString
 except ImportError:
-    #it's not defined :(
+    # it's not defined :(
     QString = type("")
 
 
@@ -62,9 +62,8 @@ class PlotterTrotter(QtWidgets.QMainWindow):
         """Sets the Plotter style."""
         self.setGeometry(100, 100, 600, 600)
         self.setWindowTitle('Data Plotter')
-        self.setWindowIcon(QtGui.QIcon(
-                            QString(
-                                self.path + '/images/icon.png')))
+        self.setWindowIcon(QtGui.QIcon(QString(self.path +
+                                               '/images/icon.png')))
 
     def _addWebView(self):
         """
@@ -73,17 +72,15 @@ class PlotterTrotter(QtWidgets.QMainWindow):
         """
         self.webview = QtWebKitWidgets.QWebView()
         self.interfaces = PlotterInterfaces(self)
-        self.webview.page().mainFrame().addToJavaScriptWindowObject(
-                                                            "interfaces",
-                                                            self.interfaces)
+        mainframe = self.webview.page().mainFrame()
+        mainframe = addToJavaScriptWindowObject("interfaces", self.interfaces)
         self.webview.setUrl(QtCore.QUrl.fromLocalFile(self.path +
                                                       "/html/plotter.html"))
-        self.webview.settings().setAttribute(
-                QtWebKit.QWebSettings.LocalContentCanAccessRemoteUrls,
-                True)
+        q = QtWebKit.QWebSettings
+        self.webview.settings().setAttribute(q.LocalContentCanAccessRemoteUrls,
+                                             True)
         self._setupInspector()
         self.setCentralWidget(self.webview)
-
 
     def _setupInspector(self):
         """
@@ -91,9 +88,8 @@ class PlotterTrotter(QtWidgets.QMainWindow):
         This is for debugging purposes and will eventually vanish.
         """
         page = self.webview.page()
-        page.settings().setAttribute(
-                            QtWebKit.QWebSettings.DeveloperExtrasEnabled,
-                            True)
+        qset = QtWebKit.QWebSettings
+        page.settings().setAttribute(qset.DeveloperExtrasEnabled, True)
         self.webInspector = QtWebKitWidgets.QWebInspector(self.webview)
         self.webInspector.setPage(page)
 
@@ -111,9 +107,10 @@ class PlotterTrotter(QtWidgets.QMainWindow):
 
     def _createLeft(self):
         """This method creates a list of filters."""
-        if not self.left_data: return
-        #for i in self.left_data:
-        #    self.webview.page().mainWindow().evaluateJavascript('addFilter('+i+');')
+        if not self.left_data:
+            return
+        # for i in self.left_data:
+        #     self.webview.page().mainWindow().evaluateJavascript('addFilter('+i+');')
 
     def _createRight(self):
         """
@@ -127,9 +124,11 @@ class PlotterTrotter(QtWidgets.QMainWindow):
                 names.extend(list(country.keys()))
                 data_list = self._getChildren(country)
         command = ('loadPinch(' + str(names) + ", " + str(data_list) +
-                    ', ' + str([str(self.begin), '01', '01']) + ');')
+                   ', ' + str([str(self.begin), '01', '01']) + ');')
         self.webview.page().mainFrame().evaluateJavaScript(command)
-        self.webview.page().mainFrame().evaluateJavaScript('alert(' + str(country) + ');')
+        self.webview.page().mainFrame().evaluateJavaScript('alert(' +
+                                                           str(country) +
+                                                           ');')
 
     def _getChildren(self, father):
         local = []
@@ -146,6 +145,6 @@ class PlotterTrotter(QtWidgets.QMainWindow):
         self._createRight()
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")
