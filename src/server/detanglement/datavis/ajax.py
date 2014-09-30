@@ -15,6 +15,7 @@ from geopy.geocoders import GeoNames
 from .models import Settings, Api, ApiKey
 from .plugins.APIInterface import APIInterface
 
+
 @dajaxice_register
 def geolocate(request):
     dajax = Dajax()
@@ -26,8 +27,9 @@ def geolocate(request):
         data = g.record_by_addr(ip)
         dajax.add_data([round(data['latitude'], 2),
                         round(data['longitude'], 2)],
-                        'addLocationMarker')
+                       'addLocationMarker')
     return dajax.json()
+
 
 @dajaxice_register
 def locate(request, country, city):
@@ -37,13 +39,14 @@ def locate(request, country, city):
     dajax.add_data([lat, lon], 'addLocationMarker')
     return dajax.json()
 
+
 @dajaxice_register
 def settings(request):
     dajax = Dajax()
     m = Settings.objects.filter(user=User.objects.get(username=request.user))
     if not m:
         m = Settings(user=User.objects.get(username=request.user),
-            uses_map="OSM", geolocation=False)
+                     uses_map="OSM", geolocation=False)
         m.save()
     else:
         m = m[0]
@@ -53,11 +56,12 @@ def settings(request):
         dajax.script("tangle.mapchoice = 1")
     elif m.uses_map == "OSM":
         dajax.script("tangle.mapchoice = 2")
-    if m.geolocation == True:
+    if m.geolocation:
         dajax.script("tangle.geolocation = true")
     else:
         dajax.script("tangle.geolocation = false")
     return dajax.json()
+
 
 @dajaxice_register
 def visualize(request, location, fro, to, filters):
@@ -65,7 +69,8 @@ def visualize(request, location, fro, to, filters):
     apis = Api.objects.filter(user=User.objects.get(username=request.user))
     location = name.split(", ") if ", " in name else name
     data = []
-    dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")
+    dajax.script("toastr.warning('Not implemented yet.', " +
+                 "'Visualization warning');")
     return dajax.json()
     for api in api_objects:
         if api.requiresFilter():
@@ -75,34 +80,37 @@ def visualize(request, location, fro, to, filters):
             if filters:
                 src = api.api_name
                 req = {}
-                for i in filters: pass
+                for i in filters:
+                    pass
         locations = api.getLocations()
-        #location = title.split(", ") if ", " in title else title
-        #data = []
-        #for api in self.apis:
-        #    if api.requiresFilter():
-        #        self._askForFilter(api)
-        #        if self.filters:
-        #            src = api.api_name
-        #            req = {}
-        #            for i in self.filters:
-        #                if self.date:
-        #                    x, t = api.getDataForLocation(location[0], i, self.date)
-        #                else:
-        #                    x, t = api.getDataForLocation(location[0], i)
-        #                if not t:
-        #                    self.web_view.warning("No datasets for filter " +
-        #                            i + "!")
-        #                else: req.update({k+'/'+i:v for k,v in t.items()})
-        #        else:
-        #            src, req = None, None
-        #    else:
-        #        src, req = api.getDataForLocation(location, [], self.date)
-        #    if req:
-        #        data += [req, src]
-        #    else:
-        #        self.web_view.warning("Got no datasets from API " +
-        #                api.api_name + "!")
+        # location = title.split(", ") if ", " in title else title
+        # data = []
+        # for api in self.apis:
+        #     if api.requiresFilter():
+        #         self._askForFilter(api)
+        #         if self.filters:
+        #             src = api.api_name
+        #             req = {}
+        #             for i in self.filters:
+        #                 if self.date:
+        #                     x, t = api.getDataForLocation(location[0], i,
+        #                                                   self.date)
+        #                 else:
+        #                     x, t = api.getDataForLocation(location[0], i)
+        #                 if not t:
+        #                     self.web_view.warning("No datasets for filter " +
+        #                             i + "!")
+        #                 else: req.update({k+'/'+i:v for k,v in t.items()})
+        #         else:
+        #             src, req = None, None
+        #     else:
+        #         src, req = api.getDataForLocation(location, [], self.date)
+        #     if req:
+        #         data += [req, src]
+        #     else:
+        #         self.web_view.warning("Got no datasets from API " +
+        #                 api.api_name + "!")
+
 
 @dajaxice_register
 def load(request):
@@ -126,10 +134,10 @@ def load(request):
             continue
         impobj = getattr(__import__("datavis.plugins." + api.api,
                                     fromlist=[api.api]),
-                        api.api)
+                         api.api)
         if credentials:
             api_objects.append(APIInterface(api.api, impobj,
-                    credentials[0].authentication))
+                               credentials[0].authentication))
         else:
             api_objects.append(APIInterface(api.api, impobj))
     script = "markers = ["
@@ -142,15 +150,18 @@ def load(request):
             except (TypeError, exc.GeopyError):
                 continue
             script += str([lat, lon, entry_name]) + ","
-    script = script[:-1] + script[-1:].replace(",","]")
+    script = script[:-1] + script[-1:].replace(",", "]")
     dajax.script(script)
     return dajax.json()
+
 
 @dajaxice_register
 def visualize_location_trends(request, lat, lon):
     dajax = Dajax()
-    dajax.script("toastr.warning('Not implemented yet.', 'Visualization warning');")
+    dajax.script("toastr.warning('Not implemented yet.', " +
+                 "'Visualization warning');")
     return dajax.json()
+
 
 @dajaxice_register
 def get_filters_for(request):
@@ -166,10 +177,10 @@ def get_filters_for(request):
             continue
         impobj = getattr(__import__("datavis.plugins." + api.api,
                                     fromlist=[api.api]),
-                        api.api)
+                         api.api)
         if credentials:
             api_objects.append(APIInterface(api.api, impobj,
-                    credentials[0].authentication))
+                               credentials[0].authentication))
         else:
             api_objects.append(APIInterface(api.api, impobj))
     script = "available_filters = "
@@ -178,6 +189,6 @@ def get_filters_for(request):
         filter_list = filter_list[1]
         filter_list = [i if type(i) is str else str(i) for i in filter_list]
         script += ("[" + str(filter_list)[1:-1] + ",")
-    script = script[:-1] + script[-1:].replace(",","]")
+    script = script[:-1] + script[-1:].replace(",", "]")
     dajax.script(script)
     return dajax.json()

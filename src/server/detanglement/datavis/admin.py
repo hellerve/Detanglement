@@ -1,6 +1,7 @@
 from django.contrib import admin
 from datavis.models import Api, ApiKey, Settings
 
+
 class ApiAdmin(admin.ModelAdmin):
     list_display = ['api']
     list_filter = ['api']

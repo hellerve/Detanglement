@@ -7,14 +7,17 @@ from django.views.decorators.cache import cache_page
 
 from .forms import ContactForm, SettingsForm, PasswordForm
 
-#@cache_page(60 * 10)
+
+# @cache_page(60 * 10)
 def serve(request, site, auth=True):
-    if auth == False or request.user.is_authenticated():
+    if not auth or request.user.is_authenticated():
         return render(request, site)
     return redirect('/login/')
 
+
 def redir(request, site):
     return redirect(site)
+
 
 def auth_check(request, fun):
     if request.user.is_authenticated():
@@ -40,27 +43,31 @@ class ContactFormView(FormView):
     def get_success_url(self):
         return reverse('sent')
 
-#@cache_page(60 * 10)
+
+# @cache_page(60 * 10)
 def settings(request):
     if not request.user.is_authenticated():
         return redirect('/login/')
     form = SettingsForm(request)
-    if request.method =="POST":
+    if request.method == "POST":
         if form.is_valid():
             return redirect("/settings/success")
         else:
             form.full_clean()
-            form._errors['email'] = ErrorList(['The email fields did not match'])
-    return render(request, 'datavis/settings.html', {'form': form })
+            form._errors['email'] = ErrorList(['The email fields ' +
+                                               'did not match'])
+    return render(request, 'datavis/settings.html', {'form': form})
+
 
 def password_change(request):
     if not request.user.is_authenticated():
         return redirect('/login/')
     form = PasswordForm(request)
-    if request.method =="POST":
+    if request.method == "POST":
         if form.is_valid():
             return redirect("/settings/success")
         else:
             form.full_clean()
-            form._errors['password'] = ErrorList(['The password fields did not match'])
-    return render(request, 'datavis/password_change.html', {'form': form })
+            form._errors['password'] = ErrorList(['The password fields ' +
+                                                  'did not match'])
+    return render(request, 'datavis/password_change.html', {'form': form})

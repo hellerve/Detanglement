@@ -14,7 +14,8 @@ class ContactForm(forms.Form):
     def __init__(self, data=None, files=None, request=None, *args, **kwargs):
         if request is None:
             raise TypeError("Keyword argument 'request' must be supplied")
-        super(ContactForm, self).__init__(data=data, files=files, *args, **kwargs)
+        super(ContactForm, self).__init__(data=data, files=files, *args,
+                                          **kwargs)
         self.request = request
 
     name = forms.CharField(max_length=100,
@@ -22,8 +23,8 @@ class ContactForm(forms.Form):
     email = forms.EmailField(max_length=200,
                              label=u'Your email address')
     body = forms.CharField(widget=forms.Textarea,
-                            max_length=1000,
-                              label=u'Your message')
+                           max_length=1000,
+                           label=u'Your message')
 
     from_email = settings.DEFAULT_FROM_EMAIL
 
@@ -48,7 +49,8 @@ class ContactForm(forms.Form):
 
     def get_context(self):
         if not self.is_valid():
-            raise ValueError("Cannot generate Context from invalid contact form")
+            raise ValueError("Cannot generate Context " +
+                             "from invalid contact form")
         if Site._meta.installed:
             site = Site.objects.get_current()
         else:
@@ -59,9 +61,11 @@ class ContactForm(forms.Form):
 
     def get_message_dict(self):
         if not self.is_valid():
-            raise ValueError("Message cannot be sent from invalid contact form")
+            raise ValueError("Message cannot be sent " +
+                             "from invalid contact form")
         message_dict = {}
-        for message_part in ('from_email', 'message', 'recipient_list', 'subject'):
+        for message_part in ('from_email', 'message', 'recipient_list',
+                             'subject'):
             attr = getattr(self, message_part)
             message_dict[message_part] = attr() if callable(attr) else attr
         return message_dict
@@ -73,14 +77,14 @@ class ContactForm(forms.Form):
 class SettingsForm(forms.Form):
     privacy = forms.BooleanField(required=False)
     display = forms.ChoiceField(choices=(("OSM", "Open Street Maps"),
-                                        ("Google", "Google Maps"),
-                                        ("Kartograph", "Kartograph")),
+                                         ("Google", "Google Maps"),
+                                         ("Kartograph", "Kartograph")),
                                 required=False)
     apis = forms.MultipleChoiceField(choices=(), required=False)
     email = forms.EmailField(max_length=200, label="New email address",
-                                required=False)
+                             required=False)
     email_sec = forms.EmailField(max_length=200, label="Retype email address",
-                                required=False)
+                                 required=False)
 
     def __init__(self, request):
         super(SettingsForm, self).__init__()
@@ -88,7 +92,7 @@ class SettingsForm(forms.Form):
             self.email = request.POST.get('email', None)
             self.email_sec = request.POST.get('email_sec', None)
             if self.email != self.email_sec:
-                setup =True
+                setup = True
             else:
                 settings = Settings.objects.get(user=request.user)
                 if request.POST.get('privacy', 'off') == 'on':
@@ -117,19 +121,18 @@ class SettingsForm(forms.Form):
             return False
         return True
 
+
 class PasswordForm(forms.Form):
     password = forms.CharField(max_length=200,
-                                label="New password",
-                                required=True)
+                               label="New password",
+                               required=True)
     password_sec = forms.CharField(max_length=200,
-                                label="Retype password",
-                                required=True)
+                                   label="Retype password",
+                                   required=True)
 
     class Meta:
-        widgets = {
-                'password': forms.PasswordInput(),
-                'password_sec': forms.PasswordInput(),
-        }
+        widgets = {'password': forms.PasswordInput(),
+                   'password_sec': forms.PasswordInput(), }
 
     def __init__(self, request):
         super(PasswordForm, self).__init__()

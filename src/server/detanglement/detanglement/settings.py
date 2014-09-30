@@ -8,7 +8,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
-# Remember: Python3 compatibality: in dajaxice.core.__init__ : add . before Dajaxice import
+# Remember: Python3 compatibality: in dajaxice.core.__init__ :
+# add . before Dajaxice import
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
@@ -24,17 +25,17 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '-=*u4@e%-#%4)n8=os-53qj4ix05#o=y7)03#k)tw2q6vyn2k('
-SECURE_SSL_REDIRECT=True
-SECURE_HSTS_SECONDS=5
-SECURE_HSTS_INCLUDE_SUBDOMAINS=True
-SECURE_FRAME_DENY=True
-SECURE_CONTENT_TYPE_NOSNIFF=True
-SECURE_BROWSER_XSS_FILTER=True
-SESSION_COOKIE_SECURE=True
-SESSION_COOKIE_HTTPONLY=True
-CSRF_COOKIE_SECURE=True
-CSRF_COOKIE_AGE=2620800
-SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 5
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_FRAME_DENY = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_AGE = 2620800
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 ACCOUNT_ACTIVATION_DAYS = 7
 EMAIL_HOST = 'localhost'
 DEFAULT_FROM_EMAIL = 'webmaster@dlocalhost'
@@ -44,9 +45,8 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
-TEMPLATE_DIRS = (
-        os.path.join(BASE_DIR, 'detanglement/templates').replace('\\', '/'),
-)
+TEMPLATE_DIRS = (os.path.join(BASE_DIR,
+                              'detanglement/templates').replace('\\', '/'),)
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -116,16 +116,10 @@ DATABASES = {
 # Database Caching
 # https://docs.djangoproject.com/en/dev/topics/cache/
 
-CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-            'LOCATION': 'datavis',
-            'TIMEOUT': 360,
-            'OPTIONS': {
-                'MAX_ENTRIES': 10000
-            },
-        }
-}
+CACHES = {'default': {'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+                      'LOCATION': 'datavis',
+                      'TIMEOUT': 360,
+                      'OPTIONS': {'MAX_ENTRIES': 10000}, }}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
@@ -142,37 +136,23 @@ USE_TZ = True
 
 # Logging
 
-OGGING = {
-        'version': 1,
-        'disable_existing_loggers': False,
-        'handlers': {
-            'logfile': {
-                'level': 'DEBUG',
-                'class': 'logging.FileHandler',
-                'filename': BASE_DIR+'/log.log'
-                },
-            },
-        'loggers': {
-            'dajaxice': {
-                'handlers': ['logfile'],
-                'level': 'DEBUG',
-                'propagate': True,
-                },
-            }
-        }
+LOGGING = {'version': 1,
+           'disable_existing_loggers': False,
+           'handlers': {'logfile': {'level': 'DEBUG',
+                                    'class': 'logging.FileHandler',
+                                    'filename': BASE_DIR+'/log.log'}, },
+           'loggers': {'dajaxice': {'handlers': ['logfile'],
+                                    'level': 'DEBUG',
+                                    'propagate': True, }, }}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static/').replace('\\', '/'),
-)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static/').replace('\\', '/'),)
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'dajaxice.finders.DajaxiceFinder',
-)
-
+STATICFILES_FINDERS = ('django.contrib.staticfiles.finders.FileSystemFinder',
+                       'django.contrib.staticfiles.finders.' +
+                       'AppDirectoriesFinder',
+                       'dajaxice.finders.DajaxiceFinder',)
