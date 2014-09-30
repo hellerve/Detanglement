@@ -5,12 +5,13 @@ import sre_constants
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-#Python 3 Hack; QString is not compatible with Py3 :(
+# Python 3 Hack; QString is not compatible with Py3 :(
 try:
     from PyQt5.QtCore import QString
 except ImportError:
-    #it's not defined :(
+    # it's not defined :(
     QString = type("")
+
 
 class FilterWindow(QtWidgets.QDialog):
     """
@@ -20,6 +21,7 @@ class FilterWindow(QtWidgets.QDialog):
     """
     appliedSignal = QtCore.pyqtSignal(list)
     dateSignal = QtCore.pyqtSignal(tuple)
+
     def __init__(self, path, name, filt):
         """
         initializes the class
@@ -37,12 +39,12 @@ class FilterWindow(QtWidgets.QDialog):
 
     def _makeGUI(self):
         """Defines the GUI for the filter window."""
-        self.setWindowTitle('Entanglement - Please specify filters for ' + self.name)
+        self.setWindowTitle('Entanglement - Please specify filters for ' +
+                            self.name)
         self.setGeometry(QtCore.QRect(200, 100, 500, 500))
         self.setFixedSize(500, 500)
-        self.setWindowIcon(QtGui.QIcon(
-                            QString(
-                                self.path + '/images/icon.png')))
+        self.setWindowIcon(QtGui.QIcon(QString(self.path +
+                                               '/images/icon.png')))
         self.exitAction = QtWidgets.QAction('Exit', self)
         self.exitAction.setShortcut('Ctrl+Q')
         self.exitAction.triggered.connect(self.close)
@@ -90,7 +92,6 @@ class FilterWindow(QtWidgets.QDialog):
         layout.addWidget(self.endTime)
         return layout
 
-
     def _makeOptions(self):
         """Creates the content for the Window(buttons and so on)."""
         layout = QtWidgets.QHBoxLayout()
@@ -137,9 +138,10 @@ class FilterWindow(QtWidgets.QDialog):
         for i in range(self.chosenview.count()):
             filters.append(self.chosenview.item(i).text())
         self.dateSignal.emit((self.beginTime.date().year(),
-            self.endTime.date().year()))
+                              self.endTime.date().year()))
         self.appliedSignal.emit(filters)
         self.close()
+
 
 class ChoiceList(QtWidgets.QListWidget):
     def __init__(self):
@@ -174,6 +176,6 @@ class ChoiceList(QtWidgets.QListWidget):
             super(ChoiceList, self).dropEvent(e)
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")
