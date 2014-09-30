@@ -2,11 +2,11 @@
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 
-#Python 3 Hack; QString is not compatible with Py3 :(
+# Python 3 Hack; QString is not compatible with Py3 :(
 try:
     from PyQt5.QtCore import QString
 except ImportError:
-    #it's not defined :(
+    # it's not defined :(
     QString = type("")
 
 
@@ -42,9 +42,7 @@ class ProgressBar(QtWidgets.QWidget, QtCore.QThread):
         self.setGeometry(600, 400, 270, 120)
         self.setFixedSize(270, 150)
         self.setWindowTitle("Setup Progress")
-        self.setWindowIcon(QtGui.QIcon(
-                              QString(
-                                path + '/images/icon.png')))
+        self.setWindowIcon(QtGui.QIcon(QString(path + '/images/icon.png')))
         self.value = 0
         self.proglabel = QtWidgets.QLabel(self)
         self.proglabel.setGeometry(70, 20, 150, 20)
@@ -100,6 +98,6 @@ class ProgressBar(QtWidgets.QWidget, QtCore.QThread):
         self.proglabel.setText("Loading " + self.names.pop())
 
 
-#Not a main module.
+# Not a main module.
 if __name__ == "__main__":
     raise ImportError("This should not be used as main module.")

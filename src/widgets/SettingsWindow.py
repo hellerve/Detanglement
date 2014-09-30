@@ -2,12 +2,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-#Python 3 Hack; QString is not compatible with Py3 :(
+# Python 3 Hack; QString is not compatible with Py3 :(
 try:
     from PyQt5.QtCore import QString
 except ImportError:
-    #it's not defined :(
+    # it's not defined :(
     QString = type("")
+
 
 class SettingsWindow(QtWidgets.QDialog):
     """
@@ -37,9 +38,8 @@ class SettingsWindow(QtWidgets.QDialog):
         self.setWindowTitle('Entanglement - Settings')
         self.setGeometry(QtCore.QRect(200, 100, 300, 400))
         self.setFixedSize(300, 400)
-        self.setWindowIcon(QtGui.QIcon(
-                            QString(
-                                self.path + '/images/icon.png')))
+        self.setWindowIcon(QtGui.QIcon(QString(self.path +
+                                               '/images/icon.png')))
         self.exitAction = QtWidgets.QAction('Exit', self)
         self.exitAction.setShortcut('Ctrl+Q')
         self.exitAction.triggered.connect(self._doClose)
@@ -47,7 +47,7 @@ class SettingsWindow(QtWidgets.QDialog):
     def _makeSettings(self):
         """Creates the content for the Window(buttons and so on)."""
         self.locate = QtWidgets.QCheckBox("Geolocation", self)
-        if self.config.configs.value("geo_location", False) == True:
+        if self.config.configs.value("geo_location", False):
                 self.locate.toggle()
         self.locate.move(10, 10)
         self.locate.stateChanged.connect(self._geoLocate)
@@ -64,15 +64,15 @@ class SettingsWindow(QtWidgets.QDialog):
             self.osm.toggle()
         self.osm.move(130, 50)
         self.osm.stateChanged.connect(self._osm)
-        #self.karto = QtWidgets.QCheckBox("Kartograph", self)
-        #if self.config.configs["map"] == "kartograph":
-        #    self.karto.toggle()
-        #self.karto.move(200, 50)
-        #self.karto.stateChanged.connect(self._kartograph)
+        # self.karto = QtWidgets.QCheckBox("Kartograph", self)
+        # if self.config.configs["map"] == "kartograph":
+        #     self.karto.toggle()
+        # self.karto.move(200, 50)
+        # self.karto.stateChanged.connect(self._kartograph)
         self.maps = QtWidgets.QButtonGroup()
         self.maps.setExclusive(True)
         self.maps.addButton(self.google)
-        #self.maps.addButton(self.karto)
+        # self.maps.addButton(self.karto)
         self.maps.addButton(self.osm)
         self.apilabel = QtWidgets.QLabel(self)
         self.apilabel.setGeometry(0, 70, 280, 20)
@@ -144,13 +144,13 @@ class SettingsWindow(QtWidgets.QDialog):
         self.toggled = True
         if state == QtCore.Qt.Checked:
             if "Twitter" not in self.config.configs.value("apis"):
-                self.config.configs.setValue("apis",
-                        self.config.configs.value("apis").append("Twitter"))
+                new_list = self.config.configs.value("apis").append("Twitter")
+                self.config.configs.setValue("apis", new_list)
                 self.config.configs.setValue("api_toggled", True)
         else:
             if "Twitter" in self.config.configs.value("apis"):
-                self.config.configs.setValue("apis",
-                        self.config.configs.value("apis").remove("Twitter"))
+                new_list = self.config.configs.value("apis").remove("Twitter")
+                self.config.configs.setValue("apis", new_list)
                 self.config.configs.setValue("api_toggled", True)
 
     def closeEvent(self, event):
@@ -163,7 +163,8 @@ class SettingsWindow(QtWidgets.QDialog):
         """
         self._doClose()
 
-    #prompts whether the user is sure to close. Invoked when the user exits the window
+    # prompts whether the user is sure to close.
+    # Invoked when the user exits the window
     def _doClose(self):
         """
         Prompts whether the user wants to save the state of the settings.
@@ -171,12 +172,14 @@ class SettingsWindow(QtWidgets.QDialog):
         """
         if self.toggled:
             reply = QtWidgets.QMessageBox.question(self,
-                                              'Message',
-                                              'New Settings are unsaved.' +
-                                              '\nDo you want to apply them before exiting?',
-                                              QtWidgets.QMessageBox.Yes |
-                                              QtWidgets.QMessageBox.No,
-                                              QtWidgets.QMessageBox.No)
+                                                   'Message',
+                                                   'New Settings are ' +
+                                                   'unsaved.\nDo you want ' +
+                                                   'to apply them before ' +
+                                                   'exiting?',
+                                                   QtWidgets.QMessageBox.Yes |
+                                                   QtWidgets.QMessageBox.No,
+                                                   QtWidgets.QMessageBox.No)
             if reply == QtWidgets.QMessageBox.Yes:
                 if self.toggled:
                     self.config.configs.setValue("toggled", True)
@@ -187,6 +190,6 @@ class SettingsWindow(QtWidgets.QDialog):
             self.close()
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")

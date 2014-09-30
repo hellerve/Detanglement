@@ -3,12 +3,13 @@
 from Crypto.Cipher import AES
 from PyQt5 import QtCore, QtGui, QtWidgets, QtSql
 
-#Python 3 Hack; QString is not compatible with Py3 :(
+# Python 3 Hack; QString is not compatible with Py3 :(
 try:
     from PyQt5.QtCore import QString
 except ImportError:
-    #it's not defined :(
+    # it's not defined :(
     QString = type("")
+
 
 class TangleBase(QtWidgets.QDialog):
     """
@@ -33,9 +34,8 @@ class TangleBase(QtWidgets.QDialog):
         self.setWindowTitle('Entanglement - Add APIs to the Database')
         self.setGeometry(QtCore.QRect(200, 100, 400, 500))
         self.setFixedSize(400, 500)
-        self.setWindowIcon(QtGui.QIcon(
-                            QString(
-                                self.path + '/images/icon.png')))
+        self.setWindowIcon(QtGui.QIcon(QString(self.path +
+                                               '/images/icon.png')))
         self.exitAction = QtWidgets.QAction('Exit', self)
         self.exitAction.setShortcut('Ctrl+Q')
         self.exitAction.triggered.connect(self.close)
@@ -57,11 +57,12 @@ class TangleBase(QtWidgets.QDialog):
         credentialslabel.setText("Your API keys")
         credlabellayout = QtWidgets.QHBoxLayout()
         credlabellayout.addWidget(credentialslabel)
-        credentials = QtWidgets.QCheckBox("This API has credentials (API keys)", self)
-        credentials.move(20, 95)
-        credentials.stateChanged.connect(self._credentials)
+        creds = QtWidgets.QCheckBox("This API has credentials (API keys)",
+                                    self)
+        creds.move(20, 95)
+        creds.stateChanged.connect(self._credentials)
         credbutlayout = QtWidgets.QHBoxLayout()
-        credbutlayout.addWidget(credentials)
+        credbutlayout.addWidget(creds)
         self.keylist = []
         keybox = QtWidgets.QLineEdit(self)
         keybox.move(40, 120)
@@ -130,7 +131,8 @@ class TangleBase(QtWidgets.QDialog):
         db.setUserName("root")
         db.setPassword("")
         passwd, ok = QtWidgets.QInputDialog.getText(self, "Password Dialog",
-                "Please enter your password:")
+                                                    "Please enter your " +
+                                                    "password:")
         if not ok:
             return
         ok = db.open()
@@ -140,14 +142,17 @@ class TangleBase(QtWidgets.QDialog):
             message.exec()
             return
         query = QtSql.QSqlQuery()
-        query.exec("create table if not exists apis(id int, api_name varchar(30) primary key)")
-        query.exec("create table if not exists credentials(credential varchar(60), api_id int)")
+        query.exec("create table if not exists apis(id int, api_name " +
+                   "varchar(30) primary key)")
+        query.exec("create table if not exists credentials(credential " +
+                   "varchar(60), api_id int)")
         query.exec("select * from apis order by id desc limit 1")
         query.next()
         idn = query.value(0)
         if not idn:
             idn = 1
-        query.exec("insert into apis values(" + str(idn) + ", " + self.dbnamebox.text() + ")")
+        query.exec("insert into apis values(" + str(idn) + ", " +
+                   self.dbnamebox.text() + ")")
         for keybox in self.keylist:
             keybox.text()
 
@@ -157,6 +162,6 @@ class TangleBase(QtWidgets.QDialog):
         self.close()
 
 
-#Not a main module
+# Not a main module
 if __name__ == "__main__":
     raise ImportError("This is not supposed to be a main module.")
