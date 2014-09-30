@@ -7,19 +7,21 @@ import webbrowser
 from argparse import ArgumentParser
 
 path = ""
-## Version information #########################################################
-## Inspired by the Makehuman Project ###########################################
-__version__ = [0, 1, 2]                     # Major, minor and patch version number
-__release__ = False                         # False for nightly
-__versionSub__ = "Alpha/Test"               # Short version description
-################################################################################
+# Version information ########################################################
+# Inspired by the Makehuman Project ##########################################
+__version__ = [0, 1, 2]             # Major, minor and patch version number
+__release__ = False                 # False for nightly
+__versionSub__ = "Alpha/Test"       # Short version description
+##############################################################################
+
 
 def getVersionDigitsStr():
     """
     String representation of the version number only (no additional info)
     Inspired by the Makehuman Project
     """
-    return ".".join( [str(v) for v in __version__] )
+    return ".".join([str(v) for v in __version__])
+
 
 def _versionStr():
     """
@@ -30,12 +32,14 @@ def _versionStr():
     else:
         return getVersionDigitsStr()
 
+
 def isRelease():
     """
     True when release version, False for nightly (dev) build
     Inspired by the Makehuman Project
     """
     return __release__
+
 
 def isBuild():
     """
@@ -46,12 +50,14 @@ def isBuild():
     """
     return getattr(sys, 'frozen', False)
 
+
 def getVersion():
     """
     Comparable version as list of ints
     Inspired by the Makehuman Project
     """
     return __version__
+
 
 def getVersionStr(verbose=True):
     """
@@ -62,12 +68,14 @@ def getVersionStr(verbose=True):
         return _versionStr()
     else:
         try:
-            result = _versionStr() + " (r%s %s)" % (os.environ['HGREVISION'], os.environ['HGNODEID'])
+            result = _versionStr() + " (r%s %s)" % (os.environ['HGREVISION'],
+                                                    os.environ['HGNODEID'])
             if verbose:
                 result += (" [%s]" % os.environ['HGREVISION_SOURCE'])
             return result
         except KeyError:
             print("HG lib does not seem to be installed.")
+
 
 def getShortVersion():
     """
@@ -79,7 +87,8 @@ def getShortVersion():
     else:
         return "v" + getVersionDigitsStr()
 
-#Gets the folder where Tangle.py is located
+
+# Gets the folder where Tangle.py is located
 def _getCwd():
     """
     Retrieve the folder where Tangle.py is located.
@@ -91,7 +100,8 @@ def _getCwd():
     else:
         return os.path.dirname(os.path.realpath(__file__))
 
-#Hacky, but hey, at least I don't have to make my own GUI then.
+
+# Hacky, but hey, at least I don't have to make my own GUI then.
 def _openHelp():
     """
     Internal function that displays the help
@@ -100,7 +110,8 @@ def _openHelp():
     """
     webbrowser.open(path + "/html/helpfiles/help.htm", 1)
 
-#The handling of the command line arguments. I just love argparse.
+
+# The handling of the command line arguments. I just love argparse.
 def _parseArguments():
     """
     Internal function that parses the command line arguments.
@@ -132,10 +143,10 @@ def _parseArguments():
                         dest="s", action="store_true")
     options, unknown = parser.parse_known_args()
 
-    #if unknown:
-    #    print("The following arguments are unknown: ", unknown, "\n")
-    #    parser.print_help()
-    #    sys.exit(1)
+    # if unknown:
+    #     print("The following arguments are unknown: ", unknown, "\n")
+    #     parser.print_help()
+    #     sys.exit(1)
 
     if options.helpme:
         _openHelp()
@@ -170,6 +181,7 @@ def _parseArguments():
     else:
         return options.apis.split(',')
 
+
 def _makeApiObjects(apis):
     """
     Creates instances of API objects for every specified object if possible.
@@ -200,9 +212,10 @@ def _makeApiObjects(apis):
                 print("Api", api, "could not be imported: No credentials.")
         elif api + ".py" in plugindir:
             impobj = getattr(getattr(__import__("plugins", fromlist=[api]),
-                    api), api)
+                                     api), api)
             objects.append(APIInterface(api, impobj, []))
     return objects
+
 
 def _showDevel():
     """
@@ -217,6 +230,7 @@ def _showDevel():
     print("\n\033[93m####   PLANNED FEATURES   ####\033[0m")
     with open(path + "/rc/PLANNED_FEATURES", "r") as f:
         print(f.read())
+
 
 def _logToFile(logfile=None):
     """
@@ -242,22 +256,23 @@ def _makeConfFile():
     settings.setValue("geo_location", False)
     settings.setValue("gnames", gname)
     settings.setValue("map", "google")
-    #try:
-    #    open(path + "/src/config.json", "r")
-    #    choice = input("File already exists. Should it be overridden with " +
-    #                   "default values?")
-    #    if choice in ["y", "yes", "YES", "Yes"]:
-    #        raise FileNotFoundError
-    #except FileNotFoundError:
-    #    import json
-    #    with open(path + "/src/config.json", "w+") as f:
-    #        gname = input("Which account name would you like to use " +
-    #                      "for authentication at geonames?")
-    #        f.write(json.dumps({"apis": ["Twitter"],
-    #                            "geo_location": False,
-    #                            "gnames": gname,
-    #                            "map": "google"}))
-    #        f.close()
+    # try:
+    #     open(path + "/src/config.json", "r")
+    #     choice = input("File already exists. Should it be overridden with " +
+    #                    "default values?")
+    #     if choice in ["y", "yes", "YES", "Yes"]:
+    #         raise FileNotFoundError
+    # except FileNotFoundError:
+    #     import json
+    #     with open(path + "/src/config.json", "w+") as f:
+    #         gname = input("Which account name would you like to use " +
+    #                       "for authentication at geonames?")
+    #         f.write(json.dumps({"apis": ["Twitter"],
+    #                             "geo_location": False,
+    #                             "gnames": gname,
+    #                             "map": "google"}))
+    #         f.close()
+
 
 def _sysCheck():
     """
@@ -265,6 +280,7 @@ def _sysCheck():
     """
     from util import SystemCheck
     SystemCheck.check()
+
 
 def main():
     """
@@ -283,6 +299,6 @@ def main():
     menu = TangleUI(api_objects, app, path, "/src/config.json")
     sys.exit(app.exec_())
 
-#Yay, a main module!
+# Yay, a main module!
 if __name__ == "__main__":
     main()
