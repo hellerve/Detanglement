@@ -18,6 +18,9 @@ from .plugins.APIInterface import APIInterface
 
 @dajaxice_register
 def geolocate(request):
+    """
+    Geolocates the user by IP.
+    """
     dajax = Dajax()
     g = pygeoip.GeoIP(preferences.BASE_DIR + '/static/rc/GeoLiteCity.dat')
     ip = request.META.get('REMOTE_ADDR', None)
@@ -33,6 +36,9 @@ def geolocate(request):
 
 @dajaxice_register
 def locate(request, country, city):
+    """
+    Locates a city input by the user.
+    """
     dajax = Dajax()
     g = GeoNames(None, "veitheller")
     place, (lat, lon) = g.geocode(str(city) + ", " + str(country))
@@ -42,6 +48,9 @@ def locate(request, country, city):
 
 @dajaxice_register
 def settings(request):
+    """
+    Loads the settings at the start of the session.
+    """
     dajax = Dajax()
     m = Settings.objects.filter(user=User.objects.get(username=request.user))
     if not m:
@@ -65,6 +74,9 @@ def settings(request):
 
 @dajaxice_register
 def visualize(request, location, fro, to, filters):
+    """
+    Visualizes data.
+    """
     dajax = Dajax()
     apis = Api.objects.filter(user=User.objects.get(username=request.user))
     location = name.split(", ") if ", " in name else name
@@ -114,6 +126,9 @@ def visualize(request, location, fro, to, filters):
 
 @dajaxice_register
 def load(request):
+    """
+    Loads locations.
+    """
     dajax = Dajax()
     apis = Api.objects.filter(user=User.objects.get(username=request.user))
     api_objects = []
@@ -157,6 +172,9 @@ def load(request):
 
 @dajaxice_register
 def visualize_location_trends(request, lat, lon):
+    """
+    Visualizes location-based trends.
+    """
     dajax = Dajax()
     dajax.script("toastr.warning('Not implemented yet.', " +
                  "'Visualization warning');")
@@ -165,6 +183,9 @@ def visualize_location_trends(request, lat, lon):
 
 @dajaxice_register
 def get_filters_for(request):
+    """
+    Get filters for a certain location.
+    """
     dajax = Dajax()
     apis = Api.objects.filter(user=User.objects.get(username=request.user))
     api_objects = []
