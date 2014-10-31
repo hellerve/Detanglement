@@ -14,7 +14,7 @@ except ImportError:
 class TangleBase(QtWidgets.QDialog):
     """
     Creates a dialog that poses as the window where you can
-    add APIs to Entanglement. As such, it is also an interface
+    add APIs to Detanglement. As such, it is also an interface
     between the database and the application.
     """
     def __init__(self, path):
@@ -31,7 +31,7 @@ class TangleBase(QtWidgets.QDialog):
 
     def _makeGUI(self):
         """Defines the GUI for the settings window."""
-        self.setWindowTitle('Entanglement - Add APIs to the Database')
+        self.setWindowTitle('Detanglement - Add APIs to the Database')
         self.setGeometry(QtCore.QRect(200, 100, 400, 500))
         self.setFixedSize(400, 500)
         self.setWindowIcon(QtGui.QIcon(QString(self.path +

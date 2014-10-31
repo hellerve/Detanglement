@@ -60,7 +60,7 @@ class PlotterTrotter(QtWidgets.QMainWindow):
 
     def _setWindowStyle(self):
         """Sets the Plotter style."""
-        self.setGeometry(100, 100, 600, 600)
+        self.setGeometry(200, 300, 600, 435)
         self.setWindowTitle('Data Plotter')
         self.setWindowIcon(QtGui.QIcon(QString(self.path +
                                                '/images/icon.png')))
@@ -73,7 +73,7 @@ class PlotterTrotter(QtWidgets.QMainWindow):
         self.webview = QtWebKitWidgets.QWebView()
         self.interfaces = PlotterInterfaces(self)
         mainframe = self.webview.page().mainFrame()
-        mainframe = addToJavaScriptWindowObject("interfaces", self.interfaces)
+        mainframe.addToJavaScriptWindowObject("interfaces", self.interfaces)
         self.webview.setUrl(QtCore.QUrl.fromLocalFile(self.path +
                                                       "/html/plotter.html"))
         q = QtWebKit.QWebSettings

@@ -39,7 +39,7 @@ class FilterWindow(QtWidgets.QDialog):
 
     def _makeGUI(self):
         """Defines the GUI for the filter window."""
-        self.setWindowTitle('Entanglement - Please specify filters for ' +
+        self.setWindowTitle('Detanglement - Please specify filters for ' +
                             self.name)
         self.setGeometry(QtCore.QRect(200, 100, 500, 500))
         self.setFixedSize(500, 500)

@@ -35,7 +35,7 @@ class SettingsWindow(QtWidgets.QDialog):
 
     def _makeGUI(self):
         """Defines the GUI for the settings window."""
-        self.setWindowTitle('Entanglement - Settings')
+        self.setWindowTitle('Detanglement - Settings')
         self.setGeometry(QtCore.QRect(200, 100, 300, 400))
         self.setFixedSize(300, 400)
         self.setWindowIcon(QtGui.QIcon(QString(self.path +

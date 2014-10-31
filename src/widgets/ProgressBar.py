@@ -39,19 +39,19 @@ class ProgressBar(QtWidgets.QWidget, QtCore.QThread):
         Keyword arguments:
         path -- path to the parent directory of the project
         """
-        self.setGeometry(600, 400, 270, 120)
+        self.setGeometry(600, 400, 250, 120)
         self.setFixedSize(270, 150)
         self.setWindowTitle("Setup Progress")
         self.setWindowIcon(QtGui.QIcon(QString(path + '/images/icon.png')))
         self.value = 0
         self.proglabel = QtWidgets.QLabel(self)
-        self.proglabel.setGeometry(70, 20, 150, 20)
+        self.proglabel.setGeometry(70, 20, 150, 30)
         self.pbar = QtWidgets.QProgressBar(self)
-        self.pbar.setGeometry(30, 50, 200, 25)
+        self.pbar.setGeometry(30, 60, 200, 25)
         self.pbar.setRange(0, self.ranged)
         self.pbar.setValue(0)
         cancelbut = QtWidgets.QPushButton("Cancel", self)
-        cancelbut.move(170, 80)
+        cancelbut.move(170, 95)
         cancelbut.clicked.connect(self._buttonClicked)
         layout = QtWidgets.QVBoxLayout()
         layout.addWidget(self.proglabel)
