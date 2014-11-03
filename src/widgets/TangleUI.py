@@ -90,7 +90,6 @@ class TangleUI(QtWidgets.QMainWindow):
                         self.preferences.configs.value('gnames', None))
         zoom = self.webView.getZoomLevel()
 
-        # print("Start:" + str(datetime.datetime.now()))
         object_count = 0
         for api in self.apis:
             object_count += len(api.locations)
@@ -119,7 +118,6 @@ class TangleUI(QtWidgets.QMainWindow):
                 else:
                     self.increment.emit()
                     QtWidgets.QApplication.processEvents()
-        # print("End: " + str(datetime.datetime.now()) + "\n")
         self.webView.success("All data points added.")
 
     def _setWindowStyle(self):
