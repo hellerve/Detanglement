@@ -4,6 +4,9 @@ Detanglement
 ![Version](http://img.shields.io/badge/version-0.3.0-yellow.svg)
 ![License](http://img.shields.io/badge/license-GPL-blue.svg)
 
+**DISCLAIMER:** This repository is no longer maintained and somewhat
+deprecated. If you still want to use it, tell me! Maybe we'll find a
+solution.
 
 This repo contains a research project I work on at FKI/HTW Berlin.
 As with most of my repositories, this is a work-in-progress, more specifically,
